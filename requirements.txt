@@ -1,6 +1,22 @@
+# core (stats engine)
 numpy
 scipy
 xarray
 pandas
 pyyaml
 pytest
+# data access (Phase 2/3). Versions used when sources were verified, 2026-11-14:
+earthaccess>=0.19
+pystac-client>=0.9
+planetary-computer>=1.0
+zarr>=3.4
+fsspec
+s3fs
+adlfs
+aiohttp
+h5netcdf
+h5py
+netCDF4
+dask
+rasterio>=1.5
+pyproj>=3.8
