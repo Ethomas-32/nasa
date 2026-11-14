@@ -239,3 +239,21 @@ def test_monthly_mean_of_daily_cube_is_not_cube_of_mean():
     out = nasa_power.monthly_mean_of_daily_cube(da).item()
     assert out == pytest.approx(1000.0 * 15 / 31)          # mean of cubes
     assert out > float(v.mean()) ** 3 * 3                  # far above cube of mean (~125)
+
+
+def test_planetary_yearly_reopens_and_retries_on_expired_token(monkeypatch):
+    opens, state = [], {"fail_next": True}
+
+    def fake_open(collection):
+        opens.append(collection)
+        if state["fail_next"]:
+            state["fail_next"] = False
+            raise PermissionError("Signature not valid in the specified time frame")
+        return "handle"
+
+    monkeypatch.setattr(planetary, "_open_zarr_asset", fake_open)
+    monkeypatch.setattr(planetary.time, "sleep", lambda s: None)
+    missing = C.month_index("2000-11", "2001-02")
+    out = list(planetary._yearly("terraclimate", missing, lambda ds, ms: len(ms), "t"))
+    assert out == [2, 2]
+    assert len(opens) == 3  # 1 failed + 1 retry for 2000, then a FRESH open for 2001 (never reuses a handle)

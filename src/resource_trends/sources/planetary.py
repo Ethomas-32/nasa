@@ -5,6 +5,8 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
+import time
+
 from . import _common as C
 
 STAC = "https://planetarycomputer.microsoft.com/api/stac/v1"
@@ -29,6 +31,25 @@ def _years(missing: pd.DatetimeIndex):
         yield y, missing[missing.year == y]
 
 
+def _yearly(collection: str, missing: pd.DatetimeIndex, compute_year, label: str, tries: int = 4):
+    """Yield one computed batch per year. The Zarr asset is RE-OPENED (and so re-signed) every year:
+    Planetary Computer SAS tokens expire (observed: a run died when its token passed its expiry),
+    so a handle must not be held across a long job. Failures are retried with a fresh handle."""
+    for y, ms in _years(missing):
+        for attempt in range(tries):
+            try:
+                out = compute_year(_open_zarr_asset(collection), ms)
+                break
+            except Exception as e:  # noqa: BLE001 - token expiry / transient network
+                if attempt == tries - 1:
+                    raise
+                print(f"  {label} {y}: retry {attempt + 1} after {type(e).__name__}", flush=True)
+                time.sleep(15 * (attempt + 1))
+        if out is not None:
+            yield out
+            print(f"  {label}: cached {y}", flush=True)
+
+
 # --- TerraClimate -------------------------------------------------------------------------------
 def standardize_terraclimate(raw: xr.DataArray, name, units, spec, bbox) -> xr.DataArray:
     return C.finalize(raw, name, units, spec["native_units"], "terraclimate", bbox,
@@ -36,18 +57,17 @@ def standardize_terraclimate(raw: xr.DataArray, name, units, spec, bbox) -> xr.D
 
 
 def load_terraclimate(name, units, spec, bbox, months, cache_path, target_deg=None, **_):
-    def batches(missing):
-        ds = _open_zarr_asset("terraclimate")
+    def year(ds, ms):
         v = ds[spec["variable"]].sel(lat=slice(bbox["lat_max"] + 0.1, bbox["lat_min"] - 0.1),   # lat descending
                                      lon=slice(bbox["lon_min"] - 0.1, bbox["lon_max"] + 0.1))
-        for y, ms in _years(missing):
-            t = v["time"].to_index()
-            sub = v.isel(time=np.where(t.isin(ms))[0])
-            if sub.sizes["time"] == 0:
-                continue
-            sub = C.coarsen_to(sub.sortby("lat"), target_deg).compute()   # block-average lazily, then load
-            yield standardize_terraclimate(sub, name, units, spec, bbox)
-            print(f"  terraclimate {spec['variable']}: cached {y}", flush=True)
+        sub = v.isel(time=np.where(v["time"].to_index().isin(ms))[0])
+        if sub.sizes["time"] == 0:
+            return None
+        sub = C.coarsen_to(sub.sortby("lat"), target_deg).compute()   # block-average lazily, then load
+        return standardize_terraclimate(sub, name, units, spec, bbox)
+
+    def batches(missing):
+        yield from _yearly("terraclimate", missing, year, f"terraclimate {spec['variable']}")
 
     return C.cached_series(cache_path, months, batches)
 
@@ -92,8 +112,7 @@ def load_daymet(name, units, spec, bbox, months, cache_path, target_deg=0.25, **
     from pyproj import Transformer
     target_deg = target_deg or 0.25
 
-    def batches(missing):
-        ds = _open_zarr_asset("daymet-monthly-na")
+    def year(ds, ms):
         v = ds[spec["variable"]]
         tr = Transformer.from_crs("EPSG:4326", " ".join(f"+{k}={val}" for k, val in LCC.items()) + " +units=m +no_defs", always_xy=True)
         gl = np.linspace(bbox["lon_min"], bbox["lon_max"], 60)
@@ -104,13 +123,13 @@ def load_daymet(name, units, spec, bbox, months, cache_path, target_deg=0.25, **
         lat = np.arange(np.ceil(bbox["lat_min"] / target_deg) * target_deg, bbox["lat_max"] + 1e-9, target_deg)
         lon = np.arange(np.ceil(bbox["lon_min"] / target_deg) * target_deg, bbox["lon_max"] + 1e-9, target_deg)
         f = int(round(target_deg * 111.0))   # ~km per target cell
-        for y, ms in _years(missing):
-            t = v["time"].to_index()
-            idx = np.where(pd.DatetimeIndex(t).to_period("M").to_timestamp().isin(ms))[0]
-            if idx.size == 0:
-                continue
-            sub = daymet_to_latlon(v.isel(time=idx), lat, lon, f).compute()
-            yield standardize_daymet(sub, name, units, spec, bbox)
-            print(f"  daymet {spec['variable']}: cached {y}", flush=True)
+        idx = np.where(pd.DatetimeIndex(v["time"].to_index()).to_period("M").to_timestamp().isin(ms))[0]
+        if idx.size == 0:
+            return None
+        sub = daymet_to_latlon(v.isel(time=idx), lat, lon, f).compute()
+        return standardize_daymet(sub, name, units, spec, bbox)
+
+    def batches(missing):
+        yield from _yearly("daymet-monthly-na", missing, year, f"daymet {spec['variable']}")
 
     return C.cached_series(cache_path, months, batches)
