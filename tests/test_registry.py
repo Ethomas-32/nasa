@@ -22,8 +22,12 @@ def test_all_four_competition_themes_are_covered(reg):
         "hydrology", "cryosphere", "atmospheric_dynamics", "atmospheric_chemistry"}
 
 
-def test_nothing_is_marked_verified_before_phase_2(reg):
-    assert all(v["status"] == "unverified" for v in reg.variables.values())
+def test_phase_2_everything_is_verified_and_fully_specified(reg):
+    for name, v in reg.variables.items():
+        assert v["status"] == "verified", name
+        for p in v.get("providers", []):
+            for key in ("dataset", "variable", "native_units", "period", "grid", "product_type"):
+                assert p.get(key), (name, p["provider"], key)  # no null/unknown provider variable names
 
 
 def test_select_by_resource_audience_theme(reg):
@@ -40,16 +44,32 @@ def test_conus_prefers_regional_product_where_available(reg):
 
 def test_global_only_forces_global_product(reg):
     assert reg.resolve("conus", "precipitation", global_only=True).provider == "terraclimate"
-    with pytest.raises(NoProviderError):
-        reg.resolve("conus", "snow_water_equivalent", global_only=True)
+    assert reg.resolve("conus", "snow_water_equivalent").provider == "daymet"
+    assert reg.resolve("conus", "snow_water_equivalent", global_only=True).provider == "terraclimate"
 
 
-def test_africa_has_no_conus_only_products(reg):
+def test_africa_never_gets_conus_only_products(reg):
     assert reg.resolve("africa", "precipitation").provider == "terraclimate"
+    assert reg.resolve("africa", "snow_water_equivalent").provider == "terraclimate"  # global fallback
+    assert reg.resolve("africa", "solar_irradiance").provider == "merra2"
+
+
+def test_solar_resolves_to_merra2_not_the_short_syn1deg_record(reg):
+    for region in ("conus", "africa", "global"):
+        assert reg.resolve(region, "solar_irradiance").provider == "merra2"
+
+
+def test_unavailable_variable_is_reported_as_none():
+    import copy
+    base = Registry.load()
+    variables = copy.deepcopy(base.variables)
+    variables["swe_only_conus"] = copy.deepcopy(variables["snow_water_equivalent"])
+    variables["swe_only_conus"]["providers"] = [p for p in variables["swe_only_conus"]["providers"] if p["provider"] == "daymet"]
+    r = Registry(variables, base.regions)
     with pytest.raises(NoProviderError):
-        reg.resolve("africa", "snow_water_equivalent")
-    avail = reg.availability("africa")
-    assert avail["snow_water_equivalent"] is None and avail["runoff"] is not None
+        r.resolve("africa", "swe_only_conus")
+    assert r.availability("africa")["swe_only_conus"] is None
+    assert r.availability("conus")["swe_only_conus"].provider == "daymet"
 
 
 def test_derived_variable_resolves_inputs(reg):
@@ -57,7 +77,7 @@ def test_derived_variable_resolves_inputs(reg):
     assert r.provider == "derived" and r.function == "wind_power_density"
     assert set(r.inputs) == {"wind_speed_50m", "air_temp_2m", "surface_pressure"}
     assert r.inputs["wind_speed_50m"].provider == "nasa_power"
-    assert r.status == "unverified"
+    assert r.status == "verified"
 
 
 def test_unknown_names_raise_keyerror(reg):

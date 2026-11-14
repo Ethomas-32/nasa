@@ -1,13 +1,16 @@
-# EVERYTHING HERE IS `status: unverified` UNTIL PHASE 2 (CLAUDE.md section 10).
-# Provider variable names, units and product types below are CANDIDATES taken from CLAUDE.md
-# section 3 or common knowledge; none has been checked against a live service.
+# Verified in Phase 2 on 2026-11-14; evidence and caveats in docs/sources.md.
+# `status: verified` means every provider entry below was checked against the live service
+# (dataset id, native variable name, units, grid, time coverage). Coverage periods move: "end" is
+# the last month seen on the check date.
 #
 # theme:       hydrology | cryosphere | atmospheric_dynamics | atmospheric_chemistry
 # resource:    solar | wind | hydro | none
 # audience:    subset of [energy, agriculture]
+# units:       our canonical units (loaders convert from `native_units`)
 # aggregation: how monthly values combine into a year/season (sum | mean | max)
 # relative:    true if a ratio scale makes "percent change" meaningful
-# providers:   ordered list of {provider, coverage, variable, product_type}
+# providers:   ordered list of {provider, coverage, dataset, variable, native_units, period, grid,
+#              product_type}. `dataset` is the store/collection id the loader opens.
 # derived:     {function, inputs} instead of providers (see derived.py)
 variables:
   solar_irradiance:
@@ -15,26 +18,33 @@ variables:
     theme: atmospheric_chemistry   # judgment call: aerosol/cloud attenuation drives the trend
     resource: solar
     audience: [energy, agriculture]
-    units: kWh m-2 day-1
+    units: W m-2
     aggregation: mean
     relative: true
-    status: unverified
-    caveats: [Reanalysis/satellite-assimilated product, not a site measurement.]
+    status: verified
+    caveats:
+      - Reanalysis, not a site measurement.
+      - "POWER's 1984-present solar series splices SRB (to 2000) and SYN1deg (from 2001) with a +1.5% step; not used for trends. See docs/sources.md."
     providers:
-      - {provider: nasa_power, coverage: [global], variable: ALLSKY_SFC_SW_DWN, product_type: reanalysis}
+      - {provider: merra2, coverage: [global], dataset: M2TMNXRAD, variable: SWGDN, native_units: W m-2,
+         period: ["1980-01", "2026-09"], grid: "0.5x0.625 deg", product_type: reanalysis}
+      - {provider: nasa_power, coverage: [global], dataset: "s3://nasa-power/syn1deg/temporal/power_syn1deg_monthly_temporal_utc.zarr",
+         variable: ALLSKY_SFC_SW_DWN, native_units: W m-2, period: ["2001-01", "2026-08"], grid: "1 deg",
+         product_type: satellite_derived, note: cross-check only, record too short for the common period}
 
   aerosol_optical_depth:
-    long_name: Total aerosol extinction optical depth (550 nm)
+    long_name: Total aerosol extinction optical thickness (550 nm)
     theme: atmospheric_chemistry
     resource: solar
     audience: [energy]
     units: "1"
     aggregation: mean
     relative: true
-    status: unverified
-    caveats: [Reanalysis aerosol, assimilates satellite AOD.]
+    status: verified
+    caveats: [Reanalysis aerosol that assimilates satellite AOD; observing-system changes can cause discontinuities.]
     providers:
-      - {provider: merra2, coverage: [global], variable: TOTEXTTAU, product_type: reanalysis}
+      - {provider: merra2, coverage: [global], dataset: M2TMNXAER, variable: TOTEXTTAU, native_units: "1",
+         period: ["1980-01", "2026-09"], grid: "0.5x0.625 deg", product_type: reanalysis}
 
   air_temp_2m:
     long_name: Air temperature at 2 m
@@ -44,21 +54,23 @@ variables:
     units: degC
     aggregation: mean
     relative: false
-    status: unverified
+    status: verified
     providers:
-      - {provider: nasa_power, coverage: [global], variable: T2M, product_type: reanalysis}
+      - {provider: nasa_power, coverage: [global], dataset: "s3://nasa-power/merra2/temporal/power_merra2_monthly_temporal_utc.zarr",
+         variable: T2M, native_units: C, period: ["1981-01", "2026-09"], grid: "0.5x0.625 deg", product_type: reanalysis}
 
   surface_pressure:
     long_name: Surface pressure
     theme: atmospheric_dynamics
     resource: none
     audience: [energy]
-    units: kPa
+    units: hPa
     aggregation: mean
     relative: true
-    status: unverified
+    status: verified
     providers:
-      - {provider: nasa_power, coverage: [global], variable: PS, product_type: reanalysis}
+      - {provider: nasa_power, coverage: [global], dataset: "s3://nasa-power/merra2/temporal/power_merra2_monthly_temporal_utc.zarr",
+         variable: PS, native_units: hPa, period: ["1981-01", "2026-09"], grid: "0.5x0.625 deg", product_type: reanalysis}
 
   wind_speed_50m:
     long_name: Wind speed at 50 m
@@ -68,10 +80,11 @@ variables:
     units: m s-1
     aggregation: mean
     relative: true
-    status: unverified
+    status: verified
     caveats: [Reanalysis, not a site measurement.]
     providers:
-      - {provider: nasa_power, coverage: [global], variable: WS50M, product_type: reanalysis}
+      - {provider: nasa_power, coverage: [global], dataset: "s3://nasa-power/merra2/temporal/power_merra2_monthly_temporal_utc.zarr",
+         variable: WS50M, native_units: m/s, period: ["1981-01", "2026-09"], grid: "0.5x0.625 deg", product_type: reanalysis}
 
   wind_power_density:
     long_name: Wind power density proxy (0.5 * rho * v^3)
@@ -81,7 +94,7 @@ variables:
     units: W m-2
     aggregation: mean
     relative: true
-    status: unverified
+    status: verified
     caveats:
       - Computed from time-mean speed, which underestimates true mean power density (E[v^3] > E[v]^3).
       - Proxy only; ignores humidity and turbine characteristics.
@@ -97,10 +110,13 @@ variables:
     units: mm
     aggregation: sum
     relative: true
-    status: unverified
-    caveats: [Resource proxy, not generation; dams and operations are not modeled., Model-based water balance product.]
+    status: verified
+    caveats:
+      - Resource proxy, not generation; dams and operations are not modeled.
+      - Model-based water balance product; PC copy ends 2021-12.
     providers:
-      - {provider: terraclimate, coverage: [global], variable: q, product_type: model}
+      - {provider: terraclimate, coverage: [global], dataset: terraclimate, variable: q, native_units: mm,
+         period: ["1958-01", "2021-12"], grid: "1/24 deg", product_type: model}
 
   precipitation:
     long_name: Precipitation
@@ -110,10 +126,13 @@ variables:
     units: mm
     aggregation: sum
     relative: true
-    status: unverified
+    status: verified
+    caveats: [PC copies end 2022-09 (NClimGrid) / 2021-12 (TerraClimate).]
     providers:
-      - {provider: nclimgrid, coverage: [conus], variable: null, product_type: gridded_observation}
-      - {provider: terraclimate, coverage: [global], variable: ppt, product_type: model}
+      - {provider: nclimgrid, coverage: [conus], dataset: noaa-nclimgrid-monthly, variable: prcp, native_units: mm,
+         period: ["1895-01", "2022-09"], grid: "1/24 deg", product_type: gridded_observation}
+      - {provider: terraclimate, coverage: [global], dataset: terraclimate, variable: ppt, native_units: mm,
+         period: ["1958-01", "2021-12"], grid: "1/24 deg", product_type: model}
 
   soil_moisture:
     long_name: Soil moisture
@@ -123,9 +142,10 @@ variables:
     units: mm
     aggregation: mean
     relative: true
-    status: unverified
+    status: verified
     providers:
-      - {provider: terraclimate, coverage: [global], variable: soil, product_type: model}
+      - {provider: terraclimate, coverage: [global], dataset: terraclimate, variable: soil, native_units: mm,
+         period: ["1958-01", "2021-12"], grid: "1/24 deg", product_type: model}
 
   pdsi:
     long_name: Palmer Drought Severity Index
@@ -135,19 +155,25 @@ variables:
     units: "1"
     aggregation: mean
     relative: false
-    status: unverified
+    status: verified
     providers:
-      - {provider: terraclimate, coverage: [global], variable: PDSI, product_type: model}
+      - {provider: terraclimate, coverage: [global], dataset: terraclimate, variable: pdsi, native_units: unitless,
+         period: ["1958-01", "2021-12"], grid: "1/24 deg", product_type: model}
 
   snow_water_equivalent:
     long_name: Snow water equivalent
     theme: cryosphere
     resource: hydro
     audience: [energy, agriculture]
-    units: kg m-2
+    units: mm
     aggregation: max   # peak SWE per year is the usual hydro-relevant statistic
     relative: true
-    status: unverified
-    caveats: [Daymet is CONUS-only; no global provider listed yet.]
+    status: verified
+    caveats:
+      - "Daymet monthly swe is described as 'monthly total snow water equivalent'; its monthly semantics (sum vs mean vs end-of-month) must be checked in the Phase 3 loader. Daily collection daymet-daily-na is the fallback."
+      - Daymet is on a 1 km Lambert conformal grid and needs reprojection.
     providers:
-      - {provider: daymet, coverage: [conus], variable: swe, product_type: gridded_observation}
+      - {provider: daymet, coverage: [conus], dataset: daymet-monthly-na, variable: swe, native_units: mm,
+         period: ["1980-01", "2020-12"], grid: "1 km LCC", product_type: gridded_observation}
+      - {provider: terraclimate, coverage: [global], dataset: terraclimate, variable: swe, native_units: mm,
+         period: ["1958-01", "2021-12"], grid: "1/24 deg", product_type: model}
