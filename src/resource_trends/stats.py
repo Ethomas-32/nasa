@@ -154,6 +154,28 @@ def trend(y, t, min_valid_frac=DEFAULT_MIN_VALID_FRAC, min_count=DEFAULT_MIN_COU
     return out
 
 
+# --- Change point -------------------------------------------------------------------------------
+def pettitt(y):
+    """Pettitt (1979) non-parametric single change-point test on a 1-D series (NaNs skipped).
+
+    Returns dict(index, K, p): `index` is the position (in the ORIGINAL array) of the first value of
+    the new regime; p uses the standard approximation 2*exp(-6K^2/(n^3+n^2)), capped at 1.
+    Used to flag product discontinuities (e.g. a satellite-era splice), not to model them.
+    """
+    y = np.asarray(y, dtype=float)
+    pos = np.where(~np.isnan(y))[0]
+    x = y[pos]
+    n = x.size
+    if n < 3:
+        return {"index": None, "K": 0.0, "p": float("nan")}
+    D = np.sign(x[None, :] - x[:, None])          # D[i, j] = sign(x_j - x_i)
+    U = np.array([D[: t + 1, t + 1:].sum() for t in range(n - 1)])
+    t_star = int(np.argmax(np.abs(U)))
+    K = float(np.abs(U[t_star]))
+    p = min(1.0, 2.0 * math.exp(-6.0 * K * K / (n ** 3 + n ** 2)))
+    return {"index": int(pos[t_star + 1]), "K": K, "p": p}
+
+
 # --- Field significance -------------------------------------------------------------------------
 def fdr_bh(p, alpha=0.10):
     """Benjamini-Hochberg FDR across pixels (any array shape). Returns (significant mask, q-values).
