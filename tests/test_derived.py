@@ -54,3 +54,12 @@ def test_wind_speed_from_uv():
     out = derived.wind_speed(da([3.0, -6.0], "m s-1"), da([4.0, 8.0], "m s-1"))
     assert out.values.tolist() == [5.0, 10.0]
     assert out.attrs["units"] == "m s-1"
+
+
+def test_wind_power_density_from_cube_matches_speed_version_for_steady_wind():
+    a = derived.wind_power_density(da([10.0], "m s-1"), da([15.0], "degC"), da([101.325], "kPa"))
+    b = derived.wind_power_density_from_cube(da([1000.0], "m3 s-3"), da([15.0], "degC"), da([1013.25], "hPa"))
+    assert b.values[0] == pytest.approx(a.values[0], rel=1e-9)
+    assert b.attrs["units"] == "W m-2"
+    with pytest.raises(ValueError):
+        derived.wind_power_density_from_cube(da([1000.0], "m s-1"), da([15.0], "degC"), da([1013.25], "hPa"))

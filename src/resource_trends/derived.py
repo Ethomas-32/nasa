@@ -67,6 +67,26 @@ def wind_power_density(speed: xr.DataArray, temp: xr.DataArray, pressure: xr.Dat
     return out
 
 
+def wind_power_density_from_cube(speed_cubed: xr.DataArray, temp: xr.DataArray, pressure: xr.DataArray) -> xr.DataArray:
+    """Wind power density 0.5 * rho * E[v^3] in W m-2, from the monthly mean of daily v^3 (m3 s-3).
+
+    Better than cubing monthly-mean speed (measured +29% median for a Great Plains box, 2010-2019,
+    and a different trend), but still low vs hourly v^3 because within-day variability is averaged
+    out. Uses monthly-mean density (rho/v^3 covariance ignored)."""
+    u = _units(speed_cubed)
+    if u not in ("m3 s-3", "m^3 s^-3", "m3/s3"):
+        raise ValueError(f"unsupported speed-cubed units {speed_cubed.attrs['units']!r}")
+    out = 0.5 * air_density(temp, pressure) * speed_cubed
+    out.name = "wind_power_density"
+    out.attrs = {
+        "units": "W m-2",
+        "long_name": "Wind power density proxy (0.5*rho*mean daily v^3, dry air)",
+        "caveat": "daily-mean speeds: underestimates hourly-based power density; rho/v^3 covariance ignored",
+    }
+    return out
+
+
 DERIVED_FUNCTIONS = {
     "wind_power_density": wind_power_density,
+    "wind_power_density_from_cube": wind_power_density_from_cube,
 }

@@ -205,7 +205,7 @@ def test_cached_series_provider_without_data_raises(tmp_path):
 def test_load_computes_derived_wind_power_density(tmp_path, monkeypatch):
     def fake(units_by_var):
         def loader(variable, units, spec, bbox, months, path, target_deg=None, **_):
-            val = {"wind_speed_50m": 10.0, "air_temp_2m": 15.0, "surface_pressure": 1013.25}[variable]
+            val = {"wind_speed_cubed_50m": 1000.0, "air_temp_2m": 15.0, "surface_pressure": 1013.25}[variable]
             return xr.DataArray(np.full((len(months), 2, 2), val, "float32"), dims=("time", "lat", "lon"), name=variable,
                                 coords={"time": months, "lat": [30.0, 31.0], "lon": [-100.0, -99.0]},
                                 attrs={"units": units, "provider": "fake"})
@@ -216,3 +216,26 @@ def test_load_computes_derived_wind_power_density(tmp_path, monkeypatch):
     assert out.attrs["units"] == "W m-2" and out.name == "wind_power_density"
     assert out.dims == ("time", "lat", "lon")
     np.testing.assert_allclose(out.values, 612.5, rtol=1e-3)
+
+
+def test_monthly_mean_of_daily_cube():
+    t = pd.date_range("2020-01-01", "2020-03-31", freq="D")
+    v = np.full((t.size, 1, 1), 2.0)
+    v[t.month == 2] = 4.0
+    v[(t.month == 3) & (t.day <= 5)] = np.nan            # March: 26/31 valid = 84% < 90% -> NaN
+    da = xr.DataArray(v, dims=("time", "lat", "lon"), coords={"time": t, "lat": [40.0], "lon": [-100.0]})
+    out = nasa_power.monthly_mean_of_daily_cube(da)
+    # March fails the 90%-of-days rule everywhere, so it is NaN in every cell and dropped entirely
+    # (the same path drops an incomplete latest month and POWER's pre-allocated future months)
+    assert out["time"].dt.strftime("%Y-%m").values.tolist() == ["2020-01", "2020-02"]
+    assert out.sel(time="2020-01-01").item() == pytest.approx(8.0)
+    assert out.sel(time="2020-02-01").item() == pytest.approx(64.0)
+
+
+def test_monthly_mean_of_daily_cube_is_not_cube_of_mean():
+    t = pd.date_range("2020-01-01", "2020-01-31", freq="D")
+    v = np.where(np.arange(t.size) % 2 == 0, 0.0, 10.0)[:, None, None]   # alternating calm / 10 m/s
+    da = xr.DataArray(v, dims=("time", "lat", "lon"), coords={"time": t, "lat": [40.0], "lon": [-100.0]})
+    out = nasa_power.monthly_mean_of_daily_cube(da).item()
+    assert out == pytest.approx(1000.0 * 15 / 31)          # mean of cubes
+    assert out > float(v.mean()) ** 3 * 3                  # far above cube of mean (~125)

@@ -39,15 +39,26 @@ before relying on them; they move.
 5. **Candidate common period:** 1981-2020 (wind starts 1981-01; Daymet ends 2020-12). The earlier
    tentative 1984 start came from POWER solar, which we no longer use. Decision pending.
 6. **TerraClimate also has `swe`**, so snow water equivalent has a global provider (Africa/global
-   runs). Daymet `swe` is a monthly aggregate of daily SWE (a state variable); its monthly semantics
-   (sum vs mean vs end-of-month) are NOT yet verified. Check in the Phase 3 loader and, if unclear,
-   derive peak SWE from `daymet-daily-na`.
+   runs). **Daymet monthly `swe` semantics (verified Phase 3):** attrs `cell_methods: "area: mean
+   time: sum within days time: sum over days"`, long_name "monthly total snow water equivalent", i.e.
+   the SUM of daily SWE over the month. The loader divides by days-in-month -> monthly-mean SWE (mm).
+   The annual `max` aggregation is therefore peak monthly-mean SWE, a lower bound on true peak SWE.
 7. **MERRA-2 cost:** a global monthly file is 60-84 MB. Full download of one variable (~560 months)
    is ~35 GB, so do not download. Streaming a CONUS subset via `earthaccess.open` + `h5netcdf` works:
    ~10 s per file (3 files in 32 s), so ~1.5 h per variable single-threaded, cached after that.
-8. **Wind power density:** the Zarr also has daily stores (`power_merra2_daily_temporal_utc.zarr`
-   listed, not opened). Computing monthly mean of daily v^3 would reduce (not remove) the bias of
-   cubing monthly-mean speed. Evaluate in Phase 3.
+8. **Wind power density (evaluated Phase 3):** daily store `power_merra2_daily_temporal_utc.zarr`
+   has `WS50M` daily from 1981, chunks (5844 days, 15, 15), so the CONUS stream is ~450 MB.
+   Kansas/Oklahoma box (35-40N, 102-96W), 2010-2019: monthly mean of daily v^3 / (monthly mean v)^3
+   = 1.29 median (5-95%: 1.17-1.51); Sen slope of the annual box mean -0.96 %/yr (monthly cube) vs
+   -0.65 %/yr (daily cube), annual-series correlation 0.94. The bias is not a constant factor, so it
+   changes trends. **Decision:** `wind_power_density` = 0.5 * rho * monthly mean of daily v^3
+   (variable `wind_speed_cubed_50m`). Still below an hourly-based value (not evaluated; the hourly
+   store exists but was not opened).
+
+9. **Streaming costs (Phase 3, measured on this connection):** TerraClimate chunks are
+   (12 months, 1024, 1024) float64, so a CONUS year reads 4 chunks (~400 MB uncompressed): ~2 min/year
+   with other jobs running. Daymet chunks (12, 2000, 2000) float32. MERRA-2 ~1 year/min with 4 worker
+   processes. Only the cropped, 0.25-deg block-averaged series is written to disk (~3-10 MB/variable).
 
 ## Other facts observed
 - Planetary Computer: 139 collections; no key needed, SAS tokens are issued by `planetary_computer.sign`.

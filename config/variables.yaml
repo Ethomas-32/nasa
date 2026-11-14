@@ -86,8 +86,23 @@ variables:
       - {provider: nasa_power, coverage: [global], dataset: "s3://nasa-power/merra2/temporal/power_merra2_monthly_temporal_utc.zarr",
          variable: WS50M, native_units: m/s, period: ["1981-01", "2026-09"], grid: "0.5x0.625 deg", product_type: reanalysis}
 
+  wind_speed_cubed_50m:
+    long_name: Monthly mean of daily-mean 50 m wind speed cubed
+    theme: atmospheric_dynamics
+    resource: wind
+    audience: [energy]
+    units: m3 s-3
+    aggregation: mean
+    relative: true
+    status: verified
+    caveats: [Built from DAILY mean speeds; sub-daily variability is not captured.]
+    providers:
+      - {provider: nasa_power, coverage: [global], dataset: "s3://nasa-power/merra2/temporal/power_merra2_daily_temporal_utc.zarr",
+         variable: WS50M, native_units: m3 s-3, transform: monthly_mean_of_daily_cube,
+         period: ["1981-01", "2026-09"], grid: "0.5x0.625 deg", product_type: reanalysis}
+
   wind_power_density:
-    long_name: Wind power density proxy (0.5 * rho * v^3)
+    long_name: Wind power density proxy (0.5 * rho * mean daily v^3)
     theme: atmospheric_dynamics
     resource: wind
     audience: [energy]
@@ -96,11 +111,11 @@ variables:
     relative: true
     status: verified
     caveats:
-      - Computed from time-mean speed, which underestimates true mean power density (E[v^3] > E[v]^3).
-      - Proxy only; ignores humidity and turbine characteristics.
+      - "Uses the monthly mean of DAILY v^3. Cubing monthly-mean speed instead underestimated it by 29% (median) and changed the 2010-2019 trend (-0.96 vs -0.65 %/yr) in a Great Plains test box; daily is still lower than an hourly-based value."
+      - Proxy only; dry-air density, ignores humidity and turbine characteristics.
     derived:
-      function: wind_power_density
-      inputs: [wind_speed_50m, air_temp_2m, surface_pressure]
+      function: wind_power_density_from_cube
+      inputs: [wind_speed_cubed_50m, air_temp_2m, surface_pressure]
 
   runoff:
     long_name: Runoff (water-balance model)

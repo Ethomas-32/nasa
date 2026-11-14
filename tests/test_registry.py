@@ -74,9 +74,10 @@ def test_unavailable_variable_is_reported_as_none():
 
 def test_derived_variable_resolves_inputs(reg):
     r = reg.resolve("conus", "wind_power_density")
-    assert r.provider == "derived" and r.function == "wind_power_density"
-    assert set(r.inputs) == {"wind_speed_50m", "air_temp_2m", "surface_pressure"}
-    assert r.inputs["wind_speed_50m"].provider == "nasa_power"
+    assert r.provider == "derived" and r.function == "wind_power_density_from_cube"
+    assert set(r.inputs) == {"wind_speed_cubed_50m", "air_temp_2m", "surface_pressure"}
+    assert r.inputs["wind_speed_cubed_50m"].provider == "nasa_power"
+    assert r.inputs["wind_speed_cubed_50m"].spec["transform"] == "monthly_mean_of_daily_cube"
     assert r.status == "verified"
 
 
