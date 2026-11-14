@@ -12,6 +12,7 @@ Run date 2026-11-15. Hydrology variables are pending (cache still downloading).
 | wind_speed_50m | POWER (MERRA-2) | +0.010 m/s/decade (+0.17 %/dec) | 0.54 | 0.05 / 0.03 | +0.019 | none (p=0.80) |
 | wind_power_density | derived (daily v^3) | +0.64 W m-2/decade (+0.31 %/dec) | 0.63 | 0.02 / 0.01 | +2.36 | none (p=0.80) |
 | surface_pressure | POWER (MERRA-2) | -0.0007 hPa/decade | 1.0 | 0.00 / 0.00 | -0.05 | none |
+| aerosol_optical_depth | MERRA-2 TOTEXTTAU | -0.0105 /decade (-7.0 %/dec) | 0.012 | 0.00 / 0.61 | -0.0071 | none (p=0.30) |
 
 ## Sanity checks
 - **Temperature** behaves as expected: broad, significant warming of ~0.26 degC/decade with no
@@ -28,6 +29,14 @@ Run date 2026-11-15. Hydrology variables are pending (cache still downloading).
 - **Wind:** CONUS-scale wind and power density trends are small and not significant; only 2-8% of
   the area passes FDR. The `opposing_trend_score` is high (0.67-0.90) but meaningless at such small
   significant area; it must always be read together with `area_frac_sig_up + down`.
+
+- **Aerosol** declines strongly and coherently (61% of the area significant, none increasing),
+  consistent with the documented US aerosol reduction. The 1991 regional value (0.245 vs ~0.15 in
+  neighbouring years) is the Pinatubo eruption, a physically correct feature; Theil-Sen is robust
+  to it and no breakpoint is flagged. Open question, NOT tested: AOD falls ~7%/decade while
+  MERRA-2 all-sky surface solar is flat, which would imply an offsetting (e.g. cloud) change.
+  Do not state a cause without checking clear-sky vs all-sky irradiance (`SWGDNCLR` exists in
+  M2TMNXRAD) or cloud fraction.
 
 ## Method issue found and fixed
 Pettitt on the raw regional series flagged a "breakpoint" in temperature (1998, p=0.0002). That
