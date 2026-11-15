@@ -7,3 +7,4 @@ data/raw/
 scratch/
 data/cache/
 dist/
+.dodsrc
