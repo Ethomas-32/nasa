@@ -147,3 +147,10 @@ def test_portfolio_and_alert_maps_exported(built):
     assert set(cat["alert_maps"]) <= set(VARS) and cat["alert_maps"]
     for m in list(cat["portfolio_maps"].values()) + list(cat["alert_maps"].values()):
         assert (out / m["png"]).exists() and "note" in m["legend"]
+
+
+def test_number_formatting_never_prints_minus_zero():
+    assert export._fmt(-0.02, 1) == "-0.02"
+    assert export._fmt(0.0004, 2) == "+0.0004"
+    assert export._fmt(0.0, 1) == "0" and export._fmt(-0.00001, 1) == "0"
+    assert export._fmt(3.456, 1) == "+3.5" and export._fmt(float("nan")) == "n/a"

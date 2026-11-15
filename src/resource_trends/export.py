@@ -167,7 +167,13 @@ def subregion_stats(ds: xr.Dataset, subregions: dict, field: str) -> list[dict]:
 
 
 def _fmt(x, d=2):
-    return f"{x:+.{d}f}"
+    """Signed number; small non-zero magnitudes get extra decimals so -0.02 never prints as "-0.0"."""
+    if x is None or not np.isfinite(x):
+        return "n/a"
+    while d < 4 and x != 0 and abs(x) < 10 ** -d:
+        d += 1
+    s = f"{x:+.{d}f}"
+    return "0" if float(s) == 0 else s
 
 
 def variable_sentences(var: str, vdef: dict, s: dict, subs: list[dict], region_name: str) -> list[dict]:
