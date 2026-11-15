@@ -20,6 +20,10 @@
     .regions > a:hover { border-color: #3987e5; }
     .regions > span { color: #898781; }
     .regions .chip { border: 0; }
+    .teaser { margin-top: 10px; display: grid; gap: 4px; }
+    .teaser select { background: #2c2c2a; color: #f0efec; border-color: #383835; }
+    .teaser .ramp { height: 8px; border-radius: 3px; }
+    .teaser .small { color: #c3c2b7; }
     .chip { background: #2c2c2a; color: #c3c2b7; }
     @media (max-width: 600px) { .intro { right: 16px; max-width: none; } }
   </style>
@@ -33,6 +37,17 @@
   <p class="small">Per-pixel trend detection with significance testing on NASA and NOAA Earth-science data.
     Trends and anomalies only; no forecasts.</p>
   <div id="headlines"></div>
+  <div class="teaser" id="teaser" hidden>
+    <label class="small" for="teaserSel">On the globe</label>
+    <select id="teaserSel">
+      <option value="trend:air_temp_2m">Temperature trend</option>
+      <option value="trend:precipitation">Precipitation trend</option>
+      <option value="portfolio:r_solar_hydro">Solar vs hydro complementarity</option>
+      <option value="none">Nothing (plain globe)</option>
+    </select>
+    <div class="ramp" id="teaserRamp"></div>
+    <div class="small" id="teaserNote"></div>
+  </div>
   <div class="regions" id="regions"><span>Loading regions…</span></div>
 </div>
 <script type="module">
@@ -51,11 +66,12 @@
   const regions = index.regions.filter((r) => r.id !== "global");
   const feats = regions.map((r) => ({ ...rect(r.bbox), properties: r }));
 
+  const EARTH = "https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/earth-blue-marble.jpg";
   const globe = Globe()(document.getElementById("globe"))
-    .globeImageUrl("https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/earth-blue-marble.jpg")
+    .globeImageUrl(EARTH)
     .backgroundImageUrl("https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/night-sky.png")
     .polygonsData(feats)
-    .polygonCapColor((f) => (f.properties.available ? "rgba(57,135,229,0.35)" : "rgba(137,135,129,0.18)"))
+    .polygonCapColor((f) => (f.properties.available ? "rgba(0,0,0,0)" : "rgba(137,135,129,0.18)"))
     .polygonSideColor(() => "rgba(0,0,0,0)")
     .polygonStrokeColor((f) => (f.properties.available ? "#86b6ef" : "#898781"))
     .polygonAltitude(0.008)
@@ -74,6 +90,65 @@
   document.getElementById("regions").innerHTML = index.regions.map((r) => r.available
     ? `<a href="dashboard.html?region=${encodeURIComponent(r.id)}"><span>${esc(r.name)}</span><span class="chip">${esc(r.period)}</span></a>`
     : `<span><span>${esc(r.name)}</span><span>coming soon</span></span>`).join("");
+
+  // --- teaser: drape an exported CONUS overlay onto the Earth texture ----------------------------
+  // The exported PNGs are lat/lon grids, the same equirectangular projection as the globe texture,
+  // so a layer is placed by its bounds alone: x = (lon + 180) / 360 * W, y = (90 - lat) / 180 * H.
+  const loadImg = (src) => new Promise((res, rej) => {
+    const im = new Image(); im.crossOrigin = "anonymous";
+    im.onload = () => res(im); im.onerror = () => rej(new Error(src)); im.src = src;
+  });
+  const textures = new Map();
+  let earth;
+  async function composite(region, png, bounds) {
+    earth = earth || await loadImg(EARTH);
+    const ov = await loadImg(`../export/${region}/${png}`);
+    const c = document.createElement("canvas");
+    c.width = earth.width; c.height = earth.height;
+    const g = c.getContext("2d");
+    g.drawImage(earth, 0, 0);
+    g.imageSmoothingEnabled = false;                  // keep grid cells crisp
+    const X = (lon) => ((lon + 180) / 360) * c.width, Y = (lat) => ((90 - lat) / 180) * c.height;
+    g.globalAlpha = 0.9;
+    g.drawImage(ov, X(bounds.west), Y(bounds.north), X(bounds.east) - X(bounds.west), Y(bounds.south) - Y(bounds.north));
+    return c.toDataURL("image/jpeg", 0.92);
+  }
+
+  async function setupTeaser(region) {
+    const cat = await (await fetch(`../export/${region}/catalog.json`)).json();
+    const pick = (value) => {
+      const [kind, name] = value.split(":");
+      if (kind === "trend") {
+        const v = cat.variables.find((x) => x.name === name);
+        return v && { png: v.annual.trend_png, legend: v.annual.legend, label: `${v.long_name}, ${v.annual.period}`, units: v.annual.legend.units };
+      }
+      const m = cat.portfolio_maps?.[name];
+      return m && { png: m.png, legend: m.legend, label: "Solar vs hydro (runoff) monthly anomalies, 1981-2020", units: "correlation r" };
+    };
+    const sel = document.getElementById("teaserSel");
+    for (const o of sel.options) if (o.value !== "none" && !pick(o.value)) o.disabled = true;
+    async function show(value) {
+      const ramp = document.getElementById("teaserRamp"), note = document.getElementById("teaserNote");
+      if (value === "none") { globe.globeImageUrl(EARTH); ramp.hidden = true; note.textContent = ""; return; }
+      const t = pick(value);
+      note.textContent = "Loading…";
+      if (!textures.has(value)) textures.set(value, await composite(region, t.png, t.legend.bounds));
+      globe.globeImageUrl(textures.get(value));
+      const L = t.legend, f = (x) => (Math.abs(x) >= 1 ? x.toFixed(1) : x.toFixed(2));
+      ramp.hidden = false;
+      ramp.style.background = `linear-gradient(to right, ${L.colors_neg_to_pos.join(", ")})`;
+      const meaning = value.startsWith("portfolio") ? "blue = complementary" :
+        L.positive_color === "blue" ? "blue = increase" : "red = increase";
+      note.textContent = `${t.label}. ${f(L.vmin)} to ${f(L.vmax)} ${t.units}; ${meaning}; faded = not significant. ${cat.region.name} only.`;
+    }
+    sel.addEventListener("change", () => show(sel.value).catch((e) => { document.getElementById("teaserNote").textContent = `Could not load layer (${e.message}).`; }));
+    document.getElementById("teaser").hidden = false;
+    const wanted = new URLSearchParams(location.search).get("teaser");   // e.g. ?teaser=trend:precipitation
+    if (wanted && [...sel.options].some((o) => o.value === wanted && !o.disabled)) sel.value = wanted;
+    await show(sel.value);
+  }
+  const firstAvailable = index.regions.find((r) => r.available);
+  if (firstAvailable) setupTeaser(firstAvailable.id).catch((e) => console.warn("teaser", e));
 
   // headline sentences from the first available region's narrative (numbers only, no new claims)
   const first = index.regions.find((r) => r.available);

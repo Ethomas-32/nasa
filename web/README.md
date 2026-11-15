@@ -14,7 +14,10 @@ Serve the repository ROOT, not `web/`: the pages read `../export/<region>/`.
 
 ## Pages
 - `index.html`: globe; regions from `export/index.json` (available ones open the dashboard, others say
-  "coming soon"); three headline sentences from the region's `narrative.json`.
+  "coming soon"); three headline sentences from the region's `narrative.json`; a teaser layer drapes an
+  exported CONUS overlay (temperature trend, precipitation trend, solar-hydro complementarity) onto the
+  Earth texture. Both are equirectangular, so it is placed by its bounds without reprojection.
+  `?teaser=trend:precipitation` (or `portfolio:r_solar_hydro`, `none`) picks the initial layer.
 - `dashboard.html?region=<id>`: map layers (trend by season, latest-month anomaly, complementarity),
   variable list grouped by resource, resource cards, narrative + caveats + sub-region table,
   click-for-series (tested per-cell trend from the pixel tiles), portfolio table, alert list (with data
