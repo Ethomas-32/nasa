@@ -8,6 +8,11 @@ static web front end (globe + dashboard). Trends and anomalies only; **no foreca
 
 Current coverage: contiguous US (CONUS), 1981-2020. Africa and a global view are configured but not run.
 
+**Live site:** https://ethomas-32.github.io/nasa/web/ &nbsp;·&nbsp; **Why it matters and how to use it:**
+[docs/how_it_helps.md](docs/how_it_helps.md) explains what the tool does for renewable-energy providers
+(solar, wind, hydro, portfolio) and farmers, which dashboard parts answer which question, and gives demo
+walkthroughs with direct links.
+
 ## Contents
 - [Quick start: run the demo from a fresh clone](#quick-start-run-the-demo-from-a-fresh-clone)
 - [Install the Python package](#install-the-python-package)
