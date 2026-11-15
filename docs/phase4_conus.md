@@ -19,7 +19,7 @@ Run: `pipeline.run("conus", var, 1981, 2020)`, annual aggregate per variables.ya
 | runoff | TerraClimate | +6.2 mm/decade (+3.5 %/dec) | 0.38 | 0.00 / 0.00 | +9.4 | none |
 | soil_moisture | TerraClimate | +0.40 mm/decade (+0.75 %/dec) | 0.71 | 0.00 / 0.03 | +0.94 | none |
 | pdsi | TerraClimate | +0.007 /decade | 0.97 | 0.00 / 0.00 | +0.19 | none |
-| precipitation | nClimGrid | pending (cache downloading) | | | | |
+| precipitation | nClimGrid | +5.4 mm/decade (+0.7 %/dec) | 0.69 | 0.00 / 0.00 | +15.6 | none (p=0.45) |
 
 Sub-regional area-weighted mean trend (%/decade for relative variables, units/decade otherwise) and
 fraction of the sub-region significant (FDR) up/down:
@@ -29,6 +29,7 @@ fraction of the sub-region significant (FDR) up/down:
 | air_temp_2m (degC/dec) | +0.45 (0.99 up) | +0.37 (0.96 up) | +0.23 (0.52 up) | +0.33 (0.95 up) | +0.18 (0.28 up) | +0.19 (0.35 up) |
 | aerosol_optical_depth | -6.9 (0.43 dn) | -14.0 (1.00 dn) | +1.8 | -11.2 (1.00 dn) | +0.2 | -6.4 (0.48 dn) |
 | snow_water_equivalent | -7.4 (0.11 dn) | -0.6 | -12.7 (0.14 dn) | -5.9 (0.13 dn) | -1.0 (0.07 dn) | +0.1 |
+| precipitation | -7.7 | +2.9 | -1.8 | +1.7 | +1.1 | +0.6 |
 | runoff | -8.1 | +5.6 | -1.6 | +2.4 | +3.2 | +0.8 |
 | soil_moisture | -14.7 (0.22 dn) | +1.7 | -2.6 | +1.8 | -0.7 | -1.7 |
 | pdsi (/dec) | -0.70 | +0.59 | -0.45 | +0.34 | +0.12 | +0.16 |
@@ -37,15 +38,17 @@ fraction of the sub-region significant (FDR) up/down:
 Boxes: Southwest 31-37N 120-103W; Northeast 38-47.5N 85-67W; Pacific NW 42-49N 125-116W;
 Southeast 29-36N 92-76W; N. Rockies 42-49N 116-104W; Plains 35-48N 104-95W.
 
+Precipitation was not cross-checked against TerraClimate `ppt` (would need another ~25 min stream).
+
 ## Sanity checks
 - **Temperature**: broad, significant warming (+0.28 degC/decade, 68% of area significant, none
   cooling), fastest in the Southwest. Close to commonly cited US warming since ~1980 (general
   knowledge, not re-verified here). End-to-end check that pipeline, units and per-decade scaling work.
 - **Surface pressure**: no trend (negative control).
 - **Southwest drying / Northeast wetting (checked, not assumed)**: the pattern is present IN SIGN in
-  every hydro variable (runoff -8.1 vs +5.6 %/dec; soil moisture -14.7 vs +1.7; PDSI -0.70 vs +0.59),
+  every hydro variable (precipitation -7.7 vs +2.9 %/dec; runoff -8.1 vs +5.6 %/dec; soil moisture -14.7 vs +1.7; PDSI -0.70 vs +0.59),
   but it is statistically significant only for Southwest soil moisture (22% of the sub-region).
-  Annual runoff and PDSI have NO FDR-significant pixels anywhere: interannual variability is large
+  Annual precipitation, runoff and PDSI have NO FDR-significant pixels anywhere: interannual variability is large
   relative to 40 years, and FDR over ~8000 spatially correlated 0.25-deg cells is strict. This must
   be reported as "consistent direction, not established at pixel level", not as a detected trend.
 - **Snow**: declines everywhere snow matters, strongest in the Pacific Northwest (-12.7 %/dec),
