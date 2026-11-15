@@ -12,6 +12,8 @@
 # providers:   ordered list of {provider, coverage, dataset, variable, native_units, period, grid,
 #              product_type}. `dataset` is the store/collection id the loader opens.
 # derived:     {function, inputs} instead of providers (see derived.py)
+# primary:     true for exactly one headline index per resource (solar, wind, hydro)
+# seasonal:    false to skip per-season runs (default true)
 variables:
   solar_irradiance:
     long_name: All-sky surface shortwave downward irradiance
@@ -21,6 +23,7 @@ variables:
     units: W m-2
     aggregation: mean
     relative: true
+    primary: true      # the resource's headline index (portfolio analysis)
     status: verified
     caveats:
       - Reanalysis, not a site measurement.
@@ -109,6 +112,7 @@ variables:
     units: W m-2
     aggregation: mean
     relative: true
+    primary: true      # the resource's headline index (portfolio analysis)
     status: verified
     caveats:
       - "Uses the monthly mean of DAILY v^3. Cubing monthly-mean speed instead underestimated it by 29% (median) and changed the 2010-2019 trend (-0.96 vs -0.65 %/yr) in a Great Plains test box; daily is still lower than an hourly-based value."
@@ -125,6 +129,7 @@ variables:
     units: mm
     aggregation: sum
     relative: true
+    primary: true      # the resource's headline index (portfolio analysis)
     status: verified
     caveats:
       - Resource proxy, not generation; dams and operations are not modeled.

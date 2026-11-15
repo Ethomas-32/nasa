@@ -85,6 +85,10 @@ class Registry:
                         bad(f"derived input {inp!r} is not a variable")
                     if "derived" in self.variables[inp]:
                         bad(f"derived input {inp!r} is itself derived (not supported)")
+        for res in ("solar", "wind", "hydro"):
+            prim = [n for n, v in self.variables.items() if v.get("primary") and v["resource"] == res]
+            if len(prim) > 1:
+                raise RegistryError(f"resource {res!r} has more than one primary index: {prim}")
         for rname, r in self.regions.items():
             b = r.get("bbox", {})
             if not (-90 <= b.get("lat_min", 99) < b.get("lat_max", -99) <= 90):
@@ -95,6 +99,12 @@ class Registry:
                 raise RegistryError(f"region {rname!r}: coverage_tags and provider_preference required")
 
     # --- queries --------------------------------------------------------------------------------
+    def primary_index(self, resource: str) -> str:
+        for name, v in self.variables.items():
+            if v.get("primary") and v["resource"] == resource:
+                return name
+        raise KeyError(f"no primary index for resource {resource!r}")
+
     def select(self, resource=None, audience=None, theme=None) -> list[str]:
         out = []
         for name, v in self.variables.items():
