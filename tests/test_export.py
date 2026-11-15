@@ -115,7 +115,18 @@ REAL = Path(__file__).resolve().parents[1] / "export" / "conus"
 
 @pytest.mark.skipif(not (REAL / "catalog.json").exists(), reason="real CONUS export not built")
 def test_real_conus_export_validates():
-    assert export.validate_export(REAL) == []
+    # a website-only bundle (demo zip copied into a clone) has no NetCDF files, by design
+    full = any(REAL.glob("*.trend.nc"))
+    assert export.validate_export(REAL, require_netcdf=full) == []
+
+
+def test_website_only_bundle_validates_without_netcdf(built, tmp_path):
+    import shutil
+    out, _, _ = built
+    web = tmp_path / "web_only"
+    shutil.copytree(out, web, ignore=shutil.ignore_patterns("*.nc"))
+    assert any("missing" in p and ".nc" in p for p in export.validate_export(web))     # strict mode notices
+    assert export.validate_export(web, require_netcdf=False) == []
 
 
 def test_pixel_tiles_carry_tested_trend_stats(built):

@@ -428,9 +428,11 @@ SCHEMAS = {
 }
 
 
-def validate_export(out_dir) -> list[str]:
+def validate_export(out_dir, require_netcdf: bool = True) -> list[str]:
     """Return a list of problems (empty = valid): every JSON file against its schema, every referenced
-    file exists, PNG size matches the trend grid, pixel-series lengths match their years."""
+    file exists, PNG size matches the trend grid, pixel-series lengths match their years.
+    require_netcdf=False validates a website-only bundle (scripts/package_demo.py leaves the NetCDF
+    files out): `.nc` files may be absent and PNG sizes are checked against the legend instead."""
     import jsonschema
     from PIL import Image
     out = Path(out_dir)
@@ -450,7 +452,7 @@ def validate_export(out_dir) -> list[str]:
     for var in cat.get("variables", []):
         entries = ([var["annual"]] if var.get("annual") else []) + list(var.get("seasons", {}).values())
         for e in entries:
-            for k in ("trend_nc", "trend_png", "summary"):
+            for k in ("trend_nc", "trend_png", "summary") if require_netcdf else ("trend_png", "summary"):
                 if not (out / e[k]).exists():
                     problems.append(f"{var['name']}: missing {e[k]}")
             if (out / e["summary"]).exists():
@@ -459,6 +461,10 @@ def validate_export(out_dir) -> list[str]:
                 with Image.open(out / e["trend_png"]) as im, xr.open_dataset(out / e["trend_nc"]) as d:
                     if im.size != (d.sizes["lon"], d.sizes["lat"]) or im.mode != "RGBA":
                         problems.append(f"{e['trend_png']}: size {im.size}/{im.mode} != grid {(d.sizes['lon'], d.sizes['lat'])}")
+            elif (out / e["trend_png"]).exists():
+                with Image.open(out / e["trend_png"]) as im:
+                    if im.size != (e["legend"]["width"], e["legend"]["height"]) or im.mode != "RGBA":
+                        problems.append(f"{e['trend_png']}: size {im.size}/{im.mode} != legend")
             b = e["legend"]["bounds"]
             if not (b["south"] < b["north"] and b["west"] < b["east"]):
                 problems.append(f"{e['trend_png']}: bad bounds {b}")
