@@ -14,6 +14,7 @@
 # derived:     {function, inputs} instead of providers (see derived.py)
 # primary:     true for exactly one headline index per resource (solar, wind, hydro)
 # seasonal:    false to skip per-season runs (default true)
+# adverse:     low | high | both: which anomaly direction is an alert (e.g. low wind, high temperature)
 variables:
   solar_irradiance:
     long_name: All-sky surface shortwave downward irradiance
@@ -24,6 +25,7 @@ variables:
     aggregation: mean
     relative: true
     primary: true      # the resource's headline index (portfolio analysis)
+    adverse: low       # direction of concern for anomaly alerts
     status: verified
     caveats:
       - Reanalysis, not a site measurement.
@@ -43,6 +45,7 @@ variables:
     units: "1"
     aggregation: mean
     relative: true
+    adverse: high       # direction of concern for anomaly alerts
     status: verified
     caveats: [Reanalysis aerosol that assimilates satellite AOD; observing-system changes can cause discontinuities.]
     providers:
@@ -57,6 +60,7 @@ variables:
     units: degC
     aggregation: mean
     relative: false
+    adverse: high       # direction of concern for anomaly alerts
     status: verified
     providers:
       - {provider: nasa_power, coverage: [global], dataset: "s3://nasa-power/merra2/temporal/power_merra2_monthly_temporal_utc.zarr",
@@ -70,6 +74,7 @@ variables:
     units: hPa
     aggregation: mean
     relative: true
+    adverse: both       # direction of concern for anomaly alerts
     status: verified
     providers:
       - {provider: nasa_power, coverage: [global], dataset: "s3://nasa-power/merra2/temporal/power_merra2_monthly_temporal_utc.zarr",
@@ -83,6 +88,7 @@ variables:
     units: m s-1
     aggregation: mean
     relative: true
+    adverse: low       # direction of concern for anomaly alerts
     status: verified
     caveats: [Reanalysis, not a site measurement.]
     providers:
@@ -97,6 +103,7 @@ variables:
     units: m3 s-3
     aggregation: mean
     relative: true
+    adverse: low       # direction of concern for anomaly alerts
     status: verified
     caveats: [Built from DAILY mean speeds; sub-daily variability is not captured.]
     providers:
@@ -113,6 +120,7 @@ variables:
     aggregation: mean
     relative: true
     primary: true      # the resource's headline index (portfolio analysis)
+    adverse: low       # direction of concern for anomaly alerts
     status: verified
     caveats:
       - "Uses the monthly mean of DAILY v^3. Cubing monthly-mean speed instead underestimated it by 29% (median) and changed the 2010-2019 trend (-0.96 vs -0.65 %/yr) in a Great Plains test box; daily is still lower than an hourly-based value."
@@ -130,6 +138,7 @@ variables:
     aggregation: sum
     relative: true
     primary: true      # the resource's headline index (portfolio analysis)
+    adverse: low       # direction of concern for anomaly alerts
     status: verified
     caveats:
       - Resource proxy, not generation; dams and operations are not modeled.
@@ -146,6 +155,7 @@ variables:
     units: mm
     aggregation: sum
     relative: true
+    adverse: low       # direction of concern for anomaly alerts
     status: verified
     caveats: [PC copies end 2022-09 (NClimGrid) / 2021-12 (TerraClimate).]
     providers:
@@ -162,6 +172,7 @@ variables:
     units: mm
     aggregation: mean
     relative: true
+    adverse: low       # direction of concern for anomaly alerts
     status: verified
     providers:
       - {provider: terraclimate, coverage: [global], dataset: terraclimate, variable: soil, native_units: mm,
@@ -175,6 +186,7 @@ variables:
     units: "1"
     aggregation: mean
     relative: false
+    adverse: low       # direction of concern for anomaly alerts
     status: verified
     providers:
       - {provider: terraclimate, coverage: [global], dataset: terraclimate, variable: pdsi, native_units: unitless,
@@ -189,6 +201,7 @@ variables:
     aggregation: max   # peak SWE per year is the usual hydro-relevant statistic
     seasonal: false    # a seasonal peak-SWE trend (e.g. JJA) is not meaningful; annual only
     relative: true
+    adverse: low       # direction of concern for anomaly alerts
     status: verified
     caveats:
       - "Daymet monthly swe is the monthly MEAN of daily SWE (verified against daymet-daily-na despite 'monthly total' metadata). Annual value = peak monthly-mean SWE, a lower bound on true peak SWE."

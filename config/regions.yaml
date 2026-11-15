@@ -12,6 +12,13 @@ regions:
     analysis_deg: 0.25   # products finer than this are block-averaged to it (cheap stats, small cache)
     mask: data/masks/conus_nclimgrid_footprint.nc   # US land only (bbox also covers ocean, Canada, Mexico); scripts/make_mask.py
     provider_preference: [daymet, nclimgrid, terraclimate, merra2, nasa_power]
+    subregions:            # simple named boxes for summaries and alert locations (not official regions)
+      Southwest:  {lat_min: 31.0, lat_max: 37.0, lon_min: -120.0, lon_max: -103.0}
+      Northeast:  {lat_min: 38.0, lat_max: 47.5, lon_min: -85.0,  lon_max: -67.0}
+      Pacific NW: {lat_min: 42.0, lat_max: 49.0, lon_min: -125.0, lon_max: -116.0}
+      Southeast:  {lat_min: 29.0, lat_max: 36.0, lon_min: -92.0,  lon_max: -76.0}
+      N. Rockies: {lat_min: 42.0, lat_max: 49.0, lon_min: -116.0, lon_max: -104.0}
+      Plains:     {lat_min: 35.0, lat_max: 48.0, lon_min: -104.0, lon_max: -95.0}
   africa:
     name: Africa
     bbox: {lat_min: -35.0, lat_max: 38.0, lon_min: -18.0, lon_max: 52.0}
