@@ -111,6 +111,18 @@ MERRA-2 if they have been published since; that needs internet (and the Earthdat
 
 Source details, verified ids, units and known quirks are in [docs/sources.md](docs/sources.md).
 
+### Host it online (GitHub Pages)
+Live site: **https://ethomas-32.github.io/nasa/web/** (no install needed; hosted by GitHub, so the build
+machine can be off).
+```powershell
+python scripts\deploy_pages.py        # publishes web/ + export/ (no NetCDF, ~68 MB) to the gh-pages branch
+```
+One-time setup on GitHub: *Settings > Pages > Build and deployment > Source: Deploy from a branch >
+Branch `gh-pages`, folder `/ (root)` > Save*. Re-run the script after rebuilding results to update the site
+(it force-pushes a single fresh commit to `gh-pages`; `main` is untouched). The repository must be public
+for Pages on a free account. The OpenStreetMap basemap is fine for light (demo) traffic; heavy traffic would
+need a tile provider with an account.
+
 ### Make a demo zip for another device
 ```powershell
 python scripts\package_demo.py        # -> dist\resource-trends-demo.zip (web + results, ~13 MB)
