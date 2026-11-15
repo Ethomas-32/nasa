@@ -1,0 +1,5305 @@
+{
+ "contract_version": "1.0",
+ "region": {
+  "id": "conus",
+  "name": "Contiguous United States",
+  "bbox": {
+   "lat_min": 24.5,
+   "lat_max": 49.5,
+   "lon_min": -125.0,
+   "lon_max": -66.5
+  },
+  "mask": "data/masks/conus_nclimgrid_footprint.nc",
+  "analysis_deg": 0.25,
+  "subregions": {
+   "Southwest": {
+    "lat_min": 31.0,
+    "lat_max": 37.0,
+    "lon_min": -120.0,
+    "lon_max": -103.0
+   },
+   "Northeast": {
+    "lat_min": 38.0,
+    "lat_max": 47.5,
+    "lon_min": -85.0,
+    "lon_max": -67.0
+   },
+   "Pacific NW": {
+    "lat_min": 42.0,
+    "lat_max": 49.0,
+    "lon_min": -125.0,
+    "lon_max": -116.0
+   },
+   "Southeast": {
+    "lat_min": 29.0,
+    "lat_max": 36.0,
+    "lon_min": -92.0,
+    "lon_max": -76.0
+   },
+   "N. Rockies": {
+    "lat_min": 42.0,
+    "lat_max": 49.0,
+    "lon_min": -116.0,
+    "lon_max": -104.0
+   },
+   "Plains": {
+    "lat_min": 35.0,
+    "lat_max": 48.0,
+    "lon_min": -104.0,
+    "lon_max": -95.0
+   }
+  }
+ },
+ "generated": "2026-11-15",
+ "period": "1981-2020",
+ "method": "Per-pixel Theil-Sen slope + Mann-Kendall test (tie-corrected, lag-1 autocorrelation variance inflation), Benjamini-Hochberg FDR alpha 0.10; cos(latitude) area weighting.",
+ "disclaimers": [
+  "Trend detection and anomaly alerts only; no forecasts.",
+  "Reanalysis and model products are labelled as such; they are not site measurements.",
+  "Resource proxies, not generation."
+ ],
+ "variables": [
+  {
+   "name": "solar_irradiance",
+   "long_name": "All-sky surface shortwave downward irradiance",
+   "theme": "atmospheric_chemistry",
+   "resource": "solar",
+   "audience": [
+    "energy",
+    "agriculture"
+   ],
+   "units": "W m-2",
+   "aggregation": "mean",
+   "relative": true,
+   "primary": true,
+   "adverse": "low",
+   "provider": "merra2",
+   "dataset": "M2TMNXRAD",
+   "product_type": "reanalysis",
+   "status": "verified",
+   "caveats": [
+    "Reanalysis, not a site measurement.",
+    "POWER's 1984-present solar series splices SRB (to 2000) and SYN1deg (from 2001) with a +1.5% step; not used for trends. See docs/sources.md."
+   ],
+   "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual mean",
+   "annual": {
+    "trend_nc": "solar_irradiance.trend.nc",
+    "trend_png": "solar_irradiance.trend.png",
+    "summary": "solar_irradiance.summary.json",
+    "legend": {
+     "field": "pct_change_per_decade",
+     "vmin": -0.9447686318251606,
+     "vmax": 0.9447686318251606,
+     "colors_neg_to_pos": [
+      "#104281",
+      "#3987e5",
+      "#f0efec",
+      "#e34948",
+      "#8f1d1d"
+     ],
+     "positive_color": "red",
+     "nonsignificant_alpha": 0.35,
+     "transparent": "no data / outside region",
+     "bounds": {
+      "south": 24.25,
+      "north": 49.75,
+      "west": -125.3125,
+      "east": -66.5625
+     },
+     "width": 94,
+     "height": 51,
+     "units": "% per decade"
+    },
+    "period": "1981-2020",
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": 0.4592230767300234,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Northeast",
+      "mean": -0.07651103556472878,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": -0.29776811361929606,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 0.07798813983570052,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": -0.39200068858721954,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 0.08115828858984628,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     }
+    ],
+    "pixel_series": {
+     "dir": "solar_irradiance",
+     "tile_deg": 5.0,
+     "naming": "{floor(lat/5)*5:+06.1f}_{floor(lon/5)*5:+07.1f}.json",
+     "tiles": [
+      "+025.0_-0105.0.json",
+      "+025.0_-0100.0.json",
+      "+025.0_-0085.0.json",
+      "+030.0_-0120.0.json",
+      "+030.0_-0115.0.json",
+      "+030.0_-0110.0.json",
+      "+030.0_-0105.0.json",
+      "+030.0_-0100.0.json",
+      "+030.0_-0095.0.json",
+      "+030.0_-0090.0.json",
+      "+030.0_-0085.0.json",
+      "+030.0_-0080.0.json",
+      "+035.0_-0125.0.json",
+      "+035.0_-0120.0.json",
+      "+035.0_-0115.0.json",
+      "+035.0_-0110.0.json",
+      "+035.0_-0105.0.json",
+      "+035.0_-0100.0.json",
+      "+035.0_-0095.0.json",
+      "+035.0_-0090.0.json",
+      "+035.0_-0085.0.json",
+      "+035.0_-0080.0.json",
+      "+040.0_-0125.0.json",
+      "+040.0_-0120.0.json",
+      "+040.0_-0115.0.json",
+      "+040.0_-0110.0.json",
+      "+040.0_-0105.0.json",
+      "+040.0_-0100.0.json",
+      "+040.0_-0095.0.json",
+      "+040.0_-0090.0.json",
+      "+040.0_-0085.0.json",
+      "+040.0_-0080.0.json",
+      "+040.0_-0075.0.json",
+      "+045.0_-0125.0.json",
+      "+045.0_-0120.0.json",
+      "+045.0_-0115.0.json",
+      "+045.0_-0110.0.json",
+      "+045.0_-0105.0.json",
+      "+045.0_-0100.0.json",
+      "+045.0_-0095.0.json",
+      "+045.0_-0090.0.json",
+      "+045.0_-0085.0.json",
+      "+045.0_-0080.0.json",
+      "+045.0_-0075.0.json",
+      "+045.0_-0070.0.json"
+     ],
+     "years": [
+      1981,
+      2020
+     ]
+    }
+   },
+   "seasons": {
+    "DJF": {
+     "trend_nc": "solar_irradiance.DJF.trend.nc",
+     "trend_png": "solar_irradiance.DJF.trend.png",
+     "summary": "solar_irradiance.DJF.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -1.7975932261675822,
+      "vmax": 1.7975932261675822,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.7861335642557747,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": -0.4617231493788995,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.8400237235220855,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.7362286481412982,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -0.6405848678364182,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": -0.10073184583227186,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "MAM": {
+     "trend_nc": "solar_irradiance.MAM.trend.nc",
+     "trend_png": "solar_irradiance.MAM.trend.png",
+     "summary": "solar_irradiance.MAM.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -1.4375297284971449,
+      "vmax": 1.4375297284971449,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.5393885980011762,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": -0.2921951448388227,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.19703294761576973,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": -0.5277084737586474,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -0.4612890511014893,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": -0.3877117129869062,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "JJA": {
+     "trend_nc": "solar_irradiance.JJA.trend.nc",
+     "trend_png": "solar_irradiance.JJA.trend.png",
+     "summary": "solar_irradiance.JJA.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -1.0280574376631642,
+      "vmax": 1.0280574376631642,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -0.09904803633403421,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": -0.235447368333357,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.1261901774171699,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": -0.3496984028784228,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -0.2604975791472881,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 0.04321464376830067,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "SON": {
+     "trend_nc": "solar_irradiance.SON.trend.nc",
+     "trend_png": "solar_irradiance.SON.trend.png",
+     "summary": "solar_irradiance.SON.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -1.6507726448895377,
+      "vmax": 1.6507726448895377,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.7672239044014763,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.5678750237167789,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.5173672165896139,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 1.3008792837256793,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -0.2978454547780895,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 0.4561736690222731,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "name": "aerosol_optical_depth",
+   "long_name": "Total aerosol extinction optical thickness (550 nm)",
+   "theme": "atmospheric_chemistry",
+   "resource": "solar",
+   "audience": [
+    "energy"
+   ],
+   "units": "1",
+   "aggregation": "mean",
+   "relative": true,
+   "primary": false,
+   "adverse": "high",
+   "provider": "merra2",
+   "dataset": "M2TMNXAER",
+   "product_type": "reanalysis",
+   "status": "verified",
+   "caveats": [
+    "Reanalysis aerosol that assimilates satellite AOD; observing-system changes can cause discontinuities."
+   ],
+   "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual mean",
+   "annual": {
+    "trend_nc": "aerosol_optical_depth.trend.nc",
+    "trend_png": "aerosol_optical_depth.trend.png",
+    "summary": "aerosol_optical_depth.summary.json",
+    "legend": {
+     "field": "pct_change_per_decade",
+     "vmin": -14.876285520498795,
+     "vmax": 14.876285520498795,
+     "colors_neg_to_pos": [
+      "#104281",
+      "#3987e5",
+      "#f0efec",
+      "#e34948",
+      "#8f1d1d"
+     ],
+     "positive_color": "red",
+     "nonsignificant_alpha": 0.35,
+     "transparent": "no data / outside region",
+     "bounds": {
+      "south": 24.25,
+      "north": 49.75,
+      "west": -125.3125,
+      "east": -66.5625
+     },
+     "width": 94,
+     "height": 51,
+     "units": "% per decade"
+    },
+    "period": "1981-2020",
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": -6.9228603365978225,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.42670950060437424
+     },
+     {
+      "name": "Northeast",
+      "mean": -13.98073425338208,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 1.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": 1.8318563274716695,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": -11.211395983835494,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 1.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 0.20697579416158896,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": -6.4256455460962325,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.476886232746163
+     }
+    ],
+    "pixel_series": {
+     "dir": "aerosol_optical_depth",
+     "tile_deg": 5.0,
+     "naming": "{floor(lat/5)*5:+06.1f}_{floor(lon/5)*5:+07.1f}.json",
+     "tiles": [
+      "+025.0_-0105.0.json",
+      "+025.0_-0100.0.json",
+      "+025.0_-0085.0.json",
+      "+030.0_-0120.0.json",
+      "+030.0_-0115.0.json",
+      "+030.0_-0110.0.json",
+      "+030.0_-0105.0.json",
+      "+030.0_-0100.0.json",
+      "+030.0_-0095.0.json",
+      "+030.0_-0090.0.json",
+      "+030.0_-0085.0.json",
+      "+030.0_-0080.0.json",
+      "+035.0_-0125.0.json",
+      "+035.0_-0120.0.json",
+      "+035.0_-0115.0.json",
+      "+035.0_-0110.0.json",
+      "+035.0_-0105.0.json",
+      "+035.0_-0100.0.json",
+      "+035.0_-0095.0.json",
+      "+035.0_-0090.0.json",
+      "+035.0_-0085.0.json",
+      "+035.0_-0080.0.json",
+      "+040.0_-0125.0.json",
+      "+040.0_-0120.0.json",
+      "+040.0_-0115.0.json",
+      "+040.0_-0110.0.json",
+      "+040.0_-0105.0.json",
+      "+040.0_-0100.0.json",
+      "+040.0_-0095.0.json",
+      "+040.0_-0090.0.json",
+      "+040.0_-0085.0.json",
+      "+040.0_-0080.0.json",
+      "+040.0_-0075.0.json",
+      "+045.0_-0125.0.json",
+      "+045.0_-0120.0.json",
+      "+045.0_-0115.0.json",
+      "+045.0_-0110.0.json",
+      "+045.0_-0105.0.json",
+      "+045.0_-0100.0.json",
+      "+045.0_-0095.0.json",
+      "+045.0_-0090.0.json",
+      "+045.0_-0085.0.json",
+      "+045.0_-0080.0.json",
+      "+045.0_-0075.0.json",
+      "+045.0_-0070.0.json"
+     ],
+     "years": [
+      1981,
+      2020
+     ]
+    }
+   },
+   "seasons": {
+    "DJF": {
+     "trend_nc": "aerosol_optical_depth.DJF.trend.nc",
+     "trend_png": "aerosol_optical_depth.DJF.trend.png",
+     "summary": "aerosol_optical_depth.DJF.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -18.54683141099963,
+      "vmax": 18.54683141099963,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -11.302614758501454,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.9032909559934806
+      },
+      {
+       "name": "Northeast",
+       "mean": -13.823283896326686,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 1.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -5.277661320529935,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.22451208115614954
+      },
+      {
+       "name": "Southeast",
+       "mean": -14.244504182695259,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 1.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -7.2525268975818555,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.6828776861407522
+      },
+      {
+       "name": "Plains",
+       "mean": -10.71663020413207,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.9770956002642543
+      }
+     ]
+    },
+    "MAM": {
+     "trend_nc": "aerosol_optical_depth.MAM.trend.nc",
+     "trend_png": "aerosol_optical_depth.MAM.trend.png",
+     "summary": "aerosol_optical_depth.MAM.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -12.536962966082148,
+      "vmax": 12.536962966082148,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -4.890224692822723,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.5686733058451799
+      },
+      {
+       "name": "Northeast",
+       "mean": -11.397582521617872,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 1.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.4608689800613916,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": -8.166313401317403,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 1.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -2.114465770113437,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.09299549690116321
+      },
+      {
+       "name": "Plains",
+       "mean": -4.978639558439161,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.5867505461027408
+      }
+     ]
+    },
+    "JJA": {
+     "trend_nc": "aerosol_optical_depth.JJA.trend.nc",
+     "trend_png": "aerosol_optical_depth.JJA.trend.png",
+     "summary": "aerosol_optical_depth.JJA.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -16.4933763688041,
+      "vmax": 16.4933763688041,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -6.916476162344508,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.38609253069997007
+      },
+      {
+       "name": "Northeast",
+       "mean": -13.689905190794331,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 1.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 0.7711315606690406,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": -12.391632656008033,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 1.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 0.8299629069503819,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.048641645065499214
+      },
+      {
+       "name": "Plains",
+       "mean": -5.0247205097668886,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.37527002229897455
+      }
+     ]
+    },
+    "SON": {
+     "trend_nc": "aerosol_optical_depth.SON.trend.nc",
+     "trend_png": "aerosol_optical_depth.SON.trend.png",
+     "summary": "aerosol_optical_depth.SON.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -18.43617281609531,
+      "vmax": 18.43617281609531,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -9.150210197738256,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.7480970794504556
+      },
+      {
+       "name": "Northeast",
+       "mean": -17.47292962217606,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 1.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 1.3839568563646838,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": -14.381018840273981,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 1.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -0.1338544775018508,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.015003108270359897
+      },
+      {
+       "name": "Plains",
+       "mean": -10.932361878207923,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.7270377770495271
+      }
+     ]
+    }
+   }
+  },
+  {
+   "name": "air_temp_2m",
+   "long_name": "Air temperature at 2 m",
+   "theme": "atmospheric_dynamics",
+   "resource": "none",
+   "audience": [
+    "energy",
+    "agriculture"
+   ],
+   "units": "degC",
+   "aggregation": "mean",
+   "relative": false,
+   "primary": false,
+   "adverse": "high",
+   "provider": "nasa_power",
+   "dataset": "s3://nasa-power/merra2/temporal/power_merra2_monthly_temporal_utc.zarr",
+   "product_type": "reanalysis",
+   "status": "verified",
+   "caveats": [],
+   "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual mean",
+   "annual": {
+    "trend_nc": "air_temp_2m.trend.nc",
+    "trend_png": "air_temp_2m.trend.png",
+    "summary": "air_temp_2m.summary.json",
+    "legend": {
+     "field": "slope_per_decade",
+     "vmin": -0.520100172883147,
+     "vmax": 0.520100172883147,
+     "colors_neg_to_pos": [
+      "#104281",
+      "#3987e5",
+      "#f0efec",
+      "#e34948",
+      "#8f1d1d"
+     ],
+     "positive_color": "red",
+     "nonsignificant_alpha": 0.35,
+     "transparent": "no data / outside region",
+     "bounds": {
+      "south": 24.25,
+      "north": 49.75,
+      "west": -125.3125,
+      "east": -66.5625
+     },
+     "width": 94,
+     "height": 51,
+     "units": "degC per decade"
+    },
+    "period": "1981-2020",
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": 0.4488904071155243,
+      "frac_sig_up": 0.9923296813859973,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Northeast",
+      "mean": 0.3665156277815144,
+      "frac_sig_up": 0.9609336538908246,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": 0.23337286898021364,
+      "frac_sig_up": 0.518720135453737,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 0.3268729594216599,
+      "frac_sig_up": 0.9506372256160494,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 0.17519669600228835,
+      "frac_sig_up": 0.28257006859348993,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 0.1895406704364288,
+      "frac_sig_up": 0.3478173275670904,
+      "frac_sig_down": 0.0
+     }
+    ],
+    "pixel_series": {
+     "dir": "air_temp_2m",
+     "tile_deg": 5.0,
+     "naming": "{floor(lat/5)*5:+06.1f}_{floor(lon/5)*5:+07.1f}.json",
+     "tiles": [
+      "+025.0_-0105.0.json",
+      "+025.0_-0100.0.json",
+      "+025.0_-0085.0.json",
+      "+030.0_-0120.0.json",
+      "+030.0_-0115.0.json",
+      "+030.0_-0110.0.json",
+      "+030.0_-0105.0.json",
+      "+030.0_-0100.0.json",
+      "+030.0_-0095.0.json",
+      "+030.0_-0090.0.json",
+      "+030.0_-0085.0.json",
+      "+030.0_-0080.0.json",
+      "+035.0_-0125.0.json",
+      "+035.0_-0120.0.json",
+      "+035.0_-0115.0.json",
+      "+035.0_-0110.0.json",
+      "+035.0_-0105.0.json",
+      "+035.0_-0100.0.json",
+      "+035.0_-0095.0.json",
+      "+035.0_-0090.0.json",
+      "+035.0_-0085.0.json",
+      "+035.0_-0080.0.json",
+      "+040.0_-0125.0.json",
+      "+040.0_-0120.0.json",
+      "+040.0_-0115.0.json",
+      "+040.0_-0110.0.json",
+      "+040.0_-0105.0.json",
+      "+040.0_-0100.0.json",
+      "+040.0_-0095.0.json",
+      "+040.0_-0090.0.json",
+      "+040.0_-0085.0.json",
+      "+040.0_-0080.0.json",
+      "+040.0_-0075.0.json",
+      "+045.0_-0125.0.json",
+      "+045.0_-0120.0.json",
+      "+045.0_-0115.0.json",
+      "+045.0_-0110.0.json",
+      "+045.0_-0105.0.json",
+      "+045.0_-0100.0.json",
+      "+045.0_-0095.0.json",
+      "+045.0_-0090.0.json",
+      "+045.0_-0085.0.json",
+      "+045.0_-0080.0.json",
+      "+045.0_-0075.0.json",
+      "+045.0_-0070.0.json"
+     ],
+     "years": [
+      1981,
+      2020
+     ]
+    }
+   },
+   "seasons": {
+    "DJF": {
+     "trend_nc": "air_temp_2m.DJF.trend.nc",
+     "trend_png": "air_temp_2m.DJF.trend.png",
+     "summary": "air_temp_2m.DJF.summary.json",
+     "legend": {
+      "field": "slope_per_decade",
+      "vmin": -0.6775702727468389,
+      "vmax": 0.6775702727468389,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "degC per decade"
+     },
+     "period": "1982-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.3389934242811537,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.47539399255400994,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 0.21715717728136227,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.5788107079339088,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 0.18113280692495973,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 0.21388107796292136,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "MAM": {
+     "trend_nc": "air_temp_2m.MAM.trend.nc",
+     "trend_png": "air_temp_2m.MAM.trend.png",
+     "summary": "air_temp_2m.MAM.summary.json",
+     "legend": {
+      "field": "slope_per_decade",
+      "vmin": -0.48017962573444317,
+      "vmax": 0.48017962573444317,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "degC per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.3802908118142157,
+       "frac_sig_up": 0.3073165652022377,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.22327879981324686,
+       "frac_sig_up": 0.05420645621304137,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 0.13542817318989447,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.34668207143031715,
+       "frac_sig_up": 0.3063971830219453,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -0.01074476690091796,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 0.022745857282853398,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "JJA": {
+     "trend_nc": "air_temp_2m.JJA.trend.nc",
+     "trend_png": "air_temp_2m.JJA.trend.png",
+     "summary": "air_temp_2m.JJA.summary.json",
+     "legend": {
+      "field": "slope_per_decade",
+      "vmin": -0.6403001278620384,
+      "vmax": 0.6403001278620384,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "degC per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.500357971865167,
+       "frac_sig_up": 0.9695231853879048,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.335741562922575,
+       "frac_sig_up": 0.6343348525014704,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 0.3674977350991874,
+       "frac_sig_up": 0.7240616237801143,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.1621998454270425,
+       "frac_sig_up": 0.02832346575781581,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 0.22454065154726158,
+       "frac_sig_up": 0.15950390356367466,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 0.19933069252441327,
+       "frac_sig_up": 0.05884134340978694,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "SON": {
+     "trend_nc": "air_temp_2m.SON.trend.nc",
+     "trend_png": "air_temp_2m.SON.trend.png",
+     "summary": "air_temp_2m.SON.summary.json",
+     "legend": {
+      "field": "slope_per_decade",
+      "vmin": -0.6729907854881906,
+      "vmax": 0.6729907854881906,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "degC per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.5374773310690102,
+       "frac_sig_up": 1.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.43920570925703484,
+       "frac_sig_up": 0.6603322268834314,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 0.25598614870408615,
+       "frac_sig_up": 0.17302320082211367,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.26591896710705276,
+       "frac_sig_up": 0.04586108029063054,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 0.3127457176157465,
+       "frac_sig_up": 0.3858486805647885,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 0.31906139032870345,
+       "frac_sig_up": 0.12454033999002924,
+       "frac_sig_down": 0.0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "name": "surface_pressure",
+   "long_name": "Surface pressure",
+   "theme": "atmospheric_dynamics",
+   "resource": "none",
+   "audience": [
+    "energy"
+   ],
+   "units": "hPa",
+   "aggregation": "mean",
+   "relative": true,
+   "primary": false,
+   "adverse": "both",
+   "provider": "nasa_power",
+   "dataset": "s3://nasa-power/merra2/temporal/power_merra2_monthly_temporal_utc.zarr",
+   "product_type": "reanalysis",
+   "status": "verified",
+   "caveats": [],
+   "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual mean",
+   "annual": {
+    "trend_nc": "surface_pressure.trend.nc",
+    "trend_png": "surface_pressure.trend.png",
+    "summary": "surface_pressure.summary.json",
+    "legend": {
+     "field": "pct_change_per_decade",
+     "vmin": -0.024889147273097764,
+     "vmax": 0.024889147273097764,
+     "colors_neg_to_pos": [
+      "#104281",
+      "#3987e5",
+      "#f0efec",
+      "#e34948",
+      "#8f1d1d"
+     ],
+     "positive_color": "red",
+     "nonsignificant_alpha": 0.35,
+     "transparent": "no data / outside region",
+     "bounds": {
+      "south": 24.25,
+      "north": 49.75,
+      "west": -125.3125,
+      "east": -66.5625
+     },
+     "width": 94,
+     "height": 51,
+     "units": "% per decade"
+    },
+    "period": "1981-2020",
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": 0.009785406602182745,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Northeast",
+      "mean": -0.011212884399688875,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": 0.006596911867182847,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": -0.009607988737095457,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 0.010739010315560616,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 0.0009378402730106349,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     }
+    ],
+    "pixel_series": {
+     "dir": "surface_pressure",
+     "tile_deg": 5.0,
+     "naming": "{floor(lat/5)*5:+06.1f}_{floor(lon/5)*5:+07.1f}.json",
+     "tiles": [
+      "+025.0_-0105.0.json",
+      "+025.0_-0100.0.json",
+      "+025.0_-0085.0.json",
+      "+030.0_-0120.0.json",
+      "+030.0_-0115.0.json",
+      "+030.0_-0110.0.json",
+      "+030.0_-0105.0.json",
+      "+030.0_-0100.0.json",
+      "+030.0_-0095.0.json",
+      "+030.0_-0090.0.json",
+      "+030.0_-0085.0.json",
+      "+030.0_-0080.0.json",
+      "+035.0_-0125.0.json",
+      "+035.0_-0120.0.json",
+      "+035.0_-0115.0.json",
+      "+035.0_-0110.0.json",
+      "+035.0_-0105.0.json",
+      "+035.0_-0100.0.json",
+      "+035.0_-0095.0.json",
+      "+035.0_-0090.0.json",
+      "+035.0_-0085.0.json",
+      "+035.0_-0080.0.json",
+      "+040.0_-0125.0.json",
+      "+040.0_-0120.0.json",
+      "+040.0_-0115.0.json",
+      "+040.0_-0110.0.json",
+      "+040.0_-0105.0.json",
+      "+040.0_-0100.0.json",
+      "+040.0_-0095.0.json",
+      "+040.0_-0090.0.json",
+      "+040.0_-0085.0.json",
+      "+040.0_-0080.0.json",
+      "+040.0_-0075.0.json",
+      "+045.0_-0125.0.json",
+      "+045.0_-0120.0.json",
+      "+045.0_-0115.0.json",
+      "+045.0_-0110.0.json",
+      "+045.0_-0105.0.json",
+      "+045.0_-0100.0.json",
+      "+045.0_-0095.0.json",
+      "+045.0_-0090.0.json",
+      "+045.0_-0085.0.json",
+      "+045.0_-0080.0.json",
+      "+045.0_-0075.0.json",
+      "+045.0_-0070.0.json"
+     ],
+     "years": [
+      1981,
+      2020
+     ]
+    }
+   },
+   "seasons": {
+    "DJF": {
+     "trend_nc": "surface_pressure.DJF.trend.nc",
+     "trend_png": "surface_pressure.DJF.trend.png",
+     "summary": "surface_pressure.DJF.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -0.03233547104990301,
+      "vmax": 0.03233547104990301,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1982-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.008084313604148246,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": -0.019305698162864957,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 0.00020163660723579205,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": -0.01062437980356005,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -0.01411457618433442,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": -0.02193779155535855,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "MAM": {
+     "trend_nc": "surface_pressure.MAM.trend.nc",
+     "trend_png": "surface_pressure.MAM.trend.png",
+     "summary": "surface_pressure.MAM.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -0.0387207829742705,
+      "vmax": 0.0387207829742705,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.01759389486122129,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.02502898272298531,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 0.019919769703292536,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.01884291331769571,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 0.030191883316655753,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 0.02535570226807606,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "JJA": {
+     "trend_nc": "surface_pressure.JJA.trend.nc",
+     "trend_png": "surface_pressure.JJA.trend.png",
+     "summary": "surface_pressure.JJA.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -0.03927781683945024,
+      "vmax": 0.03927781683945024,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -0.0006245993471224225,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.01487892514110108
+      },
+      {
+       "name": "Northeast",
+       "mean": -0.03276582703873292,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.6761073586149241
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 0.0013598662290991033,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": -0.027495613431467596,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 1.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 0.006136604415492858,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": -0.011574443240151864,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.04694847954911473
+      }
+     ]
+    },
+    "SON": {
+     "trend_nc": "surface_pressure.SON.trend.nc",
+     "trend_png": "surface_pressure.SON.trend.png",
+     "summary": "surface_pressure.SON.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -0.03969618467952667,
+      "vmax": 0.03969618467952667,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.013690819808167987,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": -0.014705755339533333,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 0.01805786756771639,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": -0.026331494387951387,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 0.01854767019861052,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 0.007144820639131298,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "name": "wind_speed_50m",
+   "long_name": "Wind speed at 50 m",
+   "theme": "atmospheric_dynamics",
+   "resource": "wind",
+   "audience": [
+    "energy"
+   ],
+   "units": "m s-1",
+   "aggregation": "mean",
+   "relative": true,
+   "primary": false,
+   "adverse": "low",
+   "provider": "nasa_power",
+   "dataset": "s3://nasa-power/merra2/temporal/power_merra2_monthly_temporal_utc.zarr",
+   "product_type": "reanalysis",
+   "status": "verified",
+   "caveats": [
+    "Reanalysis",
+    "not a site measurement."
+   ],
+   "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual mean",
+   "annual": {
+    "trend_nc": "wind_speed_50m.trend.nc",
+    "trend_png": "wind_speed_50m.trend.png",
+    "summary": "wind_speed_50m.summary.json",
+    "legend": {
+     "field": "pct_change_per_decade",
+     "vmin": -1.8063843318663848,
+     "vmax": 1.8063843318663848,
+     "colors_neg_to_pos": [
+      "#104281",
+      "#3987e5",
+      "#f0efec",
+      "#e34948",
+      "#8f1d1d"
+     ],
+     "positive_color": "red",
+     "nonsignificant_alpha": 0.35,
+     "transparent": "no data / outside region",
+     "bounds": {
+      "south": 24.25,
+      "north": 49.75,
+      "west": -125.3125,
+      "east": -66.5625
+     },
+     "width": 94,
+     "height": 51,
+     "units": "% per decade"
+    },
+    "period": "1981-2020",
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": 0.12325578326019615,
+      "frac_sig_up": 0.022317821167773824,
+      "frac_sig_down": 0.07271369379928709
+     },
+     {
+      "name": "Northeast",
+      "mean": -0.0900280699160095,
+      "frac_sig_up": 0.013395316974863666,
+      "frac_sig_down": 0.003496761639265233
+     },
+     {
+      "name": "Pacific NW",
+      "mean": 0.050915580724301045,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 0.06791277131699196,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 0.7113090753887888,
+      "frac_sig_up": 0.0890027442055277,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 0.27785545173643283,
+      "frac_sig_up": 0.014791488172470587,
+      "frac_sig_down": 0.0
+     }
+    ],
+    "pixel_series": {
+     "dir": "wind_speed_50m",
+     "tile_deg": 5.0,
+     "naming": "{floor(lat/5)*5:+06.1f}_{floor(lon/5)*5:+07.1f}.json",
+     "tiles": [
+      "+025.0_-0105.0.json",
+      "+025.0_-0100.0.json",
+      "+025.0_-0085.0.json",
+      "+030.0_-0120.0.json",
+      "+030.0_-0115.0.json",
+      "+030.0_-0110.0.json",
+      "+030.0_-0105.0.json",
+      "+030.0_-0100.0.json",
+      "+030.0_-0095.0.json",
+      "+030.0_-0090.0.json",
+      "+030.0_-0085.0.json",
+      "+030.0_-0080.0.json",
+      "+035.0_-0125.0.json",
+      "+035.0_-0120.0.json",
+      "+035.0_-0115.0.json",
+      "+035.0_-0110.0.json",
+      "+035.0_-0105.0.json",
+      "+035.0_-0100.0.json",
+      "+035.0_-0095.0.json",
+      "+035.0_-0090.0.json",
+      "+035.0_-0085.0.json",
+      "+035.0_-0080.0.json",
+      "+040.0_-0125.0.json",
+      "+040.0_-0120.0.json",
+      "+040.0_-0115.0.json",
+      "+040.0_-0110.0.json",
+      "+040.0_-0105.0.json",
+      "+040.0_-0100.0.json",
+      "+040.0_-0095.0.json",
+      "+040.0_-0090.0.json",
+      "+040.0_-0085.0.json",
+      "+040.0_-0080.0.json",
+      "+040.0_-0075.0.json",
+      "+045.0_-0125.0.json",
+      "+045.0_-0120.0.json",
+      "+045.0_-0115.0.json",
+      "+045.0_-0110.0.json",
+      "+045.0_-0105.0.json",
+      "+045.0_-0100.0.json",
+      "+045.0_-0095.0.json",
+      "+045.0_-0090.0.json",
+      "+045.0_-0085.0.json",
+      "+045.0_-0080.0.json",
+      "+045.0_-0075.0.json",
+      "+045.0_-0070.0.json"
+     ],
+     "years": [
+      1981,
+      2020
+     ]
+    }
+   },
+   "seasons": {
+    "DJF": {
+     "trend_nc": "wind_speed_50m.DJF.trend.nc",
+     "trend_png": "wind_speed_50m.DJF.trend.png",
+     "summary": "wind_speed_50m.DJF.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -2.884698050675405,
+      "vmax": 2.884698050675405,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1982-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.1017130561326921,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.04230799030099075
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.3561216595792782,
+       "frac_sig_up": 0.010054410078327431,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.06713513099638907,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.6269051920899704,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 0.8714997157926749,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 0.35237723771049306,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "MAM": {
+     "trend_nc": "wind_speed_50m.MAM.trend.nc",
+     "trend_png": "wind_speed_50m.MAM.trend.png",
+     "summary": "wind_speed_50m.MAM.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -2.0557771922596095,
+      "vmax": 2.0557771922596095,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.07317547376065095,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.22667438637135956,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 0.38201716755700477,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.09555227188359673,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 0.7732434292769678,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": -0.0009180633656647197,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "JJA": {
+     "trend_nc": "wind_speed_50m.JJA.trend.nc",
+     "trend_png": "wind_speed_50m.JJA.trend.png",
+     "summary": "wind_speed_50m.JJA.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -2.2686780045024126,
+      "vmax": 2.2686780045024126,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.10483680084752324,
+       "frac_sig_up": 0.014830473473508684,
+       "frac_sig_down": 0.026350869546396177
+      },
+      {
+       "name": "Northeast",
+       "mean": -0.8934312572815859,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.017720631937674376
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.08216575204221366,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": -0.3047694493531355,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 0.012174753029210776,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": -0.3529960196775756,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "SON": {
+     "trend_nc": "wind_speed_50m.SON.trend.nc",
+     "trend_png": "wind_speed_50m.SON.trend.png",
+     "summary": "wind_speed_50m.SON.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -2.2611383299167387,
+      "vmax": 2.2611383299167387,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -0.19457812713859235,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.05380228682344145
+      },
+      {
+       "name": "Northeast",
+       "mean": -0.5849754325611152,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0038968453532812683
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.0027955377152930594,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": -0.14981914352817502,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 1.211015384176363,
+       "frac_sig_up": 0.05462018001248069,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 0.9881144623763506,
+       "frac_sig_up": 0.23653321574614555,
+       "frac_sig_down": 0.0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "name": "wind_speed_cubed_50m",
+   "long_name": "Monthly mean of daily-mean 50 m wind speed cubed",
+   "theme": "atmospheric_dynamics",
+   "resource": "wind",
+   "audience": [
+    "energy"
+   ],
+   "units": "m3 s-3",
+   "aggregation": "mean",
+   "relative": true,
+   "primary": false,
+   "adverse": "low",
+   "provider": "nasa_power",
+   "dataset": "s3://nasa-power/merra2/temporal/power_merra2_daily_temporal_utc.zarr",
+   "product_type": "reanalysis",
+   "status": "verified",
+   "caveats": [
+    "Built from DAILY mean speeds; sub-daily variability is not captured."
+   ],
+   "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual mean",
+   "annual": {
+    "trend_nc": "wind_speed_cubed_50m.trend.nc",
+    "trend_png": "wind_speed_cubed_50m.trend.png",
+    "summary": "wind_speed_cubed_50m.summary.json",
+    "legend": {
+     "field": "pct_change_per_decade",
+     "vmin": -5.577637370032503,
+     "vmax": 5.577637370032503,
+     "colors_neg_to_pos": [
+      "#104281",
+      "#3987e5",
+      "#f0efec",
+      "#e34948",
+      "#8f1d1d"
+     ],
+     "positive_color": "red",
+     "nonsignificant_alpha": 0.35,
+     "transparent": "no data / outside region",
+     "bounds": {
+      "south": 24.25,
+      "north": 49.75,
+      "west": -125.3125,
+      "east": -66.5625
+     },
+     "width": 94,
+     "height": 51,
+     "units": "% per decade"
+    },
+    "period": "1981-2020",
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": 0.5475907303411033,
+      "frac_sig_up": 0.026049453142563916,
+      "frac_sig_down": 0.07284756915325362
+     },
+     {
+      "name": "Northeast",
+      "mean": 0.21291240014484153,
+      "frac_sig_up": 0.010147927671794756,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": 0.18015715411720168,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 0.7514369392431237,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 2.116294078081161,
+      "frac_sig_up": 0.05215409387876916,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 1.1573681364815762,
+      "frac_sig_up": 0.019702595704292232,
+      "frac_sig_down": 0.0
+     }
+    ],
+    "pixel_series": {
+     "dir": "wind_speed_cubed_50m",
+     "tile_deg": 5.0,
+     "naming": "{floor(lat/5)*5:+06.1f}_{floor(lon/5)*5:+07.1f}.json",
+     "tiles": [
+      "+025.0_-0105.0.json",
+      "+025.0_-0100.0.json",
+      "+025.0_-0085.0.json",
+      "+030.0_-0120.0.json",
+      "+030.0_-0115.0.json",
+      "+030.0_-0110.0.json",
+      "+030.0_-0105.0.json",
+      "+030.0_-0100.0.json",
+      "+030.0_-0095.0.json",
+      "+030.0_-0090.0.json",
+      "+030.0_-0085.0.json",
+      "+030.0_-0080.0.json",
+      "+035.0_-0125.0.json",
+      "+035.0_-0120.0.json",
+      "+035.0_-0115.0.json",
+      "+035.0_-0110.0.json",
+      "+035.0_-0105.0.json",
+      "+035.0_-0100.0.json",
+      "+035.0_-0095.0.json",
+      "+035.0_-0090.0.json",
+      "+035.0_-0085.0.json",
+      "+035.0_-0080.0.json",
+      "+040.0_-0125.0.json",
+      "+040.0_-0120.0.json",
+      "+040.0_-0115.0.json",
+      "+040.0_-0110.0.json",
+      "+040.0_-0105.0.json",
+      "+040.0_-0100.0.json",
+      "+040.0_-0095.0.json",
+      "+040.0_-0090.0.json",
+      "+040.0_-0085.0.json",
+      "+040.0_-0080.0.json",
+      "+040.0_-0075.0.json",
+      "+045.0_-0125.0.json",
+      "+045.0_-0120.0.json",
+      "+045.0_-0115.0.json",
+      "+045.0_-0110.0.json",
+      "+045.0_-0105.0.json",
+      "+045.0_-0100.0.json",
+      "+045.0_-0095.0.json",
+      "+045.0_-0090.0.json",
+      "+045.0_-0085.0.json",
+      "+045.0_-0080.0.json",
+      "+045.0_-0075.0.json",
+      "+045.0_-0070.0.json"
+     ],
+     "years": [
+      1981,
+      2020
+     ]
+    }
+   },
+   "seasons": {
+    "DJF": {
+     "trend_nc": "wind_speed_cubed_50m.DJF.trend.nc",
+     "trend_png": "wind_speed_cubed_50m.DJF.trend.png",
+     "summary": "wind_speed_cubed_50m.DJF.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -7.9575074045412935,
+      "vmax": 7.9575074045412935,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1982-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.3853536491717355,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.030746898300955904
+      },
+      {
+       "name": "Northeast",
+       "mean": 1.942454459338718,
+       "frac_sig_up": 0.010086099467046156,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.08516617025142853,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 1.6216385696099398,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 2.4630649976977503,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 1.618075450469672,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "MAM": {
+     "trend_nc": "wind_speed_cubed_50m.MAM.trend.nc",
+     "trend_png": "wind_speed_cubed_50m.MAM.trend.png",
+     "summary": "wind_speed_cubed_50m.MAM.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -6.509106785812501,
+      "vmax": 6.509106785812501,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.6732356165657227,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.6889170617316793,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 1.6100373809794375,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.177764317612264,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 1.8645918891963584,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": -0.060288511058189546,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "JJA": {
+     "trend_nc": "wind_speed_cubed_50m.JJA.trend.nc",
+     "trend_png": "wind_speed_cubed_50m.JJA.trend.png",
+     "summary": "wind_speed_cubed_50m.JJA.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -6.9352319005834255,
+      "vmax": 6.9352319005834255,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -0.11378813371779252,
+       "frac_sig_up": 0.014878358597223282,
+       "frac_sig_down": 0.022664254376542677
+      },
+      {
+       "name": "Northeast",
+       "mean": -2.8024492595954373,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.049549292278055726
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.8414100432543942,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.008793772792341954
+      },
+      {
+       "name": "Southeast",
+       "mean": -0.013247293825709818,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0044875847656373966
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -0.16570200068169424,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": -0.3973609552992194,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "SON": {
+     "trend_nc": "wind_speed_cubed_50m.SON.trend.nc",
+     "trend_png": "wind_speed_cubed_50m.SON.trend.png",
+     "summary": "wind_speed_cubed_50m.SON.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -6.498350517933704,
+      "vmax": 6.498350517933704,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.06786741454486095,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0269005575954011
+      },
+      {
+       "name": "Northeast",
+       "mean": -1.0247147121006444,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 0.4153092822779751,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.6665427069268365,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 3.9785755330541606,
+       "frac_sig_up": 0.025210587624112653,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 2.853693927156438,
+       "frac_sig_up": 0.13331099881988046,
+       "frac_sig_down": 0.0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "name": "wind_power_density",
+   "long_name": "Wind power density proxy (0.5 * rho * mean daily v^3)",
+   "theme": "atmospheric_dynamics",
+   "resource": "wind",
+   "audience": [
+    "energy"
+   ],
+   "units": "W m-2",
+   "aggregation": "mean",
+   "relative": true,
+   "primary": true,
+   "adverse": "low",
+   "provider": "derived:nasa_power",
+   "dataset": null,
+   "product_type": null,
+   "status": "verified",
+   "caveats": [
+    "Uses the monthly mean of DAILY v^3. Cubing monthly-mean speed instead underestimated it by 29% (median) and changed the 2010-2019 trend (-0.96 vs -0.65 %/yr) in a Great Plains test box; daily is still lower than an hourly-based value.",
+    "Proxy only; dry-air density, ignores humidity and turbine characteristics."
+   ],
+   "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual mean",
+   "annual": {
+    "trend_nc": "wind_power_density.trend.nc",
+    "trend_png": "wind_power_density.trend.png",
+    "summary": "wind_power_density.summary.json",
+    "legend": {
+     "field": "pct_change_per_decade",
+     "vmin": -5.590371356921948,
+     "vmax": 5.590371356921948,
+     "colors_neg_to_pos": [
+      "#104281",
+      "#3987e5",
+      "#f0efec",
+      "#e34948",
+      "#8f1d1d"
+     ],
+     "positive_color": "red",
+     "nonsignificant_alpha": 0.35,
+     "transparent": "no data / outside region",
+     "bounds": {
+      "south": 24.25,
+      "north": 49.75,
+      "west": -125.3125,
+      "east": -66.5625
+     },
+     "width": 94,
+     "height": 51,
+     "units": "% per decade"
+    },
+    "period": "1981-2020",
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": 0.39730073209310096,
+      "frac_sig_up": 0.014854841396416123,
+      "frac_sig_down": 0.07669390985880842
+     },
+     {
+      "name": "Northeast",
+      "mean": 0.14995967830081927,
+      "frac_sig_up": 0.0034661138787222857,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": 0.1449882768669639,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 0.6288274771566298,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 2.08393750386951,
+      "frac_sig_up": 0.044711768150174434,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 1.0739259928004536,
+      "frac_sig_up": 0.014791488172470587,
+      "frac_sig_down": 0.0
+     }
+    ],
+    "pixel_series": {
+     "dir": "wind_power_density",
+     "tile_deg": 5.0,
+     "naming": "{floor(lat/5)*5:+06.1f}_{floor(lon/5)*5:+07.1f}.json",
+     "tiles": [
+      "+025.0_-0105.0.json",
+      "+025.0_-0100.0.json",
+      "+025.0_-0085.0.json",
+      "+030.0_-0120.0.json",
+      "+030.0_-0115.0.json",
+      "+030.0_-0110.0.json",
+      "+030.0_-0105.0.json",
+      "+030.0_-0100.0.json",
+      "+030.0_-0095.0.json",
+      "+030.0_-0090.0.json",
+      "+030.0_-0085.0.json",
+      "+030.0_-0080.0.json",
+      "+035.0_-0125.0.json",
+      "+035.0_-0120.0.json",
+      "+035.0_-0115.0.json",
+      "+035.0_-0110.0.json",
+      "+035.0_-0105.0.json",
+      "+035.0_-0100.0.json",
+      "+035.0_-0095.0.json",
+      "+035.0_-0090.0.json",
+      "+035.0_-0085.0.json",
+      "+035.0_-0080.0.json",
+      "+040.0_-0125.0.json",
+      "+040.0_-0120.0.json",
+      "+040.0_-0115.0.json",
+      "+040.0_-0110.0.json",
+      "+040.0_-0105.0.json",
+      "+040.0_-0100.0.json",
+      "+040.0_-0095.0.json",
+      "+040.0_-0090.0.json",
+      "+040.0_-0085.0.json",
+      "+040.0_-0080.0.json",
+      "+040.0_-0075.0.json",
+      "+045.0_-0125.0.json",
+      "+045.0_-0120.0.json",
+      "+045.0_-0115.0.json",
+      "+045.0_-0110.0.json",
+      "+045.0_-0105.0.json",
+      "+045.0_-0100.0.json",
+      "+045.0_-0095.0.json",
+      "+045.0_-0090.0.json",
+      "+045.0_-0085.0.json",
+      "+045.0_-0080.0.json",
+      "+045.0_-0075.0.json",
+      "+045.0_-0070.0.json"
+     ],
+     "years": [
+      1981,
+      2020
+     ]
+    }
+   },
+   "seasons": {
+    "DJF": {
+     "trend_nc": "wind_power_density.DJF.trend.nc",
+     "trend_png": "wind_power_density.DJF.trend.png",
+     "summary": "wind_power_density.DJF.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -7.876726200110448,
+      "vmax": 7.876726200110448,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1982-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.2732872139820953,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.030746898300955904
+      },
+      {
+       "name": "Northeast",
+       "mean": 1.7668503399626194,
+       "frac_sig_up": 0.010086099467046156,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.16826556193963685,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 1.4232859130787991,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 2.320725777700518,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 1.5156495276375874,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "MAM": {
+     "trend_nc": "wind_power_density.MAM.trend.nc",
+     "trend_png": "wind_power_density.MAM.trend.png",
+     "summary": "wind_power_density.MAM.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -6.466823531094674,
+      "vmax": 6.466823531094674,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": 0.548344422249948,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.6563224001408932,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 1.6383864479632115,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.08330109445239464,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 1.919537210623822,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": -0.05874492758174677,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "JJA": {
+     "trend_nc": "wind_power_density.JJA.trend.nc",
+     "trend_png": "wind_power_density.JJA.trend.png",
+     "summary": "wind_power_density.JJA.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -6.972952324425915,
+      "vmax": 6.972952324425915,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -0.2718198824698189,
+       "frac_sig_up": 0.014878358597223282,
+       "frac_sig_down": 0.022664254376542677
+      },
+      {
+       "name": "Northeast",
+       "mean": -2.9490632710032134,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.05678152406204078
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.973473775004532,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.008793772792341954
+      },
+      {
+       "name": "Southeast",
+       "mean": -0.09636317566944319,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0044875847656373966
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -0.2314890595978498,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": -0.4763199380110483,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "SON": {
+     "trend_nc": "wind_power_density.SON.trend.nc",
+     "trend_png": "wind_power_density.SON.trend.png",
+     "summary": "wind_power_density.SON.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -6.455758535449844,
+      "vmax": 6.455758535449844,
+      "colors_neg_to_pos": [
+       "#104281",
+       "#3987e5",
+       "#f0efec",
+       "#e34948",
+       "#8f1d1d"
+      ],
+      "positive_color": "red",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.25,
+       "north": 49.75,
+       "west": -125.3125,
+       "east": -66.5625
+      },
+      "width": 94,
+      "height": 51,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -0.13056159646015358,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.030746898300955904
+      },
+      {
+       "name": "Northeast",
+       "mean": -1.1596716230763948,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 0.3145331998851549,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.5395318835412274,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 3.9120570572161792,
+       "frac_sig_up": 0.014575751569218936,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 2.7489530170660887,
+       "frac_sig_up": 0.10541282816202853,
+       "frac_sig_down": 0.0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "name": "runoff",
+   "long_name": "Runoff (water-balance model)",
+   "theme": "hydrology",
+   "resource": "hydro",
+   "audience": [
+    "energy",
+    "agriculture"
+   ],
+   "units": "mm",
+   "aggregation": "sum",
+   "relative": true,
+   "primary": true,
+   "adverse": "low",
+   "provider": "terraclimate",
+   "dataset": "terraclimate",
+   "product_type": "model",
+   "status": "verified",
+   "caveats": [
+    "Resource proxy, not generation; dams and operations are not modeled.",
+    "Model-based water balance product; PC copy ends 2021-12."
+   ],
+   "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual sum",
+   "annual": {
+    "trend_nc": "runoff.trend.nc",
+    "trend_png": "runoff.trend.png",
+    "summary": "runoff.summary.json",
+    "legend": {
+     "field": "pct_change_per_decade",
+     "vmin": -14.019189342055705,
+     "vmax": 14.019189342055705,
+     "colors_neg_to_pos": [
+      "#8f1d1d",
+      "#e34948",
+      "#f0efec",
+      "#3987e5",
+      "#104281"
+     ],
+     "positive_color": "blue",
+     "nonsignificant_alpha": 0.35,
+     "transparent": "no data / outside region",
+     "bounds": {
+      "south": 24.416666666666675,
+      "north": 49.416666666666664,
+      "west": -125.08333333333333,
+      "east": -66.58333333333333
+     },
+     "width": 234,
+     "height": 100,
+     "units": "% per decade"
+    },
+    "period": "1981-2020",
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": -8.092169594406892,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Northeast",
+      "mean": 5.564627149903507,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": -1.5614364436824058,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 2.3822184410251075,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 3.1743201945924095,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 0.7897930129923858,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     }
+    ],
+    "pixel_series": {
+     "dir": "runoff",
+     "tile_deg": 5.0,
+     "naming": "{floor(lat/5)*5:+06.1f}_{floor(lon/5)*5:+07.1f}.json",
+     "tiles": [
+      "+025.0_-0105.0.json",
+      "+025.0_-0100.0.json",
+      "+025.0_-0085.0.json",
+      "+030.0_-0120.0.json",
+      "+030.0_-0115.0.json",
+      "+030.0_-0110.0.json",
+      "+030.0_-0105.0.json",
+      "+030.0_-0100.0.json",
+      "+030.0_-0095.0.json",
+      "+030.0_-0090.0.json",
+      "+030.0_-0085.0.json",
+      "+030.0_-0080.0.json",
+      "+035.0_-0125.0.json",
+      "+035.0_-0120.0.json",
+      "+035.0_-0115.0.json",
+      "+035.0_-0110.0.json",
+      "+035.0_-0105.0.json",
+      "+035.0_-0100.0.json",
+      "+035.0_-0095.0.json",
+      "+035.0_-0090.0.json",
+      "+035.0_-0085.0.json",
+      "+035.0_-0080.0.json",
+      "+040.0_-0125.0.json",
+      "+040.0_-0120.0.json",
+      "+040.0_-0115.0.json",
+      "+040.0_-0110.0.json",
+      "+040.0_-0105.0.json",
+      "+040.0_-0100.0.json",
+      "+040.0_-0095.0.json",
+      "+040.0_-0090.0.json",
+      "+040.0_-0085.0.json",
+      "+040.0_-0080.0.json",
+      "+040.0_-0075.0.json",
+      "+045.0_-0125.0.json",
+      "+045.0_-0120.0.json",
+      "+045.0_-0115.0.json",
+      "+045.0_-0110.0.json",
+      "+045.0_-0105.0.json",
+      "+045.0_-0100.0.json",
+      "+045.0_-0095.0.json",
+      "+045.0_-0090.0.json",
+      "+045.0_-0085.0.json",
+      "+045.0_-0080.0.json",
+      "+045.0_-0075.0.json",
+      "+045.0_-0070.0.json"
+     ],
+     "years": [
+      1981,
+      2020
+     ]
+    }
+   },
+   "seasons": {
+    "DJF": {
+     "trend_nc": "runoff.DJF.trend.nc",
+     "trend_png": "runoff.DJF.trend.png",
+     "summary": "runoff.DJF.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -18.820816730808787,
+      "vmax": 18.820816730808787,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.416666666666675,
+       "north": 49.416666666666664,
+       "west": -125.08333333333333,
+       "east": -66.58333333333333
+      },
+      "width": 234,
+      "height": 100,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -0.7146086049077318,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 8.048835427100377,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.01908415846263966,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 1.7438539224439178,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -0.5849667165190462,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": -0.3497940216318213,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "MAM": {
+     "trend_nc": "runoff.MAM.trend.nc",
+     "trend_png": "runoff.MAM.trend.png",
+     "summary": "runoff.MAM.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -18.846958349694614,
+      "vmax": 18.846958349694614,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.416666666666675,
+       "north": 49.416666666666664,
+       "west": -125.08333333333333,
+       "east": -66.58333333333333
+      },
+      "width": 234,
+      "height": 100,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -12.728592458286208,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 3.841882328656047,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -1.134635854462827,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 6.6529823485821336,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 5.250295862153509,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 0.1976071200108132,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "JJA": {
+     "trend_nc": "runoff.JJA.trend.nc",
+     "trend_png": "runoff.JJA.trend.png",
+     "summary": "runoff.JJA.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -19.066574953915403,
+      "vmax": 19.066574953915403,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.416666666666675,
+       "north": 49.416666666666664,
+       "west": -125.08333333333333,
+       "east": -66.58333333333333
+      },
+      "width": 234,
+      "height": 100,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -9.096946791706713,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 3.1028613396663554,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -12.40552129676582,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 2.145217063136664,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -4.560745254007589,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 1.0139420138833313,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "SON": {
+     "trend_nc": "runoff.SON.trend.nc",
+     "trend_png": "runoff.SON.trend.png",
+     "summary": "runoff.SON.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -15.762588290318561,
+      "vmax": 15.762588290318561,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.416666666666675,
+       "north": 49.416666666666664,
+       "west": -125.08333333333333,
+       "east": -66.58333333333333
+      },
+      "width": 234,
+      "height": 100,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -8.658968534050993,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.5740169558820853,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -4.396478789723009,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": -0.15508095312453607,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 1.449799535877395,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 1.4804837523183523,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "name": "precipitation",
+   "long_name": "Precipitation",
+   "theme": "hydrology",
+   "resource": "hydro",
+   "audience": [
+    "energy",
+    "agriculture"
+   ],
+   "units": "mm",
+   "aggregation": "sum",
+   "relative": true,
+   "primary": false,
+   "adverse": "low",
+   "provider": "nclimgrid",
+   "dataset": "noaa-nclimgrid-monthly",
+   "product_type": "gridded_observation",
+   "status": "verified",
+   "caveats": [
+    "PC copies end 2022-09 (NClimGrid) / 2021-12 (TerraClimate)."
+   ],
+   "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual sum",
+   "annual": {
+    "trend_nc": "precipitation.trend.nc",
+    "trend_png": "precipitation.trend.png",
+    "summary": "precipitation.summary.json",
+    "legend": {
+     "field": "pct_change_per_decade",
+     "vmin": -10.065612176440908,
+     "vmax": 10.065612176440908,
+     "colors_neg_to_pos": [
+      "#8f1d1d",
+      "#e34948",
+      "#f0efec",
+      "#3987e5",
+      "#104281"
+     ],
+     "positive_color": "blue",
+     "nonsignificant_alpha": 0.35,
+     "transparent": "no data / outside region",
+     "bounds": {
+      "south": 24.79166597,
+      "north": 49.29166793,
+      "west": -125.00000001999999,
+      "east": -67.49999542
+     },
+     "width": 230,
+     "height": 98,
+     "units": "% per decade"
+    },
+    "period": "1981-2020",
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": -7.708511093875724,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Northeast",
+      "mean": 2.9089830699258044,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": -1.832521691987398,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 1.7302762183871623,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 1.0862055765868364,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 0.6043285820813824,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     }
+    ],
+    "pixel_series": {
+     "dir": "precipitation",
+     "tile_deg": 5.0,
+     "naming": "{floor(lat/5)*5:+06.1f}_{floor(lon/5)*5:+07.1f}.json",
+     "tiles": [
+      "+025.0_-0105.0.json",
+      "+025.0_-0100.0.json",
+      "+025.0_-0095.0.json",
+      "+025.0_-0085.0.json",
+      "+030.0_-0120.0.json",
+      "+030.0_-0115.0.json",
+      "+030.0_-0110.0.json",
+      "+030.0_-0105.0.json",
+      "+030.0_-0100.0.json",
+      "+030.0_-0095.0.json",
+      "+030.0_-0090.0.json",
+      "+030.0_-0085.0.json",
+      "+030.0_-0080.0.json",
+      "+035.0_-0125.0.json",
+      "+035.0_-0120.0.json",
+      "+035.0_-0115.0.json",
+      "+035.0_-0110.0.json",
+      "+035.0_-0105.0.json",
+      "+035.0_-0100.0.json",
+      "+035.0_-0095.0.json",
+      "+035.0_-0090.0.json",
+      "+035.0_-0085.0.json",
+      "+035.0_-0080.0.json",
+      "+040.0_-0125.0.json",
+      "+040.0_-0120.0.json",
+      "+040.0_-0115.0.json",
+      "+040.0_-0110.0.json",
+      "+040.0_-0105.0.json",
+      "+040.0_-0100.0.json",
+      "+040.0_-0095.0.json",
+      "+040.0_-0090.0.json",
+      "+040.0_-0085.0.json",
+      "+040.0_-0080.0.json",
+      "+040.0_-0075.0.json",
+      "+045.0_-0125.0.json",
+      "+045.0_-0120.0.json",
+      "+045.0_-0115.0.json",
+      "+045.0_-0110.0.json",
+      "+045.0_-0105.0.json",
+      "+045.0_-0100.0.json",
+      "+045.0_-0095.0.json",
+      "+045.0_-0090.0.json",
+      "+045.0_-0085.0.json",
+      "+045.0_-0080.0.json",
+      "+045.0_-0075.0.json",
+      "+045.0_-0070.0.json"
+     ],
+     "years": [
+      1981,
+      2020
+     ]
+    }
+   },
+   "seasons": {
+    "DJF": {
+     "trend_nc": "precipitation.DJF.trend.nc",
+     "trend_png": "precipitation.DJF.trend.png",
+     "summary": "precipitation.DJF.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -15.676913027475356,
+      "vmax": 15.676913027475356,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.79166597,
+       "north": 49.29166793,
+       "west": -125.00000001999999,
+       "east": -67.49999542
+      },
+      "width": 230,
+      "height": 98,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -2.160903582161835,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 6.698544913198163,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 0.4168576889452403,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 1.665312811155903,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 6.109341795951082,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 5.908830735856513,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "MAM": {
+     "trend_nc": "precipitation.MAM.trend.nc",
+     "trend_png": "precipitation.MAM.trend.png",
+     "summary": "precipitation.MAM.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -18.339956440838773,
+      "vmax": 18.339956440838773,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.79166597,
+       "north": 49.29166793,
+       "west": -125.00000001999999,
+       "east": -67.49999542
+      },
+      "width": 230,
+      "height": 98,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -12.981576735913468,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 2.0871441644821487,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": 0.3351116450134231,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 3.288036226045977,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 1.9558966938323847,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": -0.7055069090518187,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "JJA": {
+     "trend_nc": "precipitation.JJA.trend.nc",
+     "trend_png": "precipitation.JJA.trend.png",
+     "summary": "precipitation.JJA.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -17.117203447928013,
+      "vmax": 17.117203447928013,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.79166597,
+       "north": 49.29166793,
+       "west": -125.00000001999999,
+       "east": -67.49999542
+      },
+      "width": 230,
+      "height": 98,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -7.470760824182803,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 4.0628985420160015,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -11.943068407165928,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 2.749096571254323,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -4.819256517298715,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 1.9958553482126422,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "SON": {
+     "trend_nc": "precipitation.SON.trend.nc",
+     "trend_png": "precipitation.SON.trend.png",
+     "summary": "precipitation.SON.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -18.237839663006024,
+      "vmax": 18.237839663006024,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.79166597,
+       "north": 49.29166793,
+       "west": -125.00000001999999,
+       "east": -67.49999542
+      },
+      "width": 230,
+      "height": 98,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -8.69241385459699,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.34506472773465574,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -6.4276406561109205,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": -0.8747967348023029,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 0.6648936221523256,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": -1.296557318882214,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "name": "soil_moisture",
+   "long_name": "Soil moisture",
+   "theme": "hydrology",
+   "resource": "hydro",
+   "audience": [
+    "agriculture",
+    "energy"
+   ],
+   "units": "mm",
+   "aggregation": "mean",
+   "relative": true,
+   "primary": false,
+   "adverse": "low",
+   "provider": "terraclimate",
+   "dataset": "terraclimate",
+   "product_type": "model",
+   "status": "verified",
+   "caveats": [],
+   "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual mean",
+   "annual": {
+    "trend_nc": "soil_moisture.trend.nc",
+    "trend_png": "soil_moisture.trend.png",
+    "summary": "soil_moisture.summary.json",
+    "legend": {
+     "field": "pct_change_per_decade",
+     "vmin": -29.099757853533667,
+     "vmax": 29.099757853533667,
+     "colors_neg_to_pos": [
+      "#8f1d1d",
+      "#e34948",
+      "#f0efec",
+      "#3987e5",
+      "#104281"
+     ],
+     "positive_color": "blue",
+     "nonsignificant_alpha": 0.35,
+     "transparent": "no data / outside region",
+     "bounds": {
+      "south": 24.416666666666675,
+      "north": 49.416666666666664,
+      "west": -125.08333333333333,
+      "east": -66.58333333333333
+     },
+     "width": 234,
+     "height": 100,
+     "units": "% per decade"
+    },
+    "period": "1981-2020",
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": -14.707458939771511,
+      "frac_sig_up": 0.0008369578873007693,
+      "frac_sig_down": 0.22327911125842773
+     },
+     {
+      "name": "Northeast",
+      "mean": 1.7210382466611727,
+      "frac_sig_up": 0.0008470024907758956,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": -2.5507556124722752,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 1.762620965798443,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": -0.6694549531407679,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0015659164020938566
+     },
+     {
+      "name": "Plains",
+      "mean": -1.654175405780281,
+      "frac_sig_up": 0.002858341099049593,
+      "frac_sig_down": 0.010734374267736218
+     }
+    ],
+    "pixel_series": {
+     "dir": "soil_moisture",
+     "tile_deg": 5.0,
+     "naming": "{floor(lat/5)*5:+06.1f}_{floor(lon/5)*5:+07.1f}.json",
+     "tiles": [
+      "+025.0_-0105.0.json",
+      "+025.0_-0100.0.json",
+      "+025.0_-0085.0.json",
+      "+030.0_-0120.0.json",
+      "+030.0_-0115.0.json",
+      "+030.0_-0110.0.json",
+      "+030.0_-0105.0.json",
+      "+030.0_-0100.0.json",
+      "+030.0_-0095.0.json",
+      "+030.0_-0090.0.json",
+      "+030.0_-0085.0.json",
+      "+030.0_-0080.0.json",
+      "+035.0_-0125.0.json",
+      "+035.0_-0120.0.json",
+      "+035.0_-0115.0.json",
+      "+035.0_-0110.0.json",
+      "+035.0_-0105.0.json",
+      "+035.0_-0100.0.json",
+      "+035.0_-0095.0.json",
+      "+035.0_-0090.0.json",
+      "+035.0_-0085.0.json",
+      "+035.0_-0080.0.json",
+      "+040.0_-0125.0.json",
+      "+040.0_-0120.0.json",
+      "+040.0_-0115.0.json",
+      "+040.0_-0110.0.json",
+      "+040.0_-0105.0.json",
+      "+040.0_-0100.0.json",
+      "+040.0_-0095.0.json",
+      "+040.0_-0090.0.json",
+      "+040.0_-0085.0.json",
+      "+040.0_-0080.0.json",
+      "+040.0_-0075.0.json",
+      "+045.0_-0125.0.json",
+      "+045.0_-0120.0.json",
+      "+045.0_-0115.0.json",
+      "+045.0_-0110.0.json",
+      "+045.0_-0105.0.json",
+      "+045.0_-0100.0.json",
+      "+045.0_-0095.0.json",
+      "+045.0_-0090.0.json",
+      "+045.0_-0085.0.json",
+      "+045.0_-0080.0.json",
+      "+045.0_-0075.0.json",
+      "+045.0_-0070.0.json"
+     ],
+     "years": [
+      1981,
+      2020
+     ]
+    }
+   },
+   "seasons": {
+    "DJF": {
+     "trend_nc": "soil_moisture.DJF.trend.nc",
+     "trend_png": "soil_moisture.DJF.trend.png",
+     "summary": "soil_moisture.DJF.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -26.30532484905987,
+      "vmax": 26.30532484905987,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.416666666666675,
+       "north": 49.416666666666664,
+       "west": -125.08333333333333,
+       "east": -66.58333333333333
+      },
+      "width": 234,
+      "height": 100,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -10.522954838803889,
+       "frac_sig_up": 0.0016713940096764275,
+       "frac_sig_down": 0.2499392963690035
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.0028929249914337167,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -2.037567670934413,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": -0.03992464715335329,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -1.984582983624875,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.00385664351468724
+      },
+      {
+       "name": "Plains",
+       "mean": -1.290974155456498,
+       "frac_sig_up": 0.0017168712127637595,
+       "frac_sig_down": 0.0124327232501843
+      }
+     ]
+    },
+    "MAM": {
+     "trend_nc": "soil_moisture.MAM.trend.nc",
+     "trend_png": "soil_moisture.MAM.trend.png",
+     "summary": "soil_moisture.MAM.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -27.67002628727399,
+      "vmax": 27.67002628727399,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.416666666666675,
+       "north": 49.416666666666664,
+       "west": -125.08333333333333,
+       "east": -66.58333333333333
+      },
+      "width": 234,
+      "height": 100,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -13.913473649537107,
+       "frac_sig_up": 0.0016713940096764275,
+       "frac_sig_down": 0.23893010645465249
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.3523483824746132,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -1.1216924277556823,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 1.2401159265660624,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 0.5485701550057817,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0031412643206101412
+      },
+      {
+       "name": "Plains",
+       "mean": -1.2464358919356595,
+       "frac_sig_up": 0.003996058323482238,
+       "frac_sig_down": 0.011106904534419027
+      }
+     ]
+    },
+    "JJA": {
+     "trend_nc": "soil_moisture.JJA.trend.nc",
+     "trend_png": "soil_moisture.JJA.trend.png",
+     "summary": "soil_moisture.JJA.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -29.235752139422853,
+      "vmax": 29.235752139422853,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.416666666666675,
+       "north": 49.416666666666664,
+       "west": -125.08333333333333,
+       "east": -66.58333333333333
+      },
+      "width": 234,
+      "height": 100,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -14.271862012226661,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.22721593353127426
+      },
+      {
+       "name": "Northeast",
+       "mean": 4.325107849089909,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -2.940233613742306,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 2.5516431056991338,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -0.45583566316608803,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0023567167841019284
+      },
+      {
+       "name": "Plains",
+       "mean": -0.37486948769338196,
+       "frac_sig_up": 0.005141237336707249,
+       "frac_sig_down": 0.015498130007388448
+      }
+     ]
+    },
+    "SON": {
+     "trend_nc": "soil_moisture.SON.trend.nc",
+     "trend_png": "soil_moisture.SON.trend.png",
+     "summary": "soil_moisture.SON.summary.json",
+     "legend": {
+      "field": "pct_change_per_decade",
+      "vmin": -28.005169710080743,
+      "vmax": 28.005169710080743,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.416666666666675,
+       "north": 49.416666666666664,
+       "west": -125.08333333333333,
+       "east": -66.58333333333333
+      },
+      "width": 234,
+      "height": 100,
+      "units": "% per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -14.235566333416228,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.2172463304052363
+      },
+      {
+       "name": "Northeast",
+       "mean": 1.5126757186997117,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -3.0876450900119257,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 1.8350903262589604,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -1.3159346484421068,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0021847339164739084
+      },
+      {
+       "name": "Plains",
+       "mean": -1.6200652493204426,
+       "frac_sig_up": 0.002858341099049593,
+       "frac_sig_down": 0.009497354869048565
+      }
+     ]
+    }
+   }
+  },
+  {
+   "name": "pdsi",
+   "long_name": "Palmer Drought Severity Index",
+   "theme": "hydrology",
+   "resource": "hydro",
+   "audience": [
+    "agriculture"
+   ],
+   "units": "1",
+   "aggregation": "mean",
+   "relative": false,
+   "primary": false,
+   "adverse": "low",
+   "provider": "terraclimate",
+   "dataset": "terraclimate",
+   "product_type": "model",
+   "status": "verified",
+   "caveats": [],
+   "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual mean",
+   "annual": {
+    "trend_nc": "pdsi.trend.nc",
+    "trend_png": "pdsi.trend.png",
+    "summary": "pdsi.summary.json",
+    "legend": {
+     "field": "slope_per_decade",
+     "vmin": -1.031148885404228,
+     "vmax": 1.031148885404228,
+     "colors_neg_to_pos": [
+      "#8f1d1d",
+      "#e34948",
+      "#f0efec",
+      "#3987e5",
+      "#104281"
+     ],
+     "positive_color": "blue",
+     "nonsignificant_alpha": 0.35,
+     "transparent": "no data / outside region",
+     "bounds": {
+      "south": 24.416666666666675,
+      "north": 49.416666666666664,
+      "west": -125.08333333333333,
+      "east": -66.58333333333333
+     },
+     "width": 234,
+     "height": 100,
+     "units": "1 per decade"
+    },
+    "period": "1981-2020",
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": -0.7033244053080915,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Northeast",
+      "mean": 0.5868066176567845,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": -0.44860551312432395,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 0.3420422115846253,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 0.12082095434273704,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 0.15932663362138294,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     }
+    ],
+    "pixel_series": {
+     "dir": "pdsi",
+     "tile_deg": 5.0,
+     "naming": "{floor(lat/5)*5:+06.1f}_{floor(lon/5)*5:+07.1f}.json",
+     "tiles": [
+      "+025.0_-0105.0.json",
+      "+025.0_-0100.0.json",
+      "+025.0_-0085.0.json",
+      "+030.0_-0120.0.json",
+      "+030.0_-0115.0.json",
+      "+030.0_-0110.0.json",
+      "+030.0_-0105.0.json",
+      "+030.0_-0100.0.json",
+      "+030.0_-0095.0.json",
+      "+030.0_-0090.0.json",
+      "+030.0_-0085.0.json",
+      "+030.0_-0080.0.json",
+      "+035.0_-0125.0.json",
+      "+035.0_-0120.0.json",
+      "+035.0_-0115.0.json",
+      "+035.0_-0110.0.json",
+      "+035.0_-0105.0.json",
+      "+035.0_-0100.0.json",
+      "+035.0_-0095.0.json",
+      "+035.0_-0090.0.json",
+      "+035.0_-0085.0.json",
+      "+035.0_-0080.0.json",
+      "+040.0_-0125.0.json",
+      "+040.0_-0120.0.json",
+      "+040.0_-0115.0.json",
+      "+040.0_-0110.0.json",
+      "+040.0_-0105.0.json",
+      "+040.0_-0100.0.json",
+      "+040.0_-0095.0.json",
+      "+040.0_-0090.0.json",
+      "+040.0_-0085.0.json",
+      "+040.0_-0080.0.json",
+      "+040.0_-0075.0.json",
+      "+045.0_-0125.0.json",
+      "+045.0_-0120.0.json",
+      "+045.0_-0115.0.json",
+      "+045.0_-0110.0.json",
+      "+045.0_-0105.0.json",
+      "+045.0_-0100.0.json",
+      "+045.0_-0095.0.json",
+      "+045.0_-0090.0.json",
+      "+045.0_-0085.0.json",
+      "+045.0_-0080.0.json",
+      "+045.0_-0075.0.json",
+      "+045.0_-0070.0.json"
+     ],
+     "years": [
+      1981,
+      2020
+     ]
+    }
+   },
+   "seasons": {
+    "DJF": {
+     "trend_nc": "pdsi.DJF.trend.nc",
+     "trend_png": "pdsi.DJF.trend.png",
+     "summary": "pdsi.DJF.summary.json",
+     "legend": {
+      "field": "slope_per_decade",
+      "vmin": -1.090998397481132,
+      "vmax": 1.090998397481132,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.416666666666675,
+       "north": 49.416666666666664,
+       "west": -125.08333333333333,
+       "east": -66.58333333333333
+      },
+      "width": 234,
+      "height": 100,
+      "units": "1 per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -0.5318328259434425,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.6296000213759536,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.3641797194706764,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.24614319403365195,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 0.23196771648084524,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 0.2917577105278674,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "MAM": {
+     "trend_nc": "pdsi.MAM.trend.nc",
+     "trend_png": "pdsi.MAM.trend.png",
+     "summary": "pdsi.MAM.summary.json",
+     "legend": {
+      "field": "slope_per_decade",
+      "vmin": -1.0294755199960635,
+      "vmax": 1.0294755199960635,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.416666666666675,
+       "north": 49.416666666666664,
+       "west": -125.08333333333333,
+       "east": -66.58333333333333
+      },
+      "width": 234,
+      "height": 100,
+      "units": "1 per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -0.5779464870897454,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.6596907511303712,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.3369147873846919,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.27150161464225625,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 0.2678121922074396,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 0.15498371937889352,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "JJA": {
+     "trend_nc": "pdsi.JJA.trend.nc",
+     "trend_png": "pdsi.JJA.trend.png",
+     "summary": "pdsi.JJA.summary.json",
+     "legend": {
+      "field": "slope_per_decade",
+      "vmin": -1.0845186308537795,
+      "vmax": 1.0845186308537795,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.416666666666675,
+       "north": 49.416666666666664,
+       "west": -125.08333333333333,
+       "east": -66.58333333333333
+      },
+      "width": 234,
+      "height": 100,
+      "units": "1 per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -0.7097228984996641,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.6476413328574286,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.48120298554535335,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.38979606837975544,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": 0.07711567316682084,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 0.145392002224749,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    },
+    "SON": {
+     "trend_nc": "pdsi.SON.trend.nc",
+     "trend_png": "pdsi.SON.trend.png",
+     "summary": "pdsi.SON.summary.json",
+     "legend": {
+      "field": "slope_per_decade",
+      "vmin": -1.1896421945638047,
+      "vmax": 1.1896421945638047,
+      "colors_neg_to_pos": [
+       "#8f1d1d",
+       "#e34948",
+       "#f0efec",
+       "#3987e5",
+       "#104281"
+      ],
+      "positive_color": "blue",
+      "nonsignificant_alpha": 0.35,
+      "transparent": "no data / outside region",
+      "bounds": {
+       "south": 24.416666666666675,
+       "north": 49.416666666666664,
+       "west": -125.08333333333333,
+       "east": -66.58333333333333
+      },
+      "width": 234,
+      "height": 100,
+      "units": "1 per decade"
+     },
+     "period": "1981-2020",
+     "subregions": [
+      {
+       "name": "Southwest",
+       "mean": -0.8455245210504791,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Northeast",
+       "mean": 0.5610344611048655,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Pacific NW",
+       "mean": -0.5361587443614998,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Southeast",
+       "mean": 0.38771515637247117,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "N. Rockies",
+       "mean": -0.029321780705529543,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      },
+      {
+       "name": "Plains",
+       "mean": 0.1586044506952068,
+       "frac_sig_up": 0.0,
+       "frac_sig_down": 0.0
+      }
+     ]
+    }
+   }
+  },
+  {
+   "name": "snow_water_equivalent",
+   "long_name": "Snow water equivalent",
+   "theme": "cryosphere",
+   "resource": "hydro",
+   "audience": [
+    "energy",
+    "agriculture"
+   ],
+   "units": "mm",
+   "aggregation": "max",
+   "relative": true,
+   "primary": false,
+   "adverse": "low",
+   "provider": "daymet",
+   "dataset": "daymet-monthly-na",
+   "product_type": "gridded_observation",
+   "status": "verified",
+   "caveats": [
+    "Daymet monthly swe is the monthly MEAN of daily SWE (verified against daymet-daily-na despite 'monthly total' metadata). Annual value = peak monthly-mean SWE, a lower bound on true peak SWE.",
+    "Daymet is on a 1 km Lambert conformal grid and needs reprojection."
+   ],
+   "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual max",
+   "annual": {
+    "trend_nc": "snow_water_equivalent.trend.nc",
+    "trend_png": "snow_water_equivalent.trend.png",
+    "summary": "snow_water_equivalent.summary.json",
+    "legend": {
+     "field": "pct_change_per_decade",
+     "vmin": -30.377173244692592,
+     "vmax": 30.377173244692592,
+     "colors_neg_to_pos": [
+      "#8f1d1d",
+      "#e34948",
+      "#f0efec",
+      "#3987e5",
+      "#104281"
+     ],
+     "positive_color": "blue",
+     "nonsignificant_alpha": 0.35,
+     "transparent": "no data / outside region",
+     "bounds": {
+      "south": 24.375,
+      "north": 49.625,
+      "west": -125.125,
+      "east": -66.375
+     },
+     "width": 235,
+     "height": 101,
+     "units": "% per decade"
+    },
+    "period": "1981-2020",
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": -7.3906693674660735,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.112518224405055
+     },
+     {
+      "name": "Northeast",
+      "mean": -0.6064888141279264,
+      "frac_sig_up": 0.007238341905169519,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": -12.668649315790876,
+      "frac_sig_up": 0.0037965257926398425,
+      "frac_sig_down": 0.13532421295400557
+     },
+     {
+      "name": "Southeast",
+      "mean": -5.915624451445073,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.12692076415128986
+     },
+     {
+      "name": "N. Rockies",
+      "mean": -0.9553165425701726,
+      "frac_sig_up": 0.00416176012573268,
+      "frac_sig_down": 0.06689927897686207
+     },
+     {
+      "name": "Plains",
+      "mean": 0.07039159599268337,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     }
+    ],
+    "pixel_series": {
+     "dir": "snow_water_equivalent",
+     "tile_deg": 5.0,
+     "naming": "{floor(lat/5)*5:+06.1f}_{floor(lon/5)*5:+07.1f}.json",
+     "tiles": [
+      "+025.0_-0105.0.json",
+      "+025.0_-0100.0.json",
+      "+025.0_-0085.0.json",
+      "+030.0_-0120.0.json",
+      "+030.0_-0115.0.json",
+      "+030.0_-0110.0.json",
+      "+030.0_-0105.0.json",
+      "+030.0_-0100.0.json",
+      "+030.0_-0095.0.json",
+      "+030.0_-0090.0.json",
+      "+030.0_-0085.0.json",
+      "+030.0_-0080.0.json",
+      "+035.0_-0125.0.json",
+      "+035.0_-0120.0.json",
+      "+035.0_-0115.0.json",
+      "+035.0_-0110.0.json",
+      "+035.0_-0105.0.json",
+      "+035.0_-0100.0.json",
+      "+035.0_-0095.0.json",
+      "+035.0_-0090.0.json",
+      "+035.0_-0085.0.json",
+      "+035.0_-0080.0.json",
+      "+040.0_-0125.0.json",
+      "+040.0_-0120.0.json",
+      "+040.0_-0115.0.json",
+      "+040.0_-0110.0.json",
+      "+040.0_-0105.0.json",
+      "+040.0_-0100.0.json",
+      "+040.0_-0095.0.json",
+      "+040.0_-0090.0.json",
+      "+040.0_-0085.0.json",
+      "+040.0_-0080.0.json",
+      "+040.0_-0075.0.json",
+      "+045.0_-0125.0.json",
+      "+045.0_-0120.0.json",
+      "+045.0_-0115.0.json",
+      "+045.0_-0110.0.json",
+      "+045.0_-0105.0.json",
+      "+045.0_-0100.0.json",
+      "+045.0_-0095.0.json",
+      "+045.0_-0090.0.json",
+      "+045.0_-0085.0.json",
+      "+045.0_-0080.0.json",
+      "+045.0_-0075.0.json",
+      "+045.0_-0070.0.json"
+     ],
+     "years": [
+      1981,
+      2020
+     ]
+    }
+   },
+   "seasons": {}
+  }
+ ],
+ "portfolio_maps": {
+  "r_solar_wind": {
+   "png": "portfolio.r_solar_wind.png",
+   "legend": {
+    "field": "r_solar_wind",
+    "vmin": -0.41617946623238383,
+    "vmax": 0.41617946623238383,
+    "colors_neg_to_pos": [
+     "#104281",
+     "#3987e5",
+     "#f0efec",
+     "#e34948",
+     "#8f1d1d"
+    ],
+    "positive_color": "red",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.25,
+     "north": 49.75,
+     "west": -125.3125,
+     "east": -66.5625
+    },
+    "width": 94,
+    "height": 51,
+    "units": "correlation r",
+    "note": "blue = complementary (opposite anomalies), red = move together; faded = not significant (p >= 0.05, effective n)"
+   }
+  },
+  "r_solar_hydro": {
+   "png": "portfolio.r_solar_hydro.png",
+   "legend": {
+    "field": "r_solar_hydro",
+    "vmin": -0.6244986725600126,
+    "vmax": 0.6244986725600126,
+    "colors_neg_to_pos": [
+     "#104281",
+     "#3987e5",
+     "#f0efec",
+     "#e34948",
+     "#8f1d1d"
+    ],
+    "positive_color": "red",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.25,
+     "north": 49.75,
+     "west": -125.3125,
+     "east": -66.5625
+    },
+    "width": 94,
+    "height": 51,
+    "units": "correlation r",
+    "note": "blue = complementary (opposite anomalies), red = move together; faded = not significant (p >= 0.05, effective n)"
+   }
+  },
+  "r_wind_hydro": {
+   "png": "portfolio.r_wind_hydro.png",
+   "legend": {
+    "field": "r_wind_hydro",
+    "vmin": -0.6363242160470689,
+    "vmax": 0.6363242160470689,
+    "colors_neg_to_pos": [
+     "#104281",
+     "#3987e5",
+     "#f0efec",
+     "#e34948",
+     "#8f1d1d"
+    ],
+    "positive_color": "red",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.25,
+     "north": 49.75,
+     "west": -125.3125,
+     "east": -66.5625
+    },
+    "width": 94,
+    "height": 51,
+    "units": "correlation r",
+    "note": "blue = complementary (opposite anomalies), red = move together; faded = not significant (p >= 0.05, effective n)"
+   }
+  },
+  "joint_low_ratio": {
+   "png": "portfolio.joint_low_ratio.png",
+   "legend": {
+    "field": "joint_low_ratio - 1",
+    "vmin": -0.25881410256410275,
+    "vmax": 0.25881410256410275,
+    "colors_neg_to_pos": [
+     "#104281",
+     "#3987e5",
+     "#f0efec",
+     "#e34948",
+     "#8f1d1d"
+    ],
+    "positive_color": "red",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.25,
+     "north": 49.75,
+     "west": -125.3125,
+     "east": -66.5625
+    },
+    "width": 94,
+    "height": 51,
+    "units": "joint-low ratio minus 1",
+    "note": "red = joint lows more frequent than if independent, blue = less"
+   }
+  }
+ },
+ "alert_maps": {
+  "precipitation": {
+   "png": "precipitation.alert.png",
+   "legend": {
+    "field": "percentile - 50",
+    "vmin": -50.0,
+    "vmax": 50.0,
+    "colors_neg_to_pos": [
+     "#8f1d1d",
+     "#e34948",
+     "#f0efec",
+     "#3987e5",
+     "#104281"
+    ],
+    "positive_color": "blue",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.79166597,
+     "north": 49.29166793,
+     "west": -125.00000001999999,
+     "east": -67.49999542
+    },
+    "width": 230,
+    "height": 98,
+    "units": "trend-adjusted percentile minus 50",
+    "note": "opaque = outside the 10th-90th percentile band; faded = within it"
+   },
+   "data_month": "2022-09"
+  },
+  "air_temp_2m": {
+   "png": "air_temp_2m.alert.png",
+   "legend": {
+    "field": "percentile - 50",
+    "vmin": -50.0,
+    "vmax": 50.0,
+    "colors_neg_to_pos": [
+     "#104281",
+     "#3987e5",
+     "#f0efec",
+     "#e34948",
+     "#8f1d1d"
+    ],
+    "positive_color": "red",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.25,
+     "north": 49.75,
+     "west": -125.3125,
+     "east": -66.5625
+    },
+    "width": 94,
+    "height": 51,
+    "units": "trend-adjusted percentile minus 50",
+    "note": "opaque = outside the 10th-90th percentile band; faded = within it"
+   },
+   "data_month": "2026-09"
+  },
+  "pdsi": {
+   "png": "pdsi.alert.png",
+   "legend": {
+    "field": "percentile - 50",
+    "vmin": -50.0,
+    "vmax": 50.0,
+    "colors_neg_to_pos": [
+     "#8f1d1d",
+     "#e34948",
+     "#f0efec",
+     "#3987e5",
+     "#104281"
+    ],
+    "positive_color": "blue",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.416666666666675,
+     "north": 49.416666666666664,
+     "west": -125.08333333333333,
+     "east": -66.58333333333333
+    },
+    "width": 234,
+    "height": 100,
+    "units": "trend-adjusted percentile minus 50",
+    "note": "opaque = outside the 10th-90th percentile band; faded = within it"
+   },
+   "data_month": "2021-12"
+  },
+  "solar_irradiance": {
+   "png": "solar_irradiance.alert.png",
+   "legend": {
+    "field": "percentile - 50",
+    "vmin": -50.0,
+    "vmax": 50.0,
+    "colors_neg_to_pos": [
+     "#104281",
+     "#3987e5",
+     "#f0efec",
+     "#e34948",
+     "#8f1d1d"
+    ],
+    "positive_color": "red",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.25,
+     "north": 49.75,
+     "west": -125.3125,
+     "east": -66.5625
+    },
+    "width": 94,
+    "height": 51,
+    "units": "trend-adjusted percentile minus 50",
+    "note": "opaque = outside the 10th-90th percentile band; faded = within it"
+   },
+   "data_month": "2026-09"
+  },
+  "snow_water_equivalent": {
+   "png": "snow_water_equivalent.alert.png",
+   "legend": {
+    "field": "percentile - 50",
+    "vmin": -50.0,
+    "vmax": 50.0,
+    "colors_neg_to_pos": [
+     "#8f1d1d",
+     "#e34948",
+     "#f0efec",
+     "#3987e5",
+     "#104281"
+    ],
+    "positive_color": "blue",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.375,
+     "north": 49.625,
+     "west": -125.125,
+     "east": -66.375
+    },
+    "width": 235,
+    "height": 101,
+    "units": "trend-adjusted percentile minus 50",
+    "note": "opaque = outside the 10th-90th percentile band; faded = within it"
+   },
+   "data_month": "2020-12"
+  },
+  "runoff": {
+   "png": "runoff.alert.png",
+   "legend": {
+    "field": "percentile - 50",
+    "vmin": -50.0,
+    "vmax": 50.0,
+    "colors_neg_to_pos": [
+     "#8f1d1d",
+     "#e34948",
+     "#f0efec",
+     "#3987e5",
+     "#104281"
+    ],
+    "positive_color": "blue",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.416666666666675,
+     "north": 49.416666666666664,
+     "west": -125.08333333333333,
+     "east": -66.58333333333333
+    },
+    "width": 234,
+    "height": 100,
+    "units": "trend-adjusted percentile minus 50",
+    "note": "opaque = outside the 10th-90th percentile band; faded = within it"
+   },
+   "data_month": "2021-12"
+  },
+  "soil_moisture": {
+   "png": "soil_moisture.alert.png",
+   "legend": {
+    "field": "percentile - 50",
+    "vmin": -50.0,
+    "vmax": 50.0,
+    "colors_neg_to_pos": [
+     "#8f1d1d",
+     "#e34948",
+     "#f0efec",
+     "#3987e5",
+     "#104281"
+    ],
+    "positive_color": "blue",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.416666666666675,
+     "north": 49.416666666666664,
+     "west": -125.08333333333333,
+     "east": -66.58333333333333
+    },
+    "width": 234,
+    "height": 100,
+    "units": "trend-adjusted percentile minus 50",
+    "note": "opaque = outside the 10th-90th percentile band; faded = within it"
+   },
+   "data_month": "2021-12"
+  },
+  "aerosol_optical_depth": {
+   "png": "aerosol_optical_depth.alert.png",
+   "legend": {
+    "field": "percentile - 50",
+    "vmin": -50.0,
+    "vmax": 50.0,
+    "colors_neg_to_pos": [
+     "#104281",
+     "#3987e5",
+     "#f0efec",
+     "#e34948",
+     "#8f1d1d"
+    ],
+    "positive_color": "red",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.25,
+     "north": 49.75,
+     "west": -125.3125,
+     "east": -66.5625
+    },
+    "width": 94,
+    "height": 51,
+    "units": "trend-adjusted percentile minus 50",
+    "note": "opaque = outside the 10th-90th percentile band; faded = within it"
+   },
+   "data_month": "2026-09"
+  },
+  "surface_pressure": {
+   "png": "surface_pressure.alert.png",
+   "legend": {
+    "field": "percentile - 50",
+    "vmin": -50.0,
+    "vmax": 50.0,
+    "colors_neg_to_pos": [
+     "#104281",
+     "#3987e5",
+     "#f0efec",
+     "#e34948",
+     "#8f1d1d"
+    ],
+    "positive_color": "red",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.25,
+     "north": 49.75,
+     "west": -125.3125,
+     "east": -66.5625
+    },
+    "width": 94,
+    "height": 51,
+    "units": "trend-adjusted percentile minus 50",
+    "note": "opaque = outside the 10th-90th percentile band; faded = within it"
+   },
+   "data_month": "2026-09"
+  },
+  "wind_speed_50m": {
+   "png": "wind_speed_50m.alert.png",
+   "legend": {
+    "field": "percentile - 50",
+    "vmin": -50.0,
+    "vmax": 50.0,
+    "colors_neg_to_pos": [
+     "#104281",
+     "#3987e5",
+     "#f0efec",
+     "#e34948",
+     "#8f1d1d"
+    ],
+    "positive_color": "red",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.25,
+     "north": 49.75,
+     "west": -125.3125,
+     "east": -66.5625
+    },
+    "width": 94,
+    "height": 51,
+    "units": "trend-adjusted percentile minus 50",
+    "note": "opaque = outside the 10th-90th percentile band; faded = within it"
+   },
+   "data_month": "2026-09"
+  },
+  "wind_speed_cubed_50m": {
+   "png": "wind_speed_cubed_50m.alert.png",
+   "legend": {
+    "field": "percentile - 50",
+    "vmin": -50.0,
+    "vmax": 50.0,
+    "colors_neg_to_pos": [
+     "#104281",
+     "#3987e5",
+     "#f0efec",
+     "#e34948",
+     "#8f1d1d"
+    ],
+    "positive_color": "red",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.25,
+     "north": 49.75,
+     "west": -125.3125,
+     "east": -66.5625
+    },
+    "width": 94,
+    "height": 51,
+    "units": "trend-adjusted percentile minus 50",
+    "note": "opaque = outside the 10th-90th percentile band; faded = within it"
+   },
+   "data_month": "2026-09"
+  },
+  "wind_power_density": {
+   "png": "wind_power_density.alert.png",
+   "legend": {
+    "field": "percentile - 50",
+    "vmin": -50.0,
+    "vmax": 50.0,
+    "colors_neg_to_pos": [
+     "#104281",
+     "#3987e5",
+     "#f0efec",
+     "#e34948",
+     "#8f1d1d"
+    ],
+    "positive_color": "red",
+    "nonsignificant_alpha": 0.35,
+    "transparent": "no data / outside region",
+    "bounds": {
+     "south": 24.25,
+     "north": 49.75,
+     "west": -125.3125,
+     "east": -66.5625
+    },
+    "width": 94,
+    "height": 51,
+    "units": "trend-adjusted percentile minus 50",
+    "note": "opaque = outside the 10th-90th percentile band; faded = within it"
+   },
+   "data_month": "2026-09"
+  }
+ },
+ "files": {
+  "run_all": "run_all.json",
+  "narrative": "narrative.json",
+  "portfolio": "portfolio.json",
+  "alerts": "alerts.json",
+  "validation": "validation.json"
+ }
+}

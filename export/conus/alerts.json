@@ -1,0 +1,710 @@
+{
+  "region": "conus",
+  "label": "anomaly, not forecast",
+  "generated": "2026-11-15",
+  "thresholds": {
+    "alert": "regional percentile in the adverse 10% tail",
+    "strong alert": "regional percentile in the adverse 5% tail",
+    "local alert": ">= 20% of the area in the adverse 10% tail while the regional mean is not"
+  },
+  "note": "Each variable uses its own latest available month; hydrology sources lag by years (see data_month).",
+  "alerts": [
+    {
+      "variable": "precipitation",
+      "label": "anomaly, not forecast",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "provider": "nclimgrid",
+      "units": "mm",
+      "data_month": "2022-09",
+      "latency_days": 1507,
+      "adverse": "low",
+      "status": "strong alert",
+      "regional": {
+        "percentile": 0.0,
+        "percentile_raw": 0.0,
+        "anomaly": -18.3294,
+        "value": 44.2494
+      },
+      "area_frac_low_10": 0.2038,
+      "area_frac_low_5": 0.1043,
+      "area_frac_high_90": 0.0649,
+      "area_frac_high_95": 0.0295,
+      "subregions": [
+        {
+          "name": "Plains",
+          "area_frac_adverse": 0.4591,
+          "mean_percentile": 18.9739
+        },
+        {
+          "name": "Pacific NW",
+          "area_frac_adverse": 0.3143,
+          "mean_percentile": 31.9372
+        },
+        {
+          "name": "Southeast",
+          "area_frac_adverse": 0.1626,
+          "mean_percentile": 33.8913
+        },
+        {
+          "name": "N. Rockies",
+          "area_frac_adverse": 0.1452,
+          "mean_percentile": 44.9288
+        },
+        {
+          "name": "Southwest",
+          "area_frac_adverse": 0.1319,
+          "mean_percentile": 51.0144
+        },
+        {
+          "name": "Northeast",
+          "area_frac_adverse": 0.044,
+          "mean_percentile": 61.9975
+        }
+      ],
+      "baseline": {
+        "definition": "same calendar month in the 30 previous years, Theil-Sen detrended; percentile of the latest residual among baseline residuals (ties count half); cells need >= 15 valid baseline years",
+        "years": [
+          1992,
+          2021
+        ]
+      },
+      "caveats": [
+        "PC copies end 2022-09 (NClimGrid) / 2021-12 (TerraClimate)."
+      ],
+      "file": "precipitation.alert.nc"
+    },
+    {
+      "variable": "air_temp_2m",
+      "label": "anomaly, not forecast",
+      "resource": "none",
+      "theme": "atmospheric_dynamics",
+      "provider": "nasa_power",
+      "units": "degC",
+      "data_month": "2026-09",
+      "latency_days": 46,
+      "adverse": "high",
+      "status": "strong alert",
+      "regional": {
+        "percentile": 96.6667,
+        "percentile_raw": 100.0,
+        "anomaly": 0.9617,
+        "value": 21.078
+      },
+      "area_frac_low_10": 0.114,
+      "area_frac_low_5": 0.0798,
+      "area_frac_high_90": 0.2924,
+      "area_frac_high_95": 0.2288,
+      "subregions": [
+        {
+          "name": "Southeast",
+          "area_frac_adverse": 0.7103,
+          "mean_percentile": 92.2207
+        },
+        {
+          "name": "Plains",
+          "area_frac_adverse": 0.4161,
+          "mean_percentile": 80.7876
+        },
+        {
+          "name": "Southwest",
+          "area_frac_adverse": 0.2345,
+          "mean_percentile": 55.2478
+        },
+        {
+          "name": "Northeast",
+          "area_frac_adverse": 0.0311,
+          "mean_percentile": 49.6513
+        }
+      ],
+      "baseline": {
+        "definition": "same calendar month in the 30 previous years, Theil-Sen detrended; percentile of the latest residual among baseline residuals (ties count half); cells need >= 15 valid baseline years",
+        "years": [
+          1996,
+          2025
+        ]
+      },
+      "caveats": [],
+      "file": "air_temp_2m.alert.nc"
+    },
+    {
+      "variable": "pdsi",
+      "label": "anomaly, not forecast",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "provider": "terraclimate",
+      "units": "1",
+      "data_month": "2021-12",
+      "latency_days": 1780,
+      "adverse": "low",
+      "status": "alert",
+      "regional": {
+        "percentile": 10.0,
+        "percentile_raw": 10.0,
+        "anomaly": -1.8961,
+        "value": -1.4379
+      },
+      "area_frac_low_10": 0.3523,
+      "area_frac_low_5": 0.241,
+      "area_frac_high_90": 0.0383,
+      "area_frac_high_95": 0.0195,
+      "subregions": [
+        {
+          "name": "Plains",
+          "area_frac_adverse": 0.7968,
+          "mean_percentile": 9.0862
+        },
+        {
+          "name": "N. Rockies",
+          "area_frac_adverse": 0.6602,
+          "mean_percentile": 12.3578
+        },
+        {
+          "name": "Northeast",
+          "area_frac_adverse": 0.2254,
+          "mean_percentile": 35.8701
+        },
+        {
+          "name": "Pacific NW",
+          "area_frac_adverse": 0.1848,
+          "mean_percentile": 35.8363
+        },
+        {
+          "name": "Southwest",
+          "area_frac_adverse": 0.1115,
+          "mean_percentile": 38.2752
+        },
+        {
+          "name": "Southeast",
+          "area_frac_adverse": 0.0787,
+          "mean_percentile": 61.7828
+        }
+      ],
+      "baseline": {
+        "definition": "same calendar month in the 30 previous years, Theil-Sen detrended; percentile of the latest residual among baseline residuals (ties count half); cells need >= 15 valid baseline years",
+        "years": [
+          1991,
+          2020
+        ]
+      },
+      "caveats": [],
+      "file": "pdsi.alert.nc"
+    },
+    {
+      "variable": "solar_irradiance",
+      "label": "anomaly, not forecast",
+      "resource": "solar",
+      "theme": "atmospheric_chemistry",
+      "provider": "merra2",
+      "units": "W m-2",
+      "data_month": "2026-09",
+      "latency_days": 46,
+      "adverse": "low",
+      "status": "local alert",
+      "regional": {
+        "percentile": 26.6667,
+        "percentile_raw": 3.3333,
+        "anomaly": -4.1348,
+        "value": 215.9314
+      },
+      "area_frac_low_10": 0.2488,
+      "area_frac_low_5": 0.1887,
+      "area_frac_high_90": 0.1163,
+      "area_frac_high_95": 0.0733,
+      "subregions": [
+        {
+          "name": "Plains",
+          "area_frac_adverse": 0.6068,
+          "mean_percentile": 17.1223
+        },
+        {
+          "name": "Southwest",
+          "area_frac_adverse": 0.6013,
+          "mean_percentile": 22.1902
+        },
+        {
+          "name": "Pacific NW",
+          "area_frac_adverse": 0.0976,
+          "mean_percentile": 35.0634
+        },
+        {
+          "name": "N. Rockies",
+          "area_frac_adverse": 0.0787,
+          "mean_percentile": 52.3097
+        },
+        {
+          "name": "Northeast",
+          "area_frac_adverse": 0.0611,
+          "mean_percentile": 39.6602
+        }
+      ],
+      "baseline": {
+        "definition": "same calendar month in the 30 previous years, Theil-Sen detrended; percentile of the latest residual among baseline residuals (ties count half); cells need >= 15 valid baseline years",
+        "years": [
+          1996,
+          2025
+        ]
+      },
+      "caveats": [
+        "Reanalysis, not a site measurement.",
+        "POWER's 1984-present solar series splices SRB (to 2000) and SYN1deg (from 2001) with a +1.5% step; not used for trends. See docs/sources.md."
+      ],
+      "file": "solar_irradiance.alert.nc"
+    },
+    {
+      "variable": "snow_water_equivalent",
+      "label": "anomaly, not forecast",
+      "resource": "hydro",
+      "theme": "cryosphere",
+      "provider": "daymet",
+      "units": "mm",
+      "data_month": "2020-12",
+      "latency_days": 2145,
+      "adverse": "low",
+      "status": "none",
+      "regional": {
+        "percentile": 33.3333,
+        "percentile_raw": 3.3333,
+        "anomaly": -2.2763,
+        "value": 5.1098
+      },
+      "area_frac_low_10": 0.0977,
+      "area_frac_low_5": 0.0689,
+      "area_frac_high_90": 0.0212,
+      "area_frac_high_95": 0.0066,
+      "subregions": [
+        {
+          "name": "N. Rockies",
+          "area_frac_adverse": 0.2611,
+          "mean_percentile": 39.0294
+        },
+        {
+          "name": "Plains",
+          "area_frac_adverse": 0.1912,
+          "mean_percentile": 39.9972
+        },
+        {
+          "name": "Pacific NW",
+          "area_frac_adverse": 0.153,
+          "mean_percentile": 32.0563
+        },
+        {
+          "name": "Northeast",
+          "area_frac_adverse": 0.1299,
+          "mean_percentile": 37.2718
+        },
+        {
+          "name": "Southwest",
+          "area_frac_adverse": 0.0283,
+          "mean_percentile": 47.3866
+        }
+      ],
+      "baseline": {
+        "definition": "same calendar month in the 30 previous years, Theil-Sen detrended; percentile of the latest residual among baseline residuals (ties count half); cells need >= 15 valid baseline years",
+        "years": [
+          1990,
+          2019
+        ]
+      },
+      "caveats": [
+        "Daymet monthly swe is the monthly MEAN of daily SWE (verified against daymet-daily-na despite 'monthly total' metadata). Annual value = peak monthly-mean SWE, a lower bound on true peak SWE.",
+        "Daymet is on a 1 km Lambert conformal grid and needs reprojection."
+      ],
+      "file": "snow_water_equivalent.alert.nc"
+    },
+    {
+      "variable": "runoff",
+      "label": "anomaly, not forecast",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "provider": "terraclimate",
+      "units": "mm",
+      "data_month": "2021-12",
+      "latency_days": 1780,
+      "adverse": "low",
+      "status": "none",
+      "regional": {
+        "percentile": 40.0,
+        "percentile_raw": 53.3333,
+        "anomaly": -0.686,
+        "value": 16.6302
+      },
+      "area_frac_low_10": 0.1182,
+      "area_frac_low_5": 0.0818,
+      "area_frac_high_90": 0.152,
+      "area_frac_high_95": 0.0758,
+      "subregions": [
+        {
+          "name": "Southeast",
+          "area_frac_adverse": 0.3801,
+          "mean_percentile": 26.9474
+        },
+        {
+          "name": "Plains",
+          "area_frac_adverse": 0.1766,
+          "mean_percentile": 46.4219
+        },
+        {
+          "name": "Northeast",
+          "area_frac_adverse": 0.1211,
+          "mean_percentile": 64.3752
+        },
+        {
+          "name": "Southwest",
+          "area_frac_adverse": 0.0572,
+          "mean_percentile": 66.2475
+        },
+        {
+          "name": "Pacific NW",
+          "area_frac_adverse": 0.0276,
+          "mean_percentile": 60.8037
+        }
+      ],
+      "baseline": {
+        "definition": "same calendar month in the 30 previous years, Theil-Sen detrended; percentile of the latest residual among baseline residuals (ties count half); cells need >= 15 valid baseline years",
+        "years": [
+          1991,
+          2020
+        ]
+      },
+      "caveats": [
+        "Resource proxy, not generation; dams and operations are not modeled.",
+        "Model-based water balance product; PC copy ends 2021-12."
+      ],
+      "file": "runoff.alert.nc"
+    },
+    {
+      "variable": "soil_moisture",
+      "label": "anomaly, not forecast",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "provider": "terraclimate",
+      "units": "mm",
+      "data_month": "2021-12",
+      "latency_days": 1780,
+      "adverse": "low",
+      "status": "none",
+      "regional": {
+        "percentile": 53.3333,
+        "percentile_raw": 46.6667,
+        "anomaly": 0.3968,
+        "value": 56.5284
+      },
+      "area_frac_low_10": 0.1621,
+      "area_frac_low_5": 0.0985,
+      "area_frac_high_90": 0.0663,
+      "area_frac_high_95": 0.0332,
+      "subregions": [
+        {
+          "name": "N. Rockies",
+          "area_frac_adverse": 0.36,
+          "mean_percentile": 33.8199
+        },
+        {
+          "name": "Plains",
+          "area_frac_adverse": 0.2751,
+          "mean_percentile": 36.087
+        },
+        {
+          "name": "Southeast",
+          "area_frac_adverse": 0.1087,
+          "mean_percentile": 47.8097
+        },
+        {
+          "name": "Southwest",
+          "area_frac_adverse": 0.0853,
+          "mean_percentile": 62.655
+        },
+        {
+          "name": "Northeast",
+          "area_frac_adverse": 0.0412,
+          "mean_percentile": 58.2018
+        }
+      ],
+      "baseline": {
+        "definition": "same calendar month in the 30 previous years, Theil-Sen detrended; percentile of the latest residual among baseline residuals (ties count half); cells need >= 15 valid baseline years",
+        "years": [
+          1991,
+          2020
+        ]
+      },
+      "caveats": [],
+      "file": "soil_moisture.alert.nc"
+    },
+    {
+      "variable": "aerosol_optical_depth",
+      "label": "anomaly, not forecast",
+      "resource": "solar",
+      "theme": "atmospheric_chemistry",
+      "provider": "merra2",
+      "units": "1",
+      "data_month": "2026-09",
+      "latency_days": 46,
+      "adverse": "high",
+      "status": "none",
+      "regional": {
+        "percentile": 0.0,
+        "percentile_raw": 0.0,
+        "anomaly": -0.0451,
+        "value": 0.1059
+      },
+      "area_frac_low_10": 0.6459,
+      "area_frac_low_5": 0.5292,
+      "area_frac_high_90": 0.0,
+      "area_frac_high_95": 0.0,
+      "subregions": [],
+      "baseline": {
+        "definition": "same calendar month in the 30 previous years, Theil-Sen detrended; percentile of the latest residual among baseline residuals (ties count half); cells need >= 15 valid baseline years",
+        "years": [
+          1996,
+          2025
+        ]
+      },
+      "caveats": [
+        "Reanalysis aerosol that assimilates satellite AOD; observing-system changes can cause discontinuities."
+      ],
+      "file": "aerosol_optical_depth.alert.nc"
+    },
+    {
+      "variable": "surface_pressure",
+      "label": "anomaly, not forecast",
+      "resource": "none",
+      "theme": "atmospheric_dynamics",
+      "provider": "nasa_power",
+      "units": "hPa",
+      "data_month": "2026-09",
+      "latency_days": 46,
+      "adverse": "both",
+      "status": "none",
+      "regional": {
+        "percentile": 40.0,
+        "percentile_raw": 53.3333,
+        "anomaly": -0.3515,
+        "value": 927.6289
+      },
+      "area_frac_low_10": 0.1134,
+      "area_frac_low_5": 0.034,
+      "area_frac_high_90": 0.0137,
+      "area_frac_high_95": 0.0,
+      "subregions": [
+        {
+          "name": "Southwest",
+          "area_frac_adverse": 0.1775,
+          "mean_percentile": 26.0153
+        },
+        {
+          "name": "Plains",
+          "area_frac_adverse": 0.142,
+          "mean_percentile": 38.1141
+        },
+        {
+          "name": "Pacific NW",
+          "area_frac_adverse": 0.0727,
+          "mean_percentile": 39.7366
+        },
+        {
+          "name": "N. Rockies",
+          "area_frac_adverse": 0.0368,
+          "mean_percentile": 27.6269
+        }
+      ],
+      "baseline": {
+        "definition": "same calendar month in the 30 previous years, Theil-Sen detrended; percentile of the latest residual among baseline residuals (ties count half); cells need >= 15 valid baseline years",
+        "years": [
+          1996,
+          2025
+        ]
+      },
+      "caveats": [],
+      "file": "surface_pressure.alert.nc"
+    },
+    {
+      "variable": "wind_speed_50m",
+      "label": "anomaly, not forecast",
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "provider": "nasa_power",
+      "units": "m s-1",
+      "data_month": "2026-09",
+      "latency_days": 46,
+      "adverse": "low",
+      "status": "none",
+      "regional": {
+        "percentile": 46.6667,
+        "percentile_raw": 20.0,
+        "anomaly": -0.0183,
+        "value": 4.8839
+      },
+      "area_frac_low_10": 0.1437,
+      "area_frac_low_5": 0.0612,
+      "area_frac_high_90": 0.1601,
+      "area_frac_high_95": 0.0974,
+      "subregions": [
+        {
+          "name": "Southeast",
+          "area_frac_adverse": 0.4301,
+          "mean_percentile": 18.2465
+        },
+        {
+          "name": "Southwest",
+          "area_frac_adverse": 0.2169,
+          "mean_percentile": 49.0718
+        },
+        {
+          "name": "Pacific NW",
+          "area_frac_adverse": 0.2119,
+          "mean_percentile": 32.4609
+        },
+        {
+          "name": "Plains",
+          "area_frac_adverse": 0.1969,
+          "mean_percentile": 33.8871
+        },
+        {
+          "name": "N. Rockies",
+          "area_frac_adverse": 0.0186,
+          "mean_percentile": 62.9891
+        },
+        {
+          "name": "Northeast",
+          "area_frac_adverse": 0.0034,
+          "mean_percentile": 76.2935
+        }
+      ],
+      "baseline": {
+        "definition": "same calendar month in the 30 previous years, Theil-Sen detrended; percentile of the latest residual among baseline residuals (ties count half); cells need >= 15 valid baseline years",
+        "years": [
+          1996,
+          2025
+        ]
+      },
+      "caveats": [
+        "Reanalysis",
+        "not a site measurement."
+      ],
+      "file": "wind_speed_50m.alert.nc"
+    },
+    {
+      "variable": "wind_speed_cubed_50m",
+      "label": "anomaly, not forecast",
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "provider": "nasa_power",
+      "units": "m3 s-3",
+      "data_month": "2026-09",
+      "latency_days": 46,
+      "adverse": "low",
+      "status": "none",
+      "regional": {
+        "percentile": 43.3333,
+        "percentile_raw": 10.0,
+        "anomaly": -8.0539,
+        "value": 179.1094
+      },
+      "area_frac_low_10": 0.1218,
+      "area_frac_low_5": 0.0451,
+      "area_frac_high_90": 0.1156,
+      "area_frac_high_95": 0.0575,
+      "subregions": [
+        {
+          "name": "Southeast",
+          "area_frac_adverse": 0.3487,
+          "mean_percentile": 20.8183
+        },
+        {
+          "name": "Plains",
+          "area_frac_adverse": 0.1828,
+          "mean_percentile": 30.002
+        },
+        {
+          "name": "Pacific NW",
+          "area_frac_adverse": 0.1568,
+          "mean_percentile": 36.6183
+        },
+        {
+          "name": "Southwest",
+          "area_frac_adverse": 0.1447,
+          "mean_percentile": 45.5069
+        },
+        {
+          "name": "N. Rockies",
+          "area_frac_adverse": 0.0186,
+          "mean_percentile": 67.1537
+        }
+      ],
+      "baseline": {
+        "definition": "same calendar month in the 30 previous years, Theil-Sen detrended; percentile of the latest residual among baseline residuals (ties count half); cells need >= 15 valid baseline years",
+        "years": [
+          1996,
+          2025
+        ]
+      },
+      "caveats": [
+        "Built from DAILY mean speeds; sub-daily variability is not captured."
+      ],
+      "file": "wind_speed_cubed_50m.alert.nc"
+    },
+    {
+      "variable": "wind_power_density",
+      "label": "anomaly, not forecast",
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "provider": "derived:nasa_power",
+      "units": "W m-2",
+      "data_month": "2026-09",
+      "latency_days": 46,
+      "adverse": "low",
+      "status": "none",
+      "regional": {
+        "percentile": 33.3333,
+        "percentile_raw": 6.6667,
+        "anomaly": -4.2909,
+        "value": 98.3455
+      },
+      "area_frac_low_10": 0.1245,
+      "area_frac_low_5": 0.0465,
+      "area_frac_high_90": 0.1143,
+      "area_frac_high_95": 0.0571,
+      "subregions": [
+        {
+          "name": "Southeast",
+          "area_frac_adverse": 0.3666,
+          "mean_percentile": 20.3008
+        },
+        {
+          "name": "Plains",
+          "area_frac_adverse": 0.1932,
+          "mean_percentile": 29.0403
+        },
+        {
+          "name": "Southwest",
+          "area_frac_adverse": 0.1524,
+          "mean_percentile": 45.3497
+        },
+        {
+          "name": "Pacific NW",
+          "area_frac_adverse": 0.1434,
+          "mean_percentile": 37.8458
+        },
+        {
+          "name": "N. Rockies",
+          "area_frac_adverse": 0.0223,
+          "mean_percentile": 67.2022
+        }
+      ],
+      "baseline": {
+        "definition": "same calendar month in the 30 previous years, Theil-Sen detrended; percentile of the latest residual among baseline residuals (ties count half); cells need >= 15 valid baseline years",
+        "years": [
+          1996,
+          2025
+        ]
+      },
+      "caveats": [
+        "Uses the monthly mean of DAILY v^3. Cubing monthly-mean speed instead underestimated it by 29% (median) and changed the 2010-2019 trend (-0.96 vs -0.65 %/yr) in a Great Plains test box; daily is still lower than an hourly-based value.",
+        "Proxy only; dry-air density, ignores humidity and turbine characteristics."
+      ],
+      "file": "wind_power_density.alert.nc"
+    }
+  ],
+  "failures": []
+}

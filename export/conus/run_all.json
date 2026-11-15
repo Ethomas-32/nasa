@@ -1,0 +1,1153 @@
+{
+  "region": "conus",
+  "period": "1981-2020",
+  "results": [
+    {
+      "variable": "solar_irradiance",
+      "season": null,
+      "resource": "solar",
+      "theme": "atmospheric_chemistry",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "merra2",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -0.04373344292512394,
+      "regional_pct_per_decade": -0.02176834745585646,
+      "regional_p": 0.952141713504759,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "solar_irradiance.summary.json",
+        "trend": "solar_irradiance.trend.nc"
+      }
+    },
+    {
+      "variable": "solar_irradiance",
+      "season": "DJF",
+      "resource": "solar",
+      "theme": "atmospheric_chemistry",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "merra2",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.15107767758177953,
+      "regional_pct_per_decade": 0.13900367851695072,
+      "regional_p": 0.8549074678419339,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "solar_irradiance.DJF.summary.json",
+        "trend": "solar_irradiance.DJF.trend.nc"
+      }
+    },
+    {
+      "variable": "solar_irradiance",
+      "season": "MAM",
+      "resource": "solar",
+      "theme": "atmospheric_chemistry",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "merra2",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -0.6985227797758747,
+      "regional_pct_per_decade": -0.29215604716118904,
+      "regional_p": 0.46666728879482866,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "solar_irradiance.MAM.summary.json",
+        "trend": "solar_irradiance.MAM.trend.nc"
+      }
+    },
+    {
+      "variable": "solar_irradiance",
+      "season": "JJA",
+      "resource": "solar",
+      "theme": "atmospheric_chemistry",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "merra2",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -0.48552262383168854,
+      "regional_pct_per_decade": -0.16775794614825162,
+      "regional_p": 0.6079791161993455,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "solar_irradiance.JJA.summary.json",
+        "trend": "solar_irradiance.JJA.trend.nc"
+      }
+    },
+    {
+      "variable": "solar_irradiance",
+      "season": "SON",
+      "resource": "solar",
+      "theme": "atmospheric_chemistry",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "merra2",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.6515770381090189,
+      "regional_pct_per_decade": 0.39156581923920963,
+      "regional_p": 0.3692698946827706,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "solar_irradiance.SON.summary.json",
+        "trend": "solar_irradiance.SON.trend.nc"
+      }
+    },
+    {
+      "variable": "aerosol_optical_depth",
+      "season": null,
+      "resource": "solar",
+      "theme": "atmospheric_chemistry",
+      "audience": [
+        "energy"
+      ],
+      "provider": "merra2",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -0.010529104898733604,
+      "regional_pct_per_decade": -7.049140492847074,
+      "regional_p": 0.036123319686814995,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.5667434483261754,
+      "files": {
+        "summary": "aerosol_optical_depth.summary.json",
+        "trend": "aerosol_optical_depth.trend.nc"
+      }
+    },
+    {
+      "variable": "aerosol_optical_depth",
+      "season": "DJF",
+      "resource": "solar",
+      "theme": "atmospheric_chemistry",
+      "audience": [
+        "energy"
+      ],
+      "provider": "merra2",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -0.011463538133558819,
+      "regional_pct_per_decade": -10.414316437374804,
+      "regional_p": 0.0008233454356857234,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.8432309680523588,
+      "files": {
+        "summary": "aerosol_optical_depth.DJF.summary.json",
+        "trend": "aerosol_optical_depth.DJF.trend.nc"
+      }
+    },
+    {
+      "variable": "aerosol_optical_depth",
+      "season": "MAM",
+      "resource": "solar",
+      "theme": "atmospheric_chemistry",
+      "audience": [
+        "energy"
+      ],
+      "provider": "merra2",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -0.009823102651806769,
+      "regional_pct_per_decade": -5.638342188318566,
+      "regional_p": 0.0025995231707991342,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.5812484810047611,
+      "files": {
+        "summary": "aerosol_optical_depth.MAM.summary.json",
+        "trend": "aerosol_optical_depth.MAM.trend.nc"
+      }
+    },
+    {
+      "variable": "aerosol_optical_depth",
+      "season": "JJA",
+      "resource": "solar",
+      "theme": "atmospheric_chemistry",
+      "audience": [
+        "energy"
+      ],
+      "provider": "merra2",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -0.011944748807229243,
+      "regional_pct_per_decade": -6.50662791135472,
+      "regional_p": 0.03176172454744829,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.5075293677414965,
+      "files": {
+        "summary": "aerosol_optical_depth.JJA.summary.json",
+        "trend": "aerosol_optical_depth.JJA.trend.nc"
+      }
+    },
+    {
+      "variable": "aerosol_optical_depth",
+      "season": "SON",
+      "resource": "solar",
+      "theme": "atmospheric_chemistry",
+      "audience": [
+        "energy"
+      ],
+      "provider": "merra2",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -0.013556846257127175,
+      "regional_pct_per_decade": -10.433809175147756,
+      "regional_p": 0.003504455893864303,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.6486903948883134,
+      "files": {
+        "summary": "aerosol_optical_depth.SON.summary.json",
+        "trend": "aerosol_optical_depth.SON.trend.nc"
+      }
+    },
+    {
+      "variable": "air_temp_2m",
+      "season": null,
+      "resource": "none",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.2771859285143421,
+      "regional_pct_per_decade": null,
+      "regional_p": 0.0033565900662431373,
+      "area_frac_sig_up": 0.6788555739547487,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "air_temp_2m.summary.json",
+        "trend": "air_temp_2m.trend.nc"
+      }
+    },
+    {
+      "variable": "air_temp_2m",
+      "season": "DJF",
+      "resource": "none",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "nasa_power",
+      "period": "1982-2020",
+      "regional_slope_per_decade": 0.3502366387147316,
+      "regional_pct_per_decade": null,
+      "regional_p": 0.029326591805237105,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "air_temp_2m.DJF.summary.json",
+        "trend": "air_temp_2m.DJF.trend.nc"
+      }
+    },
+    {
+      "variable": "air_temp_2m",
+      "season": "MAM",
+      "resource": "none",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.14224178752493344,
+      "regional_pct_per_decade": null,
+      "regional_p": 0.18024650271916354,
+      "area_frac_sig_up": 0.08080479356271725,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "air_temp_2m.MAM.summary.json",
+        "trend": "air_temp_2m.MAM.trend.nc"
+      }
+    },
+    {
+      "variable": "air_temp_2m",
+      "season": "JJA",
+      "resource": "none",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.3188381706015004,
+      "regional_pct_per_decade": null,
+      "regional_p": 0.0015653110934690361,
+      "area_frac_sig_up": 0.3969949926082658,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "air_temp_2m.JJA.summary.json",
+        "trend": "air_temp_2m.JJA.trend.nc"
+      }
+    },
+    {
+      "variable": "air_temp_2m",
+      "season": "SON",
+      "resource": "none",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.34921534431773343,
+      "regional_pct_per_decade": null,
+      "regional_p": 0.0030154496766770958,
+      "area_frac_sig_up": 0.39615823530068667,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "air_temp_2m.SON.summary.json",
+        "trend": "air_temp_2m.SON.trend.nc"
+      }
+    },
+    {
+      "variable": "surface_pressure",
+      "season": null,
+      "resource": "none",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.014496289219528679,
+      "regional_pct_per_decade": 0.0015636167999065766,
+      "regional_p": 0.7890249008648105,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "surface_pressure.summary.json",
+        "trend": "surface_pressure.trend.nc"
+      }
+    },
+    {
+      "variable": "surface_pressure",
+      "season": "DJF",
+      "resource": "none",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "nasa_power",
+      "period": "1982-2020",
+      "regional_slope_per_decade": -0.1302626231283564,
+      "regional_pct_per_decade": -0.014037395875812288,
+      "regional_p": 0.3706969845683531,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "surface_pressure.DJF.summary.json",
+        "trend": "surface_pressure.DJF.trend.nc"
+      }
+    },
+    {
+      "variable": "surface_pressure",
+      "season": "MAM",
+      "resource": "none",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.2266783316826863,
+      "regional_pct_per_decade": 0.024485994402973575,
+      "regional_p": 0.10534105856467721,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "surface_pressure.MAM.summary.json",
+        "trend": "surface_pressure.MAM.trend.nc"
+      }
+    },
+    {
+      "variable": "surface_pressure",
+      "season": "JJA",
+      "resource": "none",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -0.1116434019058426,
+      "regional_pct_per_decade": -0.012045101865325904,
+      "regional_p": 0.2251236316084334,
+      "area_frac_sig_up": 0.002370807412015822,
+      "area_frac_sig_down": 0.29619356354533616,
+      "files": {
+        "summary": "surface_pressure.JJA.summary.json",
+        "trend": "surface_pressure.JJA.trend.nc"
+      }
+    },
+    {
+      "variable": "surface_pressure",
+      "season": "SON",
+      "resource": "none",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.01658550512503271,
+      "regional_pct_per_decade": 0.001787635617603584,
+      "regional_p": 0.7850764088135294,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "surface_pressure.SON.summary.json",
+        "trend": "surface_pressure.SON.trend.nc"
+      }
+    },
+    {
+      "variable": "wind_speed_50m",
+      "season": null,
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.005210762970448103,
+      "regional_pct_per_decade": 0.09302504748061265,
+      "regional_p": 0.6834306388633605,
+      "area_frac_sig_up": 0.021265671705365145,
+      "area_frac_sig_down": 0.015575018141035372,
+      "files": {
+        "summary": "wind_speed_50m.summary.json",
+        "trend": "wind_speed_50m.trend.nc"
+      }
+    },
+    {
+      "variable": "wind_speed_50m",
+      "season": "DJF",
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "nasa_power",
+      "period": "1982-2020",
+      "regional_slope_per_decade": 0.022858174941029485,
+      "regional_pct_per_decade": 0.38130232164371175,
+      "regional_p": 0.35790609486477887,
+      "area_frac_sig_up": 0.001356628716914288,
+      "area_frac_sig_down": 0.0050559795222891255,
+      "files": {
+        "summary": "wind_speed_50m.DJF.summary.json",
+        "trend": "wind_speed_50m.DJF.trend.nc"
+      }
+    },
+    {
+      "variable": "wind_speed_50m",
+      "season": "MAM",
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.0008339433531933657,
+      "regional_pct_per_decade": 0.013937070541009448,
+      "regional_p": 0.9349988039705048,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "wind_speed_50m.MAM.summary.json",
+        "trend": "wind_speed_50m.MAM.trend.nc"
+      }
+    },
+    {
+      "variable": "wind_speed_50m",
+      "season": "JJA",
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -0.015366039104330109,
+      "regional_pct_per_decade": -0.31478046884832933,
+      "regional_p": 0.28903354254194424,
+      "area_frac_sig_up": 0.004778767114254037,
+      "area_frac_sig_down": 0.010433356730112068,
+      "files": {
+        "summary": "wind_speed_50m.JJA.summary.json",
+        "trend": "wind_speed_50m.JJA.trend.nc"
+      }
+    },
+    {
+      "variable": "wind_speed_50m",
+      "season": "SON",
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.007545107446773032,
+      "regional_pct_per_decade": 0.1359933193167134,
+      "regional_p": 0.5523765052635039,
+      "area_frac_sig_up": 0.041368547947406985,
+      "area_frac_sig_down": 0.020387376355132613,
+      "files": {
+        "summary": "wind_speed_50m.SON.summary.json",
+        "trend": "wind_speed_50m.SON.trend.nc"
+      }
+    },
+    {
+      "variable": "wind_speed_cubed_50m",
+      "season": null,
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 1.79610633793302,
+      "regional_pct_per_decade": 0.6329456735975709,
+      "regional_p": 0.5066205695044608,
+      "area_frac_sig_up": 0.021624901555743176,
+      "area_frac_sig_down": 0.012100561221252233,
+      "files": {
+        "summary": "wind_speed_cubed_50m.summary.json",
+        "trend": "wind_speed_cubed_50m.trend.nc"
+      }
+    },
+    {
+      "variable": "wind_speed_cubed_50m",
+      "season": "DJF",
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "nasa_power",
+      "period": "1982-2020",
+      "regional_slope_per_decade": 5.1436608383489135,
+      "regional_pct_per_decade": 1.503949567643256,
+      "regional_p": 0.39711715725717023,
+      "area_frac_sig_up": 0.001359845774032459,
+      "area_frac_sig_down": 0.0033464634589694853,
+      "files": {
+        "summary": "wind_speed_cubed_50m.DJF.summary.json",
+        "trend": "wind_speed_cubed_50m.DJF.trend.nc"
+      }
+    },
+    {
+      "variable": "wind_speed_cubed_50m",
+      "season": "MAM",
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -1.7544244386214658,
+      "regional_pct_per_decade": -0.5213213465793243,
+      "regional_p": 0.7296713372860304,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "wind_speed_cubed_50m.MAM.summary.json",
+        "trend": "wind_speed_cubed_50m.MAM.trend.nc"
+      }
+    },
+    {
+      "variable": "wind_speed_cubed_50m",
+      "season": "JJA",
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -1.1404282915354003,
+      "regional_pct_per_decade": -0.6282242927048307,
+      "regional_p": 0.5369017953048785,
+      "area_frac_sig_up": 0.003984759593804517,
+      "area_frac_sig_down": 0.012498719992733038,
+      "files": {
+        "summary": "wind_speed_cubed_50m.JJA.summary.json",
+        "trend": "wind_speed_cubed_50m.JJA.trend.nc"
+      }
+    },
+    {
+      "variable": "wind_speed_cubed_50m",
+      "season": "SON",
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 3.456603027182486,
+      "regional_pct_per_decade": 1.255390474478332,
+      "regional_p": 0.16560248483061557,
+      "area_frac_sig_up": 0.022761084208234642,
+      "area_frac_sig_down": 0.01144545192685326,
+      "files": {
+        "summary": "wind_speed_cubed_50m.SON.summary.json",
+        "trend": "wind_speed_cubed_50m.SON.trend.nc"
+      }
+    },
+    {
+      "variable": "wind_power_density",
+      "season": null,
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "derived:nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.797016484707877,
+      "regional_pct_per_decade": 0.4873953150799661,
+      "regional_p": 0.600072292463655,
+      "area_frac_sig_up": 0.016692359067441206,
+      "area_frac_sig_down": 0.012519193321826938,
+      "files": {
+        "summary": "wind_power_density.summary.json",
+        "trend": "wind_power_density.trend.nc"
+      }
+    },
+    {
+      "variable": "wind_power_density",
+      "season": "DJF",
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "derived:nasa_power",
+      "period": "1982-2020",
+      "regional_slope_per_decade": 2.8008177321761583,
+      "regional_pct_per_decade": 1.3726102682336372,
+      "regional_p": 0.3706969845683531,
+      "area_frac_sig_up": 0.0010239250233900845,
+      "area_frac_sig_down": 0.0033464634589694853,
+      "files": {
+        "summary": "wind_power_density.DJF.summary.json",
+        "trend": "wind_power_density.DJF.trend.nc"
+      }
+    },
+    {
+      "variable": "wind_power_density",
+      "season": "MAM",
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "derived:nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -1.0323808053113077,
+      "regional_pct_per_decade": -0.5357712527812637,
+      "regional_p": 0.7605082516192885,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "wind_power_density.MAM.summary.json",
+        "trend": "wind_power_density.MAM.trend.nc"
+      }
+    },
+    {
+      "variable": "wind_power_density",
+      "season": "JJA",
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "derived:nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -0.7071877063460881,
+      "regional_pct_per_decade": -0.7102173649076503,
+      "regional_p": 0.4081104204610595,
+      "area_frac_sig_up": 0.003984759593804517,
+      "area_frac_sig_down": 0.014454140679499048,
+      "files": {
+        "summary": "wind_power_density.JJA.summary.json",
+        "trend": "wind_power_density.JJA.trend.nc"
+      }
+    },
+    {
+      "variable": "wind_power_density",
+      "season": "SON",
+      "resource": "wind",
+      "theme": "atmospheric_dynamics",
+      "audience": [
+        "energy"
+      ],
+      "provider": "derived:nasa_power",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 1.660142963435394,
+      "regional_pct_per_decade": 1.0508210171376866,
+      "regional_p": 0.26835952882925285,
+      "area_frac_sig_up": 0.01746480087618801,
+      "area_frac_sig_down": 0.011436036765330296,
+      "files": {
+        "summary": "wind_power_density.SON.summary.json",
+        "trend": "wind_power_density.SON.trend.nc"
+      }
+    },
+    {
+      "variable": "runoff",
+      "season": null,
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "terraclimate",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 6.180698612555265,
+      "regional_pct_per_decade": 3.456384007598118,
+      "regional_p": 0.37936351452041384,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "runoff.summary.json",
+        "trend": "runoff.trend.nc"
+      }
+    },
+    {
+      "variable": "runoff",
+      "season": "DJF",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "terraclimate",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.49750825891923917,
+      "regional_pct_per_decade": 0.9196275890261899,
+      "regional_p": 0.8188639764964802,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "runoff.DJF.summary.json",
+        "trend": "runoff.DJF.trend.nc"
+      }
+    },
+    {
+      "variable": "runoff",
+      "season": "MAM",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "terraclimate",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 2.654174434337025,
+      "regional_pct_per_decade": 3.316092242706859,
+      "regional_p": 0.345305697448102,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "runoff.MAM.summary.json",
+        "trend": "runoff.MAM.trend.nc"
+      }
+    },
+    {
+      "variable": "runoff",
+      "season": "JJA",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "terraclimate",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.6567831582481514,
+      "regional_pct_per_decade": 3.6529085355848387,
+      "regional_p": 0.33352610308834585,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "runoff.JJA.summary.json",
+        "trend": "runoff.JJA.trend.nc"
+      }
+    },
+    {
+      "variable": "runoff",
+      "season": "SON",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "terraclimate",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -0.44777724153713905,
+      "regional_pct_per_decade": -1.6864269061191552,
+      "regional_p": 0.6578251363574623,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "runoff.SON.summary.json",
+        "trend": "runoff.SON.trend.nc"
+      }
+    },
+    {
+      "variable": "precipitation",
+      "season": null,
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "nclimgrid",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 5.407528740257195,
+      "regional_pct_per_decade": 0.6922661825711778,
+      "regional_p": 0.6924695941670244,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "precipitation.summary.json",
+        "trend": "precipitation.trend.nc"
+      }
+    },
+    {
+      "variable": "precipitation",
+      "season": "DJF",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "nclimgrid",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 4.387533172481169,
+      "regional_pct_per_decade": 2.5277612328831838,
+      "regional_p": 0.3468843800469732,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "precipitation.DJF.summary.json",
+        "trend": "precipitation.DJF.trend.nc"
+      }
+    },
+    {
+      "variable": "precipitation",
+      "season": "MAM",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "nclimgrid",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 4.636465827358913,
+      "regional_pct_per_decade": 2.219345321798857,
+      "regional_p": 0.2491136330517455,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "precipitation.MAM.summary.json",
+        "trend": "precipitation.MAM.trend.nc"
+      }
+    },
+    {
+      "variable": "precipitation",
+      "season": "JJA",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "nclimgrid",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 3.1930165207556005,
+      "regional_pct_per_decade": 1.506022577088024,
+      "regional_p": 0.3797348623164343,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "precipitation.JJA.summary.json",
+        "trend": "precipitation.JJA.trend.nc"
+      }
+    },
+    {
+      "variable": "precipitation",
+      "season": "SON",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "nclimgrid",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -3.720830935413754,
+      "regional_pct_per_decade": -1.9965223568008315,
+      "regional_p": 0.2301173749582215,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "precipitation.SON.summary.json",
+        "trend": "precipitation.SON.trend.nc"
+      }
+    },
+    {
+      "variable": "soil_moisture",
+      "season": null,
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "agriculture",
+        "energy"
+      ],
+      "provider": "terraclimate",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.39878497051253703,
+      "regional_pct_per_decade": 0.7541749214830559,
+      "regional_p": 0.70631149730833,
+      "area_frac_sig_up": 0.0027860761633476164,
+      "area_frac_sig_down": 0.029845167404423785,
+      "files": {
+        "summary": "soil_moisture.summary.json",
+        "trend": "soil_moisture.trend.nc"
+      }
+    },
+    {
+      "variable": "soil_moisture",
+      "season": "DJF",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "agriculture",
+        "energy"
+      ],
+      "provider": "terraclimate",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -0.5005467499287476,
+      "regional_pct_per_decade": -0.7975102714948132,
+      "regional_p": 0.7296291421465494,
+      "area_frac_sig_up": 0.0014473882109638208,
+      "area_frac_sig_down": 0.036992485564418746,
+      "files": {
+        "summary": "soil_moisture.DJF.summary.json",
+        "trend": "soil_moisture.DJF.trend.nc"
+      }
+    },
+    {
+      "variable": "soil_moisture",
+      "season": "MAM",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "agriculture",
+        "energy"
+      ],
+      "provider": "terraclimate",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.8838175933864574,
+      "regional_pct_per_decade": 1.3320496476853088,
+      "regional_p": 0.21552962465428405,
+      "area_frac_sig_up": 0.0016290944932675416,
+      "area_frac_sig_down": 0.034429536753148096,
+      "files": {
+        "summary": "soil_moisture.MAM.summary.json",
+        "trend": "soil_moisture.MAM.trend.nc"
+      }
+    },
+    {
+      "variable": "soil_moisture",
+      "season": "JJA",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "agriculture",
+        "energy"
+      ],
+      "provider": "terraclimate",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.8178466574436942,
+      "regional_pct_per_decade": 2.004814974189208,
+      "regional_p": 0.3686017624365743,
+      "area_frac_sig_up": 0.0013070001622015814,
+      "area_frac_sig_down": 0.03345720432190125,
+      "files": {
+        "summary": "soil_moisture.JJA.summary.json",
+        "trend": "soil_moisture.JJA.trend.nc"
+      }
+    },
+    {
+      "variable": "soil_moisture",
+      "season": "SON",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "agriculture",
+        "energy"
+      ],
+      "provider": "terraclimate",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.23723958283900698,
+      "regional_pct_per_decade": 0.5719975370079466,
+      "regional_p": 0.8846056032430062,
+      "area_frac_sig_up": 0.0011035476365667727,
+      "area_frac_sig_down": 0.03125880937334844,
+      "files": {
+        "summary": "soil_moisture.SON.summary.json",
+        "trend": "soil_moisture.SON.trend.nc"
+      }
+    },
+    {
+      "variable": "pdsi",
+      "season": null,
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "agriculture"
+      ],
+      "provider": "terraclimate",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.006698855304280077,
+      "regional_pct_per_decade": null,
+      "regional_p": 0.9677928118072001,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "pdsi.summary.json",
+        "trend": "pdsi.trend.nc"
+      }
+    },
+    {
+      "variable": "pdsi",
+      "season": "DJF",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "agriculture"
+      ],
+      "provider": "terraclimate",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.06745671089280669,
+      "regional_pct_per_decade": null,
+      "regional_p": 0.812960136379304,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "pdsi.DJF.summary.json",
+        "trend": "pdsi.DJF.trend.nc"
+      }
+    },
+    {
+      "variable": "pdsi",
+      "season": "MAM",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "agriculture"
+      ],
+      "provider": "terraclimate",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.09494859359022689,
+      "regional_pct_per_decade": null,
+      "regional_p": 0.6729810665595173,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "pdsi.MAM.summary.json",
+        "trend": "pdsi.MAM.trend.nc"
+      }
+    },
+    {
+      "variable": "pdsi",
+      "season": "JJA",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "agriculture"
+      ],
+      "provider": "terraclimate",
+      "period": "1981-2020",
+      "regional_slope_per_decade": 0.057518935239514214,
+      "regional_pct_per_decade": null,
+      "regional_p": 0.711804820064402,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "pdsi.JJA.summary.json",
+        "trend": "pdsi.JJA.trend.nc"
+      }
+    },
+    {
+      "variable": "pdsi",
+      "season": "SON",
+      "resource": "hydro",
+      "theme": "hydrology",
+      "audience": [
+        "agriculture"
+      ],
+      "provider": "terraclimate",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -0.055556928966143705,
+      "regional_pct_per_decade": null,
+      "regional_p": 0.7923494182873689,
+      "area_frac_sig_up": 0.0,
+      "area_frac_sig_down": 0.0,
+      "files": {
+        "summary": "pdsi.SON.summary.json",
+        "trend": "pdsi.SON.trend.nc"
+      }
+    },
+    {
+      "variable": "snow_water_equivalent",
+      "season": null,
+      "resource": "hydro",
+      "theme": "cryosphere",
+      "audience": [
+        "energy",
+        "agriculture"
+      ],
+      "provider": "daymet",
+      "period": "1981-2020",
+      "regional_slope_per_decade": -2.501648411170378,
+      "regional_pct_per_decade": -6.936501127356409,
+      "regional_p": 0.07407058521945559,
+      "area_frac_sig_up": 0.0013883196371430784,
+      "area_frac_sig_down": 0.05840554860511932,
+      "files": {
+        "summary": "snow_water_equivalent.summary.json",
+        "trend": "snow_water_equivalent.trend.nc"
+      }
+    }
+  ],
+  "failures": []
+}

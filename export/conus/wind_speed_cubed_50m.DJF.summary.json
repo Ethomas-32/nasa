@@ -1,0 +1,88 @@
+{
+  "variable": "wind_speed_cubed_50m",
+  "region": "conus",
+  "season": "DJF",
+  "provider": "nasa_power",
+  "dataset": "s3://nasa-power/merra2/temporal/power_merra2_daily_temporal_utc.zarr",
+  "product_type": "reanalysis",
+  "units": "m3 s-3",
+  "aggregation": "mean",
+  "mask": "data/masks/conus_nclimgrid_footprint.nc",
+  "period": "1982-2020",
+  "n_years": 39,
+  "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual DJF mean",
+  "alpha_fdr": 0.1,
+  "area_frac_sig_up": 0.001359845774032459,
+  "area_frac_sig_down": 0.0033464634589694853,
+  "opposing_trend_score": 0.5778820331213442,
+  "coverage_score": 1.0,
+  "regional": {
+    "slope_per_decade": 5.1436608383489135,
+    "p_value": 0.39711715725717023,
+    "rho1": -0.17551054479235684,
+    "mean": 342.0101942919016,
+    "series": {
+      "1982": 355.2696072017368,
+      "1983": 330.75614891369383,
+      "1984": 330.26230307940654,
+      "1985": 331.6244619029879,
+      "1986": 346.1432741036602,
+      "1987": 285.66790003136697,
+      "1988": 372.891238844998,
+      "1989": 349.2310436193779,
+      "1990": 379.4753494414772,
+      "1991": 323.8602485366491,
+      "1992": 307.18299473850317,
+      "1993": 285.45984807311333,
+      "1994": 328.4876012721184,
+      "1995": 302.947524443623,
+      "1996": 398.99107298278636,
+      "1997": 364.06221909177077,
+      "1998": 308.04614899963707,
+      "1999": 390.52654966802874,
+      "2000": 349.5181142787163,
+      "2001": 289.69644706253524,
+      "2002": 367.5023175078364,
+      "2003": 315.6994756462801,
+      "2004": 327.36895295564824,
+      "2005": 297.9341808956446,
+      "2006": 372.4007675244266,
+      "2007": 366.8466847792555,
+      "2008": 370.656290539274,
+      "2009": 399.706099613557,
+      "2010": 278.9712752174233,
+      "2011": 345.165320201311,
+      "2012": 365.71605579533843,
+      "2013": 343.07750566795767,
+      "2014": 375.2489172128335,
+      "2015": 305.74136971400065,
+      "2016": 369.716561230702,
+      "2017": 384.3815613995448,
+      "2018": 343.53735868527525,
+      "2019": 348.26511601362773,
+      "2020": 330.3616704980407
+    },
+    "pct_change_per_decade": 1.503949567643256
+  },
+  "breakpoint": {
+    "year": 2006,
+    "p": 1.0,
+    "method": "Pettitt (1979) on the Sen-detrended area-weighted regional series"
+  },
+  "sensitivity": [
+    {
+      "start_year": 1987,
+      "period": "1987-2020",
+      "sign_agreement": 1.0,
+      "still_significant": 0.0,
+      "regional_slope_per_decade": 7.167396598243717
+    }
+  ],
+  "caveats": [
+    "Built from DAILY mean speeds; sub-daily variability is not captured."
+  ],
+  "notes": [
+    "DJF period starts 1982: the first winter needs December 1980, which precedes the record",
+    "start-year sensitivity at 1977 skipped: data begin 1982"
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "variable": "wind_speed_cubed_50m",
+  "region": "conus",
+  "season": "JJA",
+  "provider": "nasa_power",
+  "dataset": "s3://nasa-power/merra2/temporal/power_merra2_daily_temporal_utc.zarr",
+  "product_type": "reanalysis",
+  "units": "m3 s-3",
+  "aggregation": "mean",
+  "mask": "data/masks/conus_nclimgrid_footprint.nc",
+  "period": "1981-2020",
+  "n_years": 40,
+  "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual JJA mean",
+  "alpha_fdr": 0.1,
+  "area_frac_sig_up": 0.003984759593804517,
+  "area_frac_sig_down": 0.012498719992733038,
+  "opposing_trend_score": 0.4834852462897413,
+  "coverage_score": 1.0,
+  "regional": {
+    "slope_per_decade": -1.1404282915354003,
+    "p_value": 0.5369017953048785,
+    "rho1": -0.2117131437840102,
+    "mean": 181.53202682202343,
+    "series": {
+      "1981": 186.64688862623169,
+      "1982": 165.52193747653814,
+      "1983": 181.3308234311695,
+      "1984": 182.1107896274391,
+      "1985": 190.47894810194833,
+      "1986": 177.39148158964846,
+      "1987": 180.58737500745875,
+      "1988": 182.67390671833675,
+      "1989": 171.62415344441428,
+      "1990": 204.77389639903635,
+      "1991": 169.47470291404684,
+      "1992": 167.31149483655864,
+      "1993": 222.12627611595192,
+      "1994": 178.29729567283084,
+      "1995": 183.74962927845354,
+      "1996": 163.52172253268523,
+      "1997": 168.76951111518542,
+      "1998": 185.44932078465143,
+      "1999": 197.04287335523253,
+      "2000": 201.7968497304262,
+      "2001": 180.52385236523503,
+      "2002": 197.59012738942837,
+      "2003": 170.20842991420963,
+      "2004": 165.6788823310983,
+      "2005": 185.6432156267697,
+      "2006": 170.4129704147183,
+      "2007": 176.65567250546914,
+      "2008": 206.61765212796038,
+      "2009": 163.81168305798582,
+      "2010": 193.3516472369449,
+      "2011": 190.925549952183,
+      "2012": 189.7655183739521,
+      "2013": 168.60175812073635,
+      "2014": 184.6482324002981,
+      "2015": 167.6129309413032,
+      "2016": 178.23842410810707,
+      "2017": 167.01464307912843,
+      "2018": 173.15740270444363,
+      "2019": 165.4715086050092,
+      "2020": 204.67109486771307
+    },
+    "pct_change_per_decade": -0.6282242927048307
+  },
+  "breakpoint": {
+    "year": 1998,
+    "p": 1.0,
+    "method": "Pettitt (1979) on the Sen-detrended area-weighted regional series"
+  },
+  "sensitivity": [
+    {
+      "start_year": 1986,
+      "period": "1986-2020",
+      "sign_agreement": 1.0,
+      "still_significant": 0.46511627906976744,
+      "regional_slope_per_decade": -1.360510421216953
+    }
+  ],
+  "caveats": [
+    "Built from DAILY mean speeds; sub-daily variability is not captured."
+  ],
+  "notes": [
+    "start-year sensitivity at 1976 skipped: data begin 1981"
+  ]
+}

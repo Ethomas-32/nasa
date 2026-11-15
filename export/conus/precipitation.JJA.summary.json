@@ -1,0 +1,93 @@
+{
+  "variable": "precipitation",
+  "region": "conus",
+  "season": "JJA",
+  "provider": "nclimgrid",
+  "dataset": "noaa-nclimgrid-monthly",
+  "product_type": "gridded_observation",
+  "units": "mm",
+  "aggregation": "sum",
+  "mask": "data/masks/conus_nclimgrid_footprint.nc",
+  "period": "1981-2020",
+  "n_years": 40,
+  "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual JJA sum",
+  "alpha_fdr": 0.1,
+  "area_frac_sig_up": 0.0,
+  "area_frac_sig_down": 0.0,
+  "opposing_trend_score": 0.0,
+  "coverage_score": 1.0,
+  "regional": {
+    "slope_per_decade": 3.1930165207556005,
+    "p_value": 0.3797348623164343,
+    "rho1": 0.1422469527314653,
+    "mean": 212.0165108633013,
+    "series": {
+      "1981": 229.27412795784855,
+      "1982": 218.72028897227383,
+      "1983": 183.162995078089,
+      "1984": 203.05784747454305,
+      "1985": 203.4284306493078,
+      "1986": 213.1408126929106,
+      "1987": 207.50048848710753,
+      "1988": 168.70390223708023,
+      "1989": 232.34412574164855,
+      "1990": 202.2808090580189,
+      "1991": 199.65805138250212,
+      "1992": 246.95216689234303,
+      "1993": 245.0517309701925,
+      "1994": 211.19350722834187,
+      "1995": 211.6036822706766,
+      "1996": 212.87062037510137,
+      "1997": 219.65955123561983,
+      "1998": 215.1192436870587,
+      "1999": 203.08487829364805,
+      "2000": 190.22334821595553,
+      "2001": 202.00353544518327,
+      "2002": 185.8439569654603,
+      "2003": 211.82718128678852,
+      "2004": 237.90935869774302,
+      "2005": 220.25861218933338,
+      "2006": 191.72022779182305,
+      "2007": 207.82846413209856,
+      "2008": 219.04652928475429,
+      "2009": 218.6609098646697,
+      "2010": 232.2474552678806,
+      "2011": 181.68262049751232,
+      "2012": 174.3227662740713,
+      "2013": 227.6733383734,
+      "2014": 235.22617645001628,
+      "2015": 229.8764314182331,
+      "2016": 220.48016340200053,
+      "2017": 225.50322916540787,
+      "2018": 222.4301420582918,
+      "2019": 220.15319436284508,
+      "2020": 198.93553270426943
+    },
+    "pct_change_per_decade": 1.506022577088024
+  },
+  "breakpoint": {
+    "year": 2013,
+    "p": 1.0,
+    "method": "Pettitt (1979) on the Sen-detrended area-weighted regional series"
+  },
+  "sensitivity": [
+    {
+      "start_year": 1976,
+      "period": "1976-2020",
+      "sign_agreement": null,
+      "still_significant": null,
+      "regional_slope_per_decade": 3.7796098306148918
+    },
+    {
+      "start_year": 1986,
+      "period": "1986-2020",
+      "sign_agreement": null,
+      "still_significant": null,
+      "regional_slope_per_decade": 3.2633265141645125
+    }
+  ],
+  "caveats": [
+    "PC copies end 2022-09 (NClimGrid) / 2021-12 (TerraClimate)."
+  ],
+  "notes": []
+}

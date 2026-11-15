@@ -1,0 +1,89 @@
+{
+  "variable": "solar_irradiance",
+  "region": "conus",
+  "season": null,
+  "provider": "merra2",
+  "dataset": "M2TMNXRAD",
+  "product_type": "reanalysis",
+  "units": "W m-2",
+  "aggregation": "mean",
+  "mask": "data/masks/conus_nclimgrid_footprint.nc",
+  "period": "1981-2020",
+  "n_years": 40,
+  "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual mean",
+  "alpha_fdr": 0.1,
+  "area_frac_sig_up": 0.0,
+  "area_frac_sig_down": 0.0,
+  "opposing_trend_score": 0.0,
+  "coverage_score": 1.0,
+  "regional": {
+    "slope_per_decade": -0.04373344292512394,
+    "p_value": 0.952141713504759,
+    "rho1": 0.5064799037093604,
+    "mean": 200.90382613475828,
+    "series": {
+      "1981": 201.49005463349238,
+      "1982": 195.02852368610007,
+      "1983": 194.72778948602885,
+      "1984": 198.41855426955286,
+      "1985": 201.74611991276683,
+      "1986": 199.8347167462802,
+      "1987": 201.40827578239407,
+      "1988": 207.76483260845,
+      "1989": 202.51711164686648,
+      "1990": 202.65101740014876,
+      "1991": 196.77370395238827,
+      "1992": 196.3713582062389,
+      "1993": 197.64515729967735,
+      "1994": 201.44314839974834,
+      "1995": 200.27786627908787,
+      "1996": 202.24930726768528,
+      "1997": 201.44011065279736,
+      "1998": 201.83777263164137,
+      "1999": 207.33484006856668,
+      "2000": 205.382314862277,
+      "2001": 204.65202266865236,
+      "2002": 204.19741602769793,
+      "2003": 200.92430952858714,
+      "2004": 199.66394018582017,
+      "2005": 202.4670534941015,
+      "2006": 203.1163475306355,
+      "2007": 202.70604097703287,
+      "2008": 204.00419491443944,
+      "2009": 199.54582433598964,
+      "2010": 201.69223153798512,
+      "2011": 201.74865710327273,
+      "2012": 204.53866415124068,
+      "2013": 200.01656032578492,
+      "2014": 199.12610463972186,
+      "2015": 196.95317400603187,
+      "2016": 201.1148305539352,
+      "2017": 199.9507021293153,
+      "2018": 196.95967723905036,
+      "2019": 195.59576350515442,
+      "2020": 200.83695474369162
+    },
+    "pct_change_per_decade": -0.02176834745585646
+  },
+  "breakpoint": {
+    "year": 2013,
+    "p": 0.28465226519778725,
+    "method": "Pettitt (1979) on the Sen-detrended area-weighted regional series"
+  },
+  "sensitivity": [
+    {
+      "start_year": 1986,
+      "period": "1986-2020",
+      "sign_agreement": null,
+      "still_significant": null,
+      "regional_slope_per_decade": -0.648889682796978
+    }
+  ],
+  "caveats": [
+    "Reanalysis, not a site measurement.",
+    "POWER's 1984-present solar series splices SRB (to 2000) and SYN1deg (from 2001) with a +1.5% step; not used for trends. See docs/sources.md."
+  ],
+  "notes": [
+    "start-year sensitivity at 1976 skipped: data begin 1980"
+  ]
+}

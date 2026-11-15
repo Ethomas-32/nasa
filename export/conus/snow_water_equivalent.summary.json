@@ -1,0 +1,89 @@
+{
+  "variable": "snow_water_equivalent",
+  "region": "conus",
+  "season": null,
+  "provider": "daymet",
+  "dataset": "daymet-monthly-na",
+  "product_type": "gridded_observation",
+  "units": "mm",
+  "aggregation": "max",
+  "mask": "data/masks/conus_nclimgrid_footprint.nc",
+  "period": "1981-2020",
+  "n_years": 40,
+  "method": "Theil-Sen slope; Mann-Kendall (tie-corrected, lag-1 autocorrelation-adjusted: True); Benjamini-Hochberg FDR alpha=0.1; per-pixel annual max",
+  "alpha_fdr": 0.1,
+  "area_frac_sig_up": 0.0013883196371430784,
+  "area_frac_sig_down": 0.05840554860511932,
+  "opposing_trend_score": 0.046436856418725955,
+  "coverage_score": 1.0,
+  "regional": {
+    "slope_per_decade": -2.501648411170378,
+    "p_value": 0.07407058521945559,
+    "rho1": 0.09715335690946011,
+    "mean": 36.064989614206105,
+    "series": {
+      "1981": 34.45840860778315,
+      "1982": 62.48065565110496,
+      "1983": 54.426442756524814,
+      "1984": 41.76299975018193,
+      "1985": 53.9670303061504,
+      "1986": 28.62469976781356,
+      "1987": 26.994823115992507,
+      "1988": 40.28604379392164,
+      "1989": 38.48206562062978,
+      "1990": 34.01235845131762,
+      "1991": 29.773551280126505,
+      "1992": 27.409286523122784,
+      "1993": 40.5283821514942,
+      "1994": 42.091592625958995,
+      "1995": 30.90918827834034,
+      "1996": 57.381426331200714,
+      "1997": 38.1409140122528,
+      "1998": 26.592903879761213,
+      "1999": 36.063442899237195,
+      "2000": 39.12691503986072,
+      "2001": 34.15140003267513,
+      "2002": 23.76909143171451,
+      "2003": 28.964347431702844,
+      "2004": 30.931169742326773,
+      "2005": 27.62470870072784,
+      "2006": 23.31325053882526,
+      "2007": 36.080431831109834,
+      "2008": 60.97087449792237,
+      "2009": 36.092344615864654,
+      "2010": 35.050482399536385,
+      "2011": 36.34215387162129,
+      "2012": 24.630961865002597,
+      "2013": 32.32393881260019,
+      "2014": 35.1412989094945,
+      "2015": 29.11326489346326,
+      "2016": 30.925356797329655,
+      "2017": 29.949132529488406,
+      "2018": 31.350604197230087,
+      "2019": 47.67661754130897,
+      "2020": 24.68502308552383
+    },
+    "pct_change_per_decade": -6.936501127356409
+  },
+  "breakpoint": {
+    "year": 2007,
+    "p": 0.8308820317531255,
+    "method": "Pettitt (1979) on the Sen-detrended area-weighted regional series"
+  },
+  "sensitivity": [
+    {
+      "start_year": 1986,
+      "period": "1986-2020",
+      "sign_agreement": 0.9592814371257485,
+      "still_significant": 0.025149700598802394,
+      "regional_slope_per_decade": -1.1587284359675674
+    }
+  ],
+  "caveats": [
+    "Daymet monthly swe is the monthly MEAN of daily SWE (verified against daymet-daily-na despite 'monthly total' metadata). Annual value = peak monthly-mean SWE, a lower bound on true peak SWE.",
+    "Daymet is on a 1 km Lambert conformal grid and needs reprojection."
+  ],
+  "notes": [
+    "start-year sensitivity at 1976 skipped: data begin 1980"
+  ]
+}

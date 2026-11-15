@@ -1,0 +1,813 @@
+{
+ "region": "conus",
+ "contract_version": "1.0",
+ "note": "Every sentence is generated from the numbers in its `numbers` field and `source` file; no other claims.",
+ "sentences": [
+  {
+   "id": "solar_irradiance.regional",
+   "topic": "solar_irradiance",
+   "text": "All-sky surface shortwave downward irradiance over Contiguous United States, 1981-2020: the area-averaged trend is -0.044 W m-2 per decade (-0.02% per decade), not statistically significant (p = 0.95). 0% of the area shows a significant increase and 0% a significant decrease (false discovery rate 10%).",
+   "numbers": {
+    "slope_per_decade": -0.04373344292512394,
+    "pct_per_decade": -0.02176834745585646,
+    "p": 0.952141713504759,
+    "area_frac_sig_up": 0.0,
+    "area_frac_sig_down": 0.0
+   },
+   "source": "solar_irradiance.summary.json"
+  },
+  {
+   "id": "solar_irradiance.subregions",
+   "topic": "solar_irradiance",
+   "text": "By sub-region, the mean change ranges from -0.39% per decade (N. Rockies) to +0.46% per decade (Southwest). No sub-region has 10% or more of its area significant, so these are directions, not detected trends.",
+   "numbers": {
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": 0.4592230767300234,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Northeast",
+      "mean": -0.07651103556472878,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": -0.29776811361929606,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 0.07798813983570052,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": -0.39200068858721954,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 0.08115828858984628,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     }
+    ]
+   },
+   "source": "solar_irradiance.trend.nc"
+  },
+  {
+   "id": "aerosol_optical_depth.regional",
+   "topic": "aerosol_optical_depth",
+   "text": "Total aerosol extinction optical thickness (550 nm) over Contiguous United States, 1981-2020: the area-averaged trend is -0.011 1 per decade (-7.0% per decade), statistically significant (p = 0.036). 0% of the area shows a significant increase and 57% a significant decrease (false discovery rate 10%).",
+   "numbers": {
+    "slope_per_decade": -0.010529104898733604,
+    "pct_per_decade": -7.049140492847074,
+    "p": 0.036123319686814995,
+    "area_frac_sig_up": 0.0,
+    "area_frac_sig_down": 0.5667434483261754
+   },
+   "source": "aerosol_optical_depth.summary.json"
+  },
+  {
+   "id": "aerosol_optical_depth.subregions",
+   "topic": "aerosol_optical_depth",
+   "text": "By sub-region, the mean change ranges from -13.98% per decade (Northeast) to +1.83% per decade (Pacific NW). Sub-regions with at least 10% of their area significant: Southwest (0% up, 43% down), Northeast (0% up, 100% down), Southeast (0% up, 100% down), Plains (0% up, 48% down).",
+   "numbers": {
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": -6.9228603365978225,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.42670950060437424
+     },
+     {
+      "name": "Northeast",
+      "mean": -13.98073425338208,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 1.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": 1.8318563274716695,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": -11.211395983835494,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 1.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 0.20697579416158896,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": -6.4256455460962325,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.476886232746163
+     }
+    ]
+   },
+   "source": "aerosol_optical_depth.trend.nc"
+  },
+  {
+   "id": "air_temp_2m.regional",
+   "topic": "air_temp_2m",
+   "text": "Air temperature at 2 m over Contiguous United States, 1981-2020: the area-averaged trend is +0.277 degC per decade, statistically significant (p = 0.0034). 68% of the area shows a significant increase and 0% a significant decrease (false discovery rate 10%).",
+   "numbers": {
+    "slope_per_decade": 0.2771859285143421,
+    "pct_per_decade": null,
+    "p": 0.0033565900662431373,
+    "area_frac_sig_up": 0.6788555739547487,
+    "area_frac_sig_down": 0.0
+   },
+   "source": "air_temp_2m.summary.json"
+  },
+  {
+   "id": "air_temp_2m.subregions",
+   "topic": "air_temp_2m",
+   "text": "By sub-region, the mean change ranges from +0.18 degC per decade (N. Rockies) to +0.45 degC per decade (Southwest). Sub-regions with at least 10% of their area significant: Southwest (99% up, 0% down), Northeast (96% up, 0% down), Pacific NW (52% up, 0% down), Southeast (95% up, 0% down), N. Rockies (28% up, 0% down), Plains (35% up, 0% down).",
+   "numbers": {
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": 0.4488904071155243,
+      "frac_sig_up": 0.9923296813859973,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Northeast",
+      "mean": 0.3665156277815144,
+      "frac_sig_up": 0.9609336538908246,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": 0.23337286898021364,
+      "frac_sig_up": 0.518720135453737,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 0.3268729594216599,
+      "frac_sig_up": 0.9506372256160494,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 0.17519669600228835,
+      "frac_sig_up": 0.28257006859348993,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 0.1895406704364288,
+      "frac_sig_up": 0.3478173275670904,
+      "frac_sig_down": 0.0
+     }
+    ]
+   },
+   "source": "air_temp_2m.trend.nc"
+  },
+  {
+   "id": "surface_pressure.regional",
+   "topic": "surface_pressure",
+   "text": "Surface pressure over Contiguous United States, 1981-2020: the area-averaged trend is +0.014 hPa per decade (+0.002% per decade), not statistically significant (p = 0.79). 0% of the area shows a significant increase and 0% a significant decrease (false discovery rate 10%).",
+   "numbers": {
+    "slope_per_decade": 0.014496289219528679,
+    "pct_per_decade": 0.0015636167999065766,
+    "p": 0.7890249008648105,
+    "area_frac_sig_up": 0.0,
+    "area_frac_sig_down": 0.0
+   },
+   "source": "surface_pressure.summary.json"
+  },
+  {
+   "id": "surface_pressure.subregions",
+   "topic": "surface_pressure",
+   "text": "By sub-region, the mean change ranges from -0.01% per decade (Northeast) to +0.01% per decade (N. Rockies). No sub-region has 10% or more of its area significant, so these are directions, not detected trends.",
+   "numbers": {
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": 0.009785406602182745,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Northeast",
+      "mean": -0.011212884399688875,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": 0.006596911867182847,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": -0.009607988737095457,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 0.010739010315560616,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 0.0009378402730106349,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     }
+    ]
+   },
+   "source": "surface_pressure.trend.nc"
+  },
+  {
+   "id": "wind_speed_50m.regional",
+   "topic": "wind_speed_50m",
+   "text": "Wind speed at 50 m over Contiguous United States, 1981-2020: the area-averaged trend is +0.005 m s-1 per decade (+0.09% per decade), not statistically significant (p = 0.68). 2% of the area shows a significant increase and 2% a significant decrease (false discovery rate 10%).",
+   "numbers": {
+    "slope_per_decade": 0.005210762970448103,
+    "pct_per_decade": 0.09302504748061265,
+    "p": 0.6834306388633605,
+    "area_frac_sig_up": 0.021265671705365145,
+    "area_frac_sig_down": 0.015575018141035372
+   },
+   "source": "wind_speed_50m.summary.json"
+  },
+  {
+   "id": "wind_speed_50m.subregions",
+   "topic": "wind_speed_50m",
+   "text": "By sub-region, the mean change ranges from -0.09% per decade (Northeast) to +0.71% per decade (N. Rockies). No sub-region has 10% or more of its area significant, so these are directions, not detected trends.",
+   "numbers": {
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": 0.12325578326019615,
+      "frac_sig_up": 0.022317821167773824,
+      "frac_sig_down": 0.07271369379928709
+     },
+     {
+      "name": "Northeast",
+      "mean": -0.0900280699160095,
+      "frac_sig_up": 0.013395316974863666,
+      "frac_sig_down": 0.003496761639265233
+     },
+     {
+      "name": "Pacific NW",
+      "mean": 0.050915580724301045,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 0.06791277131699196,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 0.7113090753887888,
+      "frac_sig_up": 0.0890027442055277,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 0.27785545173643283,
+      "frac_sig_up": 0.014791488172470587,
+      "frac_sig_down": 0.0
+     }
+    ]
+   },
+   "source": "wind_speed_50m.trend.nc"
+  },
+  {
+   "id": "wind_speed_cubed_50m.regional",
+   "topic": "wind_speed_cubed_50m",
+   "text": "Monthly mean of daily-mean 50 m wind speed cubed over Contiguous United States, 1981-2020: the area-averaged trend is +1.796 m3 s-3 per decade (+0.6% per decade), not statistically significant (p = 0.51). 2% of the area shows a significant increase and 1% a significant decrease (false discovery rate 10%).",
+   "numbers": {
+    "slope_per_decade": 1.79610633793302,
+    "pct_per_decade": 0.6329456735975709,
+    "p": 0.5066205695044608,
+    "area_frac_sig_up": 0.021624901555743176,
+    "area_frac_sig_down": 0.012100561221252233
+   },
+   "source": "wind_speed_cubed_50m.summary.json"
+  },
+  {
+   "id": "wind_speed_cubed_50m.subregions",
+   "topic": "wind_speed_cubed_50m",
+   "text": "By sub-region, the mean change ranges from +0.18% per decade (Pacific NW) to +2.12% per decade (N. Rockies). No sub-region has 10% or more of its area significant, so these are directions, not detected trends.",
+   "numbers": {
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": 0.5475907303411033,
+      "frac_sig_up": 0.026049453142563916,
+      "frac_sig_down": 0.07284756915325362
+     },
+     {
+      "name": "Northeast",
+      "mean": 0.21291240014484153,
+      "frac_sig_up": 0.010147927671794756,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": 0.18015715411720168,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 0.7514369392431237,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 2.116294078081161,
+      "frac_sig_up": 0.05215409387876916,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 1.1573681364815762,
+      "frac_sig_up": 0.019702595704292232,
+      "frac_sig_down": 0.0
+     }
+    ]
+   },
+   "source": "wind_speed_cubed_50m.trend.nc"
+  },
+  {
+   "id": "wind_power_density.regional",
+   "topic": "wind_power_density",
+   "text": "Wind power density proxy (0.5 * rho * mean daily v^3) over Contiguous United States, 1981-2020: the area-averaged trend is +0.797 W m-2 per decade (+0.5% per decade), not statistically significant (p = 0.6). 2% of the area shows a significant increase and 1% a significant decrease (false discovery rate 10%).",
+   "numbers": {
+    "slope_per_decade": 0.797016484707877,
+    "pct_per_decade": 0.4873953150799661,
+    "p": 0.600072292463655,
+    "area_frac_sig_up": 0.016692359067441206,
+    "area_frac_sig_down": 0.012519193321826938
+   },
+   "source": "wind_power_density.summary.json"
+  },
+  {
+   "id": "wind_power_density.subregions",
+   "topic": "wind_power_density",
+   "text": "By sub-region, the mean change ranges from +0.14% per decade (Pacific NW) to +2.08% per decade (N. Rockies). No sub-region has 10% or more of its area significant, so these are directions, not detected trends.",
+   "numbers": {
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": 0.39730073209310096,
+      "frac_sig_up": 0.014854841396416123,
+      "frac_sig_down": 0.07669390985880842
+     },
+     {
+      "name": "Northeast",
+      "mean": 0.14995967830081927,
+      "frac_sig_up": 0.0034661138787222857,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": 0.1449882768669639,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 0.6288274771566298,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 2.08393750386951,
+      "frac_sig_up": 0.044711768150174434,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 1.0739259928004536,
+      "frac_sig_up": 0.014791488172470587,
+      "frac_sig_down": 0.0
+     }
+    ]
+   },
+   "source": "wind_power_density.trend.nc"
+  },
+  {
+   "id": "runoff.regional",
+   "topic": "runoff",
+   "text": "Runoff (water-balance model) over Contiguous United States, 1981-2020: the area-averaged trend is +6.181 mm per decade (+3.5% per decade), not statistically significant (p = 0.38). 0% of the area shows a significant increase and 0% a significant decrease (false discovery rate 10%).",
+   "numbers": {
+    "slope_per_decade": 6.180698612555265,
+    "pct_per_decade": 3.456384007598118,
+    "p": 0.37936351452041384,
+    "area_frac_sig_up": 0.0,
+    "area_frac_sig_down": 0.0
+   },
+   "source": "runoff.summary.json"
+  },
+  {
+   "id": "runoff.subregions",
+   "topic": "runoff",
+   "text": "By sub-region, the mean change ranges from -8.09% per decade (Southwest) to +5.56% per decade (Northeast). No sub-region has 10% or more of its area significant, so these are directions, not detected trends.",
+   "numbers": {
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": -8.092169594406892,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Northeast",
+      "mean": 5.564627149903507,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": -1.5614364436824058,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 2.3822184410251075,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 3.1743201945924095,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 0.7897930129923858,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     }
+    ]
+   },
+   "source": "runoff.trend.nc"
+  },
+  {
+   "id": "precipitation.regional",
+   "topic": "precipitation",
+   "text": "Precipitation over Contiguous United States, 1981-2020: the area-averaged trend is +5.408 mm per decade (+0.7% per decade), not statistically significant (p = 0.69). 0% of the area shows a significant increase and 0% a significant decrease (false discovery rate 10%).",
+   "numbers": {
+    "slope_per_decade": 5.407528740257195,
+    "pct_per_decade": 0.6922661825711778,
+    "p": 0.6924695941670244,
+    "area_frac_sig_up": 0.0,
+    "area_frac_sig_down": 0.0
+   },
+   "source": "precipitation.summary.json"
+  },
+  {
+   "id": "precipitation.subregions",
+   "topic": "precipitation",
+   "text": "By sub-region, the mean change ranges from -7.71% per decade (Southwest) to +2.91% per decade (Northeast). No sub-region has 10% or more of its area significant, so these are directions, not detected trends.",
+   "numbers": {
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": -7.708511093875724,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Northeast",
+      "mean": 2.9089830699258044,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": -1.832521691987398,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 1.7302762183871623,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 1.0862055765868364,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 0.6043285820813824,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     }
+    ]
+   },
+   "source": "precipitation.trend.nc"
+  },
+  {
+   "id": "soil_moisture.regional",
+   "topic": "soil_moisture",
+   "text": "Soil moisture over Contiguous United States, 1981-2020: the area-averaged trend is +0.399 mm per decade (+0.8% per decade), not statistically significant (p = 0.71). 0% of the area shows a significant increase and 3% a significant decrease (false discovery rate 10%).",
+   "numbers": {
+    "slope_per_decade": 0.39878497051253703,
+    "pct_per_decade": 0.7541749214830559,
+    "p": 0.70631149730833,
+    "area_frac_sig_up": 0.0027860761633476164,
+    "area_frac_sig_down": 0.029845167404423785
+   },
+   "source": "soil_moisture.summary.json"
+  },
+  {
+   "id": "soil_moisture.subregions",
+   "topic": "soil_moisture",
+   "text": "By sub-region, the mean change ranges from -14.71% per decade (Southwest) to +1.76% per decade (Southeast). Sub-regions with at least 10% of their area significant: Southwest (0% up, 22% down).",
+   "numbers": {
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": -14.707458939771511,
+      "frac_sig_up": 0.0008369578873007693,
+      "frac_sig_down": 0.22327911125842773
+     },
+     {
+      "name": "Northeast",
+      "mean": 1.7210382466611727,
+      "frac_sig_up": 0.0008470024907758956,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": -2.5507556124722752,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 1.762620965798443,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": -0.6694549531407679,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0015659164020938566
+     },
+     {
+      "name": "Plains",
+      "mean": -1.654175405780281,
+      "frac_sig_up": 0.002858341099049593,
+      "frac_sig_down": 0.010734374267736218
+     }
+    ]
+   },
+   "source": "soil_moisture.trend.nc"
+  },
+  {
+   "id": "pdsi.regional",
+   "topic": "pdsi",
+   "text": "Palmer Drought Severity Index over Contiguous United States, 1981-2020: the area-averaged trend is +0.007 1 per decade, not statistically significant (p = 0.97). 0% of the area shows a significant increase and 0% a significant decrease (false discovery rate 10%).",
+   "numbers": {
+    "slope_per_decade": 0.006698855304280077,
+    "pct_per_decade": null,
+    "p": 0.9677928118072001,
+    "area_frac_sig_up": 0.0,
+    "area_frac_sig_down": 0.0
+   },
+   "source": "pdsi.summary.json"
+  },
+  {
+   "id": "pdsi.subregions",
+   "topic": "pdsi",
+   "text": "By sub-region, the mean change ranges from -0.70 1 per decade (Southwest) to +0.59 1 per decade (Northeast). No sub-region has 10% or more of its area significant, so these are directions, not detected trends.",
+   "numbers": {
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": -0.7033244053080915,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Northeast",
+      "mean": 0.5868066176567845,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": -0.44860551312432395,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Southeast",
+      "mean": 0.3420422115846253,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "N. Rockies",
+      "mean": 0.12082095434273704,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Plains",
+      "mean": 0.15932663362138294,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     }
+    ]
+   },
+   "source": "pdsi.trend.nc"
+  },
+  {
+   "id": "snow_water_equivalent.regional",
+   "topic": "snow_water_equivalent",
+   "text": "Snow water equivalent over Contiguous United States, 1981-2020: the area-averaged trend is -2.502 mm per decade (-6.9% per decade), not statistically significant (p = 0.074). 0% of the area shows a significant increase and 6% a significant decrease (false discovery rate 10%).",
+   "numbers": {
+    "slope_per_decade": -2.501648411170378,
+    "pct_per_decade": -6.936501127356409,
+    "p": 0.07407058521945559,
+    "area_frac_sig_up": 0.0013883196371430784,
+    "area_frac_sig_down": 0.05840554860511932
+   },
+   "source": "snow_water_equivalent.summary.json"
+  },
+  {
+   "id": "snow_water_equivalent.subregions",
+   "topic": "snow_water_equivalent",
+   "text": "By sub-region, the mean change ranges from -12.67% per decade (Pacific NW) to +0.07% per decade (Plains). Sub-regions with at least 10% of their area significant: Southwest (0% up, 11% down), Pacific NW (0% up, 14% down), Southeast (0% up, 13% down).",
+   "numbers": {
+    "subregions": [
+     {
+      "name": "Southwest",
+      "mean": -7.3906693674660735,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.112518224405055
+     },
+     {
+      "name": "Northeast",
+      "mean": -0.6064888141279264,
+      "frac_sig_up": 0.007238341905169519,
+      "frac_sig_down": 0.0
+     },
+     {
+      "name": "Pacific NW",
+      "mean": -12.668649315790876,
+      "frac_sig_up": 0.0037965257926398425,
+      "frac_sig_down": 0.13532421295400557
+     },
+     {
+      "name": "Southeast",
+      "mean": -5.915624451445073,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.12692076415128986
+     },
+     {
+      "name": "N. Rockies",
+      "mean": -0.9553165425701726,
+      "frac_sig_up": 0.00416176012573268,
+      "frac_sig_down": 0.06689927897686207
+     },
+     {
+      "name": "Plains",
+      "mean": 0.07039159599268337,
+      "frac_sig_up": 0.0,
+      "frac_sig_down": 0.0
+     }
+    ]
+   },
+   "source": "snow_water_equivalent.trend.nc"
+  },
+  {
+   "id": "portfolio.solar_wind",
+   "topic": "portfolio",
+   "text": "Across Contiguous United States, monthly solar and wind anomalies tend to move together (r = +0.19, p = 5.9e-05, effective n = 463).",
+   "numbers": {
+    "r": 0.18545617309190254,
+    "p": 5.942883557825816e-05,
+    "n": 480,
+    "n_eff": 463.09962999749376,
+    "p_naive": 4.3498807391379214e-05
+   },
+   "source": "portfolio.json"
+  },
+  {
+   "id": "portfolio.solar_hydro",
+   "topic": "portfolio",
+   "text": "Across Contiguous United States, monthly solar and hydro (runoff) anomalies tend to move in opposite directions (complementary) (r = -0.42, p = 5e-19, effective n = 404).",
+   "numbers": {
+    "r": -0.42364493078252297,
+    "p": 5.014268503795303e-19,
+    "n": 480,
+    "n_eff": 404.0003754686661,
+    "p_naive": 2.5055045484813205e-22
+   },
+   "source": "portfolio.json"
+  },
+  {
+   "id": "portfolio.wind_hydro",
+   "topic": "portfolio",
+   "text": "Across Contiguous United States, monthly wind and hydro (runoff) anomalies tend to move together (r = +0.11, p = 0.018, effective n = 470).",
+   "numbers": {
+    "r": 0.10934395020984486,
+    "p": 0.01769564447566332,
+    "n": 480,
+    "n_eff": 470.2380501727588,
+    "p_naive": 0.016550252572823203
+   },
+   "source": "portfolio.json"
+  },
+  {
+   "id": "portfolio.joint_low",
+   "topic": "portfolio",
+   "text": "At least two of the three resources were unusually low in the same month 11.5% of the time, versus 10.4% expected if they were independent (ratio 1.10).",
+   "numbers": {
+    "frequency": 0.11458333333333333,
+    "expected_independent": 0.10400000000000004,
+    "ratio": 1.10176282051282
+   },
+   "source": "portfolio.json"
+  },
+  {
+   "id": "alert.precipitation",
+   "topic": "alerts",
+   "text": "Strong alert (anomaly, not forecast): precipitation was low in 2022-09, at the 0th percentile of the trend-adjusted same-month baseline. Most affected: Plains (46%), Pacific NW (31%), Southeast (16%). Note: this is 1507 days after the data month.",
+   "numbers": {
+    "status": "strong alert",
+    "percentile": 0.0,
+    "data_month": "2022-09",
+    "latency_days": 1507
+   },
+   "source": "alerts.json"
+  },
+  {
+   "id": "alert.air_temp_2m",
+   "topic": "alerts",
+   "text": "Strong alert (anomaly, not forecast): air temp 2m was high in 2026-09, at the 97th percentile of the trend-adjusted same-month baseline. Most affected: Southeast (71%), Plains (42%), Southwest (23%).",
+   "numbers": {
+    "status": "strong alert",
+    "percentile": 96.6667,
+    "data_month": "2026-09",
+    "latency_days": 46
+   },
+   "source": "alerts.json"
+  },
+  {
+   "id": "alert.pdsi",
+   "topic": "alerts",
+   "text": "Alert (anomaly, not forecast): pdsi was low in 2021-12, at the 10th percentile of the trend-adjusted same-month baseline. Most affected: Plains (80%), N. Rockies (66%), Northeast (23%). Note: this is 1780 days after the data month.",
+   "numbers": {
+    "status": "alert",
+    "percentile": 10.0,
+    "data_month": "2021-12",
+    "latency_days": 1780
+   },
+   "source": "alerts.json"
+  },
+  {
+   "id": "alert.solar_irradiance",
+   "topic": "alerts",
+   "text": "Local alert (anomaly, not forecast): solar irradiance was low in 2026-09, at the 27th percentile of the trend-adjusted same-month baseline. Most affected: Plains (61%), Southwest (60%), Pacific NW (10%).",
+   "numbers": {
+    "status": "local alert",
+    "percentile": 26.6667,
+    "data_month": "2026-09",
+    "latency_days": 46
+   },
+   "source": "alerts.json"
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "contract_version": "1.0",
+ "regions": [
+  {
+   "id": "conus",
+   "name": "Contiguous United States",
+   "bbox": {
+    "lat_min": 24.5,
+    "lat_max": 49.5,
+    "lon_min": -125.0,
+    "lon_max": -66.5
+   },
+   "available": true,
+   "period": "1981-2020",
+   "n_variables": 12
+  },
+  {
+   "id": "africa",
+   "name": "Africa",
+   "bbox": {
+    "lat_min": -35.0,
+    "lat_max": 38.0,
+    "lon_min": -18.0,
+    "lon_max": 52.0
+   },
+   "available": false
+  },
+  {
+   "id": "global",
+   "name": "Global (coarse, for the globe overview)",
+   "bbox": {
+    "lat_min": -90.0,
+    "lat_max": 90.0,
+    "lon_min": -180.0,
+    "lon_max": 180.0
+   },
+   "available": false
+  }
+ ]
+}
