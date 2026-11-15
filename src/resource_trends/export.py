@@ -69,21 +69,23 @@ def _bounds(lat, lon):
 
 
 # --- PNG overlay --------------------------------------------------------------------------------
-def render_trend_png(ds: xr.Dataset, path: Path, field: str, positive_color: str = "red") -> dict:
-    """North-up RGBA PNG, one pixel per cell. NaN transparent; non-significant cells faded.
-    Returns legend + bounds metadata for the catalog."""
+def render_png(values, opaque, lat, lon, path: Path, field: str, positive_color: str = "red",
+               vmax: float | None = None) -> dict:
+    """North-up RGBA PNG of a diverging field centred on 0, one pixel per cell. NaN transparent;
+    cells where `opaque` is False are faded to NONSIG_ALPHA. Returns legend + bounds for the catalog."""
     from PIL import Image
-    v = ds[field].values.astype(float)
-    sig = ds["significant"].values.astype(bool)
+    v = np.asarray(values, dtype=float)
     finite = np.isfinite(v)
-    vmax = float(np.nanpercentile(np.abs(v[finite]), 98)) if finite.any() else 1.0
+    if vmax is None:
+        vmax = float(np.nanpercentile(np.abs(v[finite]), 98)) if finite.any() else 1.0
     vmax = vmax if vmax > 0 else 1.0
     stops = NEG_TO_POS_BLUE_RED if positive_color == "red" else NEG_TO_POS_BLUE_RED[::-1]
     x = np.clip((np.nan_to_num(v) / vmax + 1) / 2, 0, 1)
     rgb = _ramp(stops, x)
-    alpha = np.where(finite, np.where(sig, 255, round(255 * NONSIG_ALPHA)), 0)
+    alpha = np.where(finite, np.where(np.asarray(opaque, bool), 255, round(255 * NONSIG_ALPHA)), 0)
     rgba = np.concatenate([rgb, alpha[..., None]], axis=-1).astype(np.uint8)
-    if ds["lat"].values[0] < ds["lat"].values[-1]:
+    lat = np.asarray(lat)
+    if lat[0] < lat[-1]:
         rgba = rgba[::-1]                                   # north-up
     path.parent.mkdir(parents=True, exist_ok=True)
     Image.fromarray(rgba, "RGBA").save(path)
@@ -94,17 +96,31 @@ def render_trend_png(ds: xr.Dataset, path: Path, field: str, positive_color: str
         "positive_color": positive_color,
         "nonsignificant_alpha": NONSIG_ALPHA,
         "transparent": "no data / outside region",
-        "bounds": _bounds(ds["lat"].values, ds["lon"].values),
+        "bounds": _bounds(lat, np.asarray(lon)),
         "width": int(rgba.shape[1]), "height": int(rgba.shape[0]),
     }
 
 
+def render_trend_png(ds: xr.Dataset, path: Path, field: str, positive_color: str = "red") -> dict:
+    """Trend overlay: colour = `field`, opaque where FDR-significant."""
+    return render_png(ds[field].values, ds["significant"].values.astype(bool), ds["lat"].values, ds["lon"].values,
+                      path, field, positive_color)
+
+
 # --- pixel series -------------------------------------------------------------------------------
-def write_pixel_series(annual: xr.DataArray, var_dir: Path, units: str, tile_deg: float = TILE_DEG) -> dict:
-    """Annual per-cell series grouped into tile_deg x tile_deg JSON tiles. Returns an index."""
+def write_pixel_series(annual: xr.DataArray, var_dir: Path, units: str, tile_deg: float = TILE_DEG,
+                       trend: xr.Dataset | None = None) -> dict:
+    """Annual per-cell series grouped into tile_deg x tile_deg JSON tiles. If `trend` (the annual
+    trend Dataset on the same grid) is given, each cell also carries its tested trend statistics, so a
+    click shows the real result rather than one recomputed in the browser. Returns an index."""
     years = [int(y) for y in annual["year"].values]
     lat, lon = annual["lat"].values, annual["lon"].values
     vals = annual.transpose("year", "lat", "lon").values
+    stat_fields = [f for f in ("slope_per_decade", "pct_change_per_decade", "total_change", "p_value", "q_value",
+                               "significant", "direction") if trend is not None and f in trend]
+    if trend is not None:
+        assert trend.sizes["lat"] == lat.size and trend.sizes["lon"] == lon.size, "trend grid != series grid"
+        tv = {f: trend[f].values for f in stat_fields}
     tiles = {}
     for i, la in enumerate(lat):
         for j, lo in enumerate(lon):
@@ -112,8 +128,13 @@ def write_pixel_series(annual: xr.DataArray, var_dir: Path, units: str, tile_deg
             if not np.isfinite(s).any():
                 continue
             key = (math.floor(la / tile_deg) * tile_deg, math.floor(lo / tile_deg) * tile_deg)
-            tiles.setdefault(key, []).append({"lat": round(float(la), 4), "lon": round(float(lo), 4),
-                                              "values": [None if not np.isfinite(x) else float(f"{x:.5g}") for x in s]})
+            cell = {"lat": round(float(la), 4), "lon": round(float(lo), 4),
+                    "values": [None if not np.isfinite(x) else float(f"{x:.5g}") for x in s]}
+            if trend is not None:
+                cell["trend"] = {f: (bool(tv[f][i, j]) if f == "significant" else
+                                     (None if not np.isfinite(tv[f][i, j]) else float(f"{tv[f][i, j]:.5g}")))
+                                 for f in stat_fields}
+            tiles.setdefault(key, []).append(cell)
     names = []
     for (la0, lo0), cells in sorted(tiles.items()):
         name = f"{la0:+06.1f}_{lo0:+07.1f}.json"
@@ -266,7 +287,7 @@ def build(region: str, out_dir=None, registry: Registry | None = None, loader=No
                     da = da.where(m.values[None])
             ann = preprocess.annualize(da, vdef["aggregation"], min_count=10)
             ann.name = v
-            entry["pixel_series"] = write_pixel_series(ann, out / "pixel_series" / v, summary["units"])
+            entry["pixel_series"] = write_pixel_series(ann, out / "pixel_series" / v, summary["units"], trend=ds)
             sentences += variable_sentences(v, vdef, summary, subs, region_name)
         card = variables.setdefault(v, {
             "name": v, "long_name": vdef.get("long_name", v), "theme": vdef["theme"], "resource": vdef["resource"],
@@ -284,10 +305,38 @@ def build(region: str, out_dir=None, registry: Registry | None = None, loader=No
     for key, fname in (("portfolio", "portfolio.json"), ("alerts", "alerts.json"), ("validation", "validation.json")):
         if (out / fname).exists():
             extra[key] = fname
+    portfolio_maps, alert_maps = {}, {}
     if "portfolio" in extra:
         sentences += portfolio_sentences(json.loads((out / "portfolio.json").read_text()), region_name)
+        if (out / "portfolio.nc").exists():
+            with xr.open_dataset(out / "portfolio.nc") as d:
+                pm = d.load()
+            for name in [n for n in pm.data_vars if n.startswith("r_")]:
+                leg = render_png(pm[name].values, pm["p_" + name[2:]].values < 0.05, pm["lat"].values, pm["lon"].values,
+                                 out / f"portfolio.{name}.png", name, "red")
+                leg.update(units="correlation r", note="blue = complementary (opposite anomalies), red = move together; "
+                                                       "faded = not significant (p >= 0.05, effective n)")
+                portfolio_maps[name] = {"png": f"portfolio.{name}.png", "legend": leg}
+            leg = render_png(pm["joint_low_ratio"].values - 1.0, np.isfinite(pm["joint_low_ratio"].values), pm["lat"].values,
+                             pm["lon"].values, out / "portfolio.joint_low_ratio.png", "joint_low_ratio - 1", "red")
+            leg.update(units="joint-low ratio minus 1", note="red = joint lows more frequent than if independent, blue = less")
+            portfolio_maps["joint_low_ratio"] = {"png": "portfolio.joint_low_ratio.png", "legend": leg}
     if "alerts" in extra:
-        sentences += alert_sentences(json.loads((out / "alerts.json").read_text()))
+        alerts_doc = json.loads((out / "alerts.json").read_text())
+        sentences += alert_sentences(alerts_doc)
+        for a in alerts_doc["alerts"]:
+            f = out / a.get("file", "")
+            if not a.get("file") or not f.exists():
+                continue
+            with xr.open_dataset(f) as d:
+                am = d.load()
+            pct = am["percentile"].values
+            positive = "blue" if reg.variables[a["variable"]]["theme"] in WATER_THEMES else "red"
+            leg = render_png(pct - 50.0, (pct <= 10) | (pct >= 90), am["lat"].values, am["lon"].values,
+                             out / f"{a['variable']}.alert.png", "percentile - 50", positive, vmax=50.0)
+            leg.update(units="trend-adjusted percentile minus 50",
+                       note="opaque = outside the 10th-90th percentile band; faded = within it")
+            alert_maps[a["variable"]] = {"png": f"{a['variable']}.alert.png", "legend": leg, "data_month": a["data_month"]}
 
     narrative = {"region": region, "contract_version": CONTRACT_VERSION,
                  "note": "Every sentence is generated from the numbers in its `numbers` field and `source` file; no other claims.",
@@ -306,13 +355,30 @@ def build(region: str, out_dir=None, registry: Registry | None = None, loader=No
                         "Reanalysis and model products are labelled as such; they are not site measurements.",
                         "Resource proxies, not generation."],
         "variables": list(variables.values()),
+        "portfolio_maps": portfolio_maps,
+        "alert_maps": alert_maps,
         "files": {"run_all": "run_all.json", "narrative": "narrative.json", **extra},
     }
     _write_json(out / "catalog.json", catalog)
+    write_index(out.parent, reg)
     problems = validate_export(out)
     if problems:
         raise ValueError("export failed validation:\n" + "\n".join(problems[:20]))
     return catalog
+
+
+def write_index(root: Path, reg: Registry) -> dict:
+    """export/index.json: every configured region, its bbox and whether an export exists (globe page)."""
+    idx = {"contract_version": CONTRACT_VERSION, "regions": []}
+    for rid, r in reg.regions.items():
+        cat = root / rid / "catalog.json"
+        entry = {"id": rid, "name": r.get("name", rid), "bbox": r["bbox"], "available": cat.exists()}
+        if cat.exists():
+            c = json.loads(cat.read_text())
+            entry.update(period=c["period"], n_variables=len(c["variables"]))
+        idx["regions"].append(entry)
+    _write_json(root / "index.json", idx)
+    return idx
 
 
 # --- schemas + validation -----------------------------------------------------------------------
@@ -397,6 +463,8 @@ def validate_export(out_dir) -> list[str]:
             if not (b["south"] < b["north"] and b["west"] < b["east"]):
                 problems.append(f"{e['trend_png']}: bad bounds {b}")
         ps = (var.get("annual") or {}).get("pixel_series")
+        if ps and not var["annual"]["pixel_series"].get("tiles"):
+            problems.append(f"{var['name']}: pixel_series has no tiles")
         if ps:
             for t in ps["tiles"]:
                 p = out / "pixel_series" / ps["dir"] / t
@@ -408,4 +476,12 @@ def validate_export(out_dir) -> list[str]:
                 n = len(tile["years"])
                 if any(len(c["values"]) != n for c in tile["cells"]):
                     problems.append(f"{p.name}: series length != years")
+    for group in ("portfolio_maps", "alert_maps"):
+        for name, m in cat.get(group, {}).items():
+            if not (out / m["png"]).exists():
+                problems.append(f"{group}.{name}: missing {m['png']}")
+                continue
+            with Image.open(out / m["png"]) as im:
+                if im.size != (m["legend"]["width"], m["legend"]["height"]) or im.mode != "RGBA":
+                    problems.append(f"{m['png']}: size/mode does not match legend")
     return problems

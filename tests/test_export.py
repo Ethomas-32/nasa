@@ -116,3 +116,23 @@ REAL = Path(__file__).resolve().parents[1] / "export" / "conus"
 @pytest.mark.skipif(not (REAL / "catalog.json").exists(), reason="real CONUS export not built")
 def test_real_conus_export_validates():
     assert export.validate_export(REAL) == []
+
+
+def test_pixel_tiles_carry_tested_trend_stats(built):
+    out, cat, _ = built
+    v = next(x for x in cat["variables"] if x["name"] == "solar_irradiance")
+    ps = v["annual"]["pixel_series"]
+    cells = [c for t in ps["tiles"] for c in json.loads((out / "pixel_series" / ps["dir"] / t).read_text())["cells"]]
+    assert all("trend" in c for c in cells)
+    west = [c for c in cells if c["lon"] < -106]
+    assert west and all(c["trend"]["significant"] in (True, False) for c in west)
+    assert np.mean([c["trend"]["slope_per_decade"] > 0 for c in west]) > 0.95   # west third trends up
+    assert sum(c["trend"]["significant"] for c in west) / len(west) > 0.8
+
+
+def test_portfolio_and_alert_maps_exported(built):
+    out, cat, _ = built
+    assert {"r_solar_wind", "r_solar_hydro", "r_wind_hydro", "joint_low_ratio"} <= set(cat["portfolio_maps"])
+    assert set(cat["alert_maps"]) <= set(VARS) and cat["alert_maps"]
+    for m in list(cat["portfolio_maps"].values()) + list(cat["alert_maps"].values()):
+        assert (out / m["png"]).exists() and "note" in m["legend"]

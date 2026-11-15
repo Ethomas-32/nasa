@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resource Trends Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+</head>
+<body>
+<div class="app">
+  <header class="bar">
+    <a href="index.html" class="small">&larr; Globe</a>
+    <h1 id="title">Resource Trends</h1>
+    <span class="chip" id="period"></span>
+    <span class="spacer"></span>
+    <span class="chip warn" title="This tool detects trends and anomalies in past data. It does not forecast.">Trends &amp; anomalies &middot; no forecasts</span>
+  </header>
+  <div class="main">
+    <aside class="panel left" aria-label="Controls">
+      <section class="block">
+        <h2>Map layer</h2>
+        <div class="seg" id="layerSeg">
+          <button data-layer="trend" aria-pressed="true">Trend</button>
+          <button data-layer="alert" aria-pressed="false">Latest anomaly</button>
+          <button data-layer="portfolio" aria-pressed="false">Complementarity</button>
+        </div>
+      </section>
+      <section class="block" id="seasonBlock">
+        <h2>Season</h2>
+        <div class="seg" id="seasonSeg"></div>
+      </section>
+      <section class="block" id="pairBlock" hidden>
+        <h2>Resource pair</h2>
+        <select id="pairSel">
+          <option value="r_solar_hydro">Solar vs hydro (runoff)</option>
+          <option value="r_solar_wind">Solar vs wind</option>
+          <option value="r_wind_hydro">Wind vs hydro (runoff)</option>
+          <option value="joint_low_ratio">Joint lows vs chance</option>
+        </select>
+        <p class="small muted">Correlation of detrended, deseasonalized monthly anomalies, 1981&ndash;2020.</p>
+      </section>
+      <section class="block" id="varBlock">
+        <h2>Variable</h2>
+        <div class="varlist" id="varList"></div>
+      </section>
+    </aside>
+    <div class="mapwrap">
+      <div id="map" role="region" aria-label="Trend map"></div>
+      <div class="maptitle" id="mapTitle"></div>
+      <div class="legend" id="legend"></div>
+    </div>
+    <aside class="panel right" aria-label="Details">
+      <section class="block">
+        <h2>Resource cards</h2>
+        <div class="cards" id="cards"></div>
+        <p class="small muted" id="cardsNote"></p>
+      </section>
+      <section class="block" id="detail"></section>
+      <section class="block">
+        <h2 id="seriesTitle">Annual series</h2>
+        <div class="chart" id="chart"></div>
+        <div id="cellInfo" class="small"></div>
+      </section>
+      <section class="block" id="portfolioBlock"></section>
+      <section class="block" id="alertsBlock"></section>
+      <section class="block" id="rankBlock"></section>
+      <section class="block small muted" id="footer"></section>
+    </aside>
+  </div>
+</div>
+<script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

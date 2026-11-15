@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resource Trends</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/globe.gl@2.46.2/dist/globe.gl.min.js"></script>
+  <style>
+    body { background: #000; color: #f0efec; overflow: hidden; }
+    #globe { position: fixed; inset: 0; }
+    .intro { position: fixed; left: 16px; top: 16px; max-width: 420px; background: rgba(26,26,25,.88); color: #f0efec;
+      border: 1px solid #383835; border-radius: 10px; padding: 14px 16px; z-index: 2; }
+    .intro h1 { font-size: 22px; margin-bottom: 6px; }
+    .intro p { margin: 6px 0; line-height: 1.45; color: #c3c2b7; }
+    .intro .hl { color: #f0efec; }
+    .regions { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+    .regions > a, .regions > span { display: flex; justify-content: space-between; gap: 8px; padding: 6px 10px; border-radius: 6px;
+      border: 1px solid #383835; text-decoration: none; color: #f0efec; }
+    .regions > a:hover { border-color: #3987e5; }
+    .regions > span { color: #898781; }
+    .regions .chip { border: 0; }
+    .chip { background: #2c2c2a; color: #c3c2b7; }
+    @media (max-width: 600px) { .intro { right: 16px; max-width: none; } }
+  </style>
+</head>
+<body>
+<div id="globe" role="img" aria-label="Globe showing analysis regions"></div>
+<div class="intro">
+  <h1>Resource Trends</h1>
+  <p>Is the solar, wind and water resource your portfolio depends on changing here, by how much, can you trust the
+    signal, and do your resources cover for each other?</p>
+  <p class="small">Per-pixel trend detection with significance testing on NASA and NOAA Earth-science data.
+    Trends and anomalies only; no forecasts.</p>
+  <div id="headlines"></div>
+  <div class="regions" id="regions"><span>Loading regions…</span></div>
+</div>
+<script type="module">
+  const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const rect = (b) => ({ type: "Feature", geometry: { type: "Polygon", coordinates: [[
+    [b.lon_min, b.lat_min], [b.lon_max, b.lat_min], [b.lon_max, b.lat_max], [b.lon_min, b.lat_max], [b.lon_min, b.lat_min]]] } });
+
+  let index;
+  try { index = await (await fetch("../export/index.json")).json(); }
+  catch (e) {
+    document.getElementById("regions").innerHTML = `<span>Could not load ../export/index.json. Serve the repository root:
+      python -m http.server 8000, then open http://localhost:8000/web/</span>`;
+    throw e;
+  }
+  // the global region is the whole sphere; draw only the regional boxes
+  const regions = index.regions.filter((r) => r.id !== "global");
+  const feats = regions.map((r) => ({ ...rect(r.bbox), properties: r }));
+
+  const globe = Globe()(document.getElementById("globe"))
+    .globeImageUrl("https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/earth-blue-marble.jpg")
+    .backgroundImageUrl("https://cdn.jsdelivr.net/npm/three-globe@2.44.0/example/img/night-sky.png")
+    .polygonsData(feats)
+    .polygonCapColor((f) => (f.properties.available ? "rgba(57,135,229,0.35)" : "rgba(137,135,129,0.18)"))
+    .polygonSideColor(() => "rgba(0,0,0,0)")
+    .polygonStrokeColor((f) => (f.properties.available ? "#86b6ef" : "#898781"))
+    .polygonAltitude(0.008)
+    .polygonLabel((f) => `<div style="background:#1a1a19;color:#f0efec;padding:6px 8px;border-radius:6px;border:1px solid #383835">
+        <b>${esc(f.properties.name)}</b><br>${f.properties.available
+          ? `${esc(f.properties.period)} · ${f.properties.n_variables} variables<br>Click to open the dashboard`
+          : "Coming soon"}</div>`)
+    .onPolygonClick((f) => { if (f.properties.available) location.href = `dashboard.html?region=${encodeURIComponent(f.properties.id)}`; })
+    .onPolygonHover((f) => { document.body.style.cursor = f && f.properties.available ? "pointer" : "default"; });
+  globe.width(innerWidth).height(innerHeight);
+  globe.pointOfView({ lat: 32, lng: -85, altitude: 2.1 }, 0);
+  globe.controls().autoRotate = true;
+  globe.controls().autoRotateSpeed = 0.35;
+  addEventListener("resize", () => globe.width(innerWidth).height(innerHeight));
+
+  document.getElementById("regions").innerHTML = index.regions.map((r) => r.available
+    ? `<a href="dashboard.html?region=${encodeURIComponent(r.id)}"><span>${esc(r.name)}</span><span class="chip">${esc(r.period)}</span></a>`
+    : `<span><span>${esc(r.name)}</span><span>coming soon</span></span>`).join("");
+
+  // headline sentences from the first available region's narrative (numbers only, no new claims)
+  const first = index.regions.find((r) => r.available);
+  if (first) {
+    try {
+      const nar = await (await fetch(`../export/${first.id}/narrative.json`)).json();
+      const pick = ["air_temp_2m.regional", "portfolio.solar_hydro", "precipitation.subregions"];
+      const s = pick.map((id) => nar.sentences.find((x) => x.id === id)).filter(Boolean);
+      document.getElementById("headlines").innerHTML = s.map((x) => `<p class="small hl">${esc(x.text)}</p>`).join("");
+    } catch { /* headlines are optional */ }
+  }
+</script>
+</body>
+</html>
