@@ -182,6 +182,7 @@ variables:
     audience: [energy, agriculture]
     units: mm
     aggregation: max   # peak SWE per year is the usual hydro-relevant statistic
+    seasonal: false    # a seasonal peak-SWE trend (e.g. JJA) is not meaningful; annual only
     relative: true
     status: verified
     caveats:

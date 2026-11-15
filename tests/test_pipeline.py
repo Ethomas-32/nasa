@@ -141,3 +141,38 @@ def test_region_mask_removes_cells_outside_the_region(synthetic):
     assert bool(kansas.notnull().all())
     _, s2 = pipeline.run("conus", "solar_irradiance", start_year=1990, end_year=2020, registry=REG, loader=loader, apply_mask=False)
     assert s2["mask"] is None and any("no land mask" in n for n in s2["notes"])
+
+
+# --- run_all ------------------------------------------------------------------------------------
+def test_run_all_writes_index_seasons_and_records_failures(synthetic, tmp_path):
+    loader, _ = synthetic
+
+    def flaky(variable, region, registry, start, end, **kw):
+        if variable == "runoff":
+            raise ConnectionError("simulated outage")
+        return loader(variable, region, registry, start, end, **kw)
+
+    idx = pipeline.run_all("conus", start_year=1990, end_year=2020, registry=REG, loader=flaky, out_dir=tmp_path,
+                           variables=["solar_irradiance", "snow_water_equivalent", "runoff"], apply_mask=False)
+    saved = json.loads((tmp_path / "run_all.json").read_text())
+    assert saved == json.loads(json.dumps(idx))
+    assert saved["period"] == "1990-2020" and saved["region"] == "conus"
+    done = {(r["variable"], r["season"]) for r in saved["results"]}
+    # solar: annual + 4 seasons; SWE: annual only (seasonal: false); runoff failed, recorded, not raised
+    assert {("solar_irradiance", s) for s in [None, "DJF", "MAM", "JJA", "SON"]} <= done
+    assert ("snow_water_equivalent", None) in done and ("snow_water_equivalent", "JJA") not in done
+    assert [f["variable"] for f in saved["failures"]] == ["runoff"] and "outage" in saved["failures"][0]["error"]
+    assert (tmp_path / "solar_irradiance.JJA.trend.nc").exists()
+    for r in saved["results"]:
+        assert {"summary", "trend"} <= set(r["files"]) and r["resource"] in ("solar", "wind", "hydro", "none")
+
+
+def test_djf_starts_one_year_late_when_record_starts_in_january(synthetic):
+    loader, _ = synthetic       # synthetic monthly data begin 1984-01, so the first full DJF is 1985
+    _, s = pipeline.run("conus", "solar_irradiance", start_year=1984, end_year=2020, season="DJF",
+                        registry=REG, loader=loader, apply_mask=False)
+    assert s["period"] == "1985-2020"
+    assert any("DJF period starts 1985" in n for n in s["notes"])
+    with pytest.raises(ValueError):
+        pipeline.run("conus", "solar_irradiance", start_year=1982, end_year=2020, season="DJF",
+                     registry=REG, loader=loader, apply_mask=False)

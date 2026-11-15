@@ -81,7 +81,14 @@ def run(region: str, variable: str, start_year: int = DEFAULT_START, end_year: i
         raise ValueError(f"no valid {variable} data for {region}")
     data_start, data_end = int(has.min()), int(has.max())
     if data_start > start_year:
-        raise ValueError(f"{variable} data begin {data_start}, after requested start {start_year}")
+        # A record starting in January cannot form the first DJF (needs the previous December): allow
+        # exactly that one-year shortfall for DJF and say so; anything larger is an error.
+        if season == "DJF" and data_start == start_year + 1:
+            notes.append(f"DJF period starts {data_start}: the first winter needs December {start_year - 1}, "
+                         f"which precedes the record")
+            start_year = data_start
+        else:
+            raise ValueError(f"{variable} data begin {data_start}, after requested start {start_year}")
     if data_end < end_year:
         notes.append(f"data end {data_end}, before requested end {end_year}; period truncated")
         end_year = data_end
@@ -177,3 +184,44 @@ def run(region: str, variable: str, start_year: int = DEFAULT_START, end_year: i
         enc.to_netcdf(out / f"{stem}.trend.nc")
         (out / f"{stem}.summary.json").write_text(json.dumps(summary, indent=2))
     return ds, summary
+
+
+SEASONS = ("DJF", "MAM", "JJA", "SON")
+
+
+def run_all(region: str, start_year: int = DEFAULT_START, end_year: int = DEFAULT_END, registry: Registry | None = None,
+            loader=None, out_dir=None, variables=None, seasons=SEASONS, **kw) -> dict:
+    """Run every variable (annual + each season unless the variable sets `seasonal: false`) for a region
+    over a common period. A failure in one variable is recorded in the index and does not stop the run.
+    Writes `<out_dir>/run_all.json` (the index) next to the per-variable outputs."""
+    import traceback
+    reg = registry or Registry.load()
+    out = Path(out_dir) if out_dir else None
+    names = variables or list(reg.variables)
+    results, failures = [], []
+    for v in names:
+        vdef = reg.variables[v]
+        for season in (None,) + (tuple(seasons) if vdef.get("seasonal", True) else ()):
+            try:
+                _, s = run(region, v, start_year, end_year, season=season, registry=reg, loader=loader, out_dir=out, **kw)
+            except Exception as e:  # noqa: BLE001 - record and continue
+                failures.append({"variable": v, "season": season, "error": f"{type(e).__name__}: {e}",
+                                 "trace": traceback.format_exc(limit=3)})
+                if season is None:
+                    break          # no point trying seasons when the annual load failed
+                continue
+            stem = v + (f".{season}" if season else "")
+            results.append({
+                "variable": v, "season": season, "resource": vdef["resource"], "theme": vdef["theme"],
+                "audience": vdef["audience"], "provider": s["provider"], "period": s["period"],
+                "regional_slope_per_decade": s["regional"]["slope_per_decade"],
+                "regional_pct_per_decade": s["regional"].get("pct_change_per_decade"),
+                "regional_p": s["regional"]["p_value"],
+                "area_frac_sig_up": s["area_frac_sig_up"], "area_frac_sig_down": s["area_frac_sig_down"],
+                "files": {"summary": f"{stem}.summary.json", "trend": f"{stem}.trend.nc"},
+            })
+    index = {"region": region, "period": f"{start_year}-{end_year}", "results": results, "failures": failures}
+    if out:
+        out.mkdir(parents=True, exist_ok=True)
+        (out / "run_all.json").write_text(json.dumps(index, indent=2))
+    return index
