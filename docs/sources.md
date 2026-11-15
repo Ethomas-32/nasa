@@ -74,7 +74,15 @@ before relying on them; they move.
 - Earthdata: MERRA-2 collections found by short name: M2TMNXAER, M2T1NXAER, M2TMNXSLV, M2T1NXSLV, M2TMNXRAD (all v5.12.4, from 1980-01).
 - MERRA-2 June 2020 CONUS mean SWGDN from the streamed subset: 290 W m-2 (plausible for June).
 
+## NOAA station data (verified Phase 8, 2026-11-15)
+- NCEI Access Data Service v1 `https://www.ncei.noaa.gov/access/services/data/v1`, dataset
+  `global-summary-of-the-month`: no key, JSON, TAVG/PRCP in metric, 1981-01..2026-10 for 12 USW stations.
+- NCEI CDO API v2: requires a token (`400 Token parameter is required`); token page
+  https://www.ncdc.noaa.gov/cdo-web/token. Not used.
+- USCRN monthly text files `https://www.ncei.noaa.gov/pub/data/uscrn/products/monthly01/`: no key;
+  field 11 SOLRAD_MONTHLY_AVG in MJ m-2 (monthly average of daily totals), -9999 = missing.
+
 ## Not verified
-- NOAA station endpoints (Phase 8). EIA data (stretch). GDELT (Phase 9+).
+- (NOAA station endpoints: now verified, see above.) EIA data (stretch). GDELT (Phase 9+).
 - POWER `PRECTOTCORR` quality vs gauges; MERRA-2 land/soil variables for alerts.
 - CONUS bounding box vs any boundary dataset.
