@@ -81,14 +81,16 @@ def test_terraclimate_descending_lat_float64_becomes_contract():
 
 
 # --- Daymet -------------------------------------------------------------------------------------
-def test_daymet_monthly_sum_becomes_mean_swe():
-    # Daymet monthly swe is a sum of daily values: constant 1 mm SWE all month -> total = days.
+def test_daymet_monthly_value_is_used_as_mean_swe():
+    # Daymet monthly swe IS the mean of daily SWE (verified against daymet-daily-na at 3 sites), so the
+    # loader must NOT divide by days-in-month, whatever the metadata says. (A first version did,
+    # making SWE ~30x too small; caught by an implausible CONUS mean.)
     t = pd.to_datetime(["2020-01-16T12:00", "2020-02-15T12:00", "2020-03-16T12:00"])
-    total = np.array([31.0, 29.0, 31.0])[:, None, None] * np.ones((3, 2, 2))
-    da = xr.DataArray(total, dims=("time", "lat", "lon"), coords={"time": t, "lat": [39.0, 40.0], "lon": [-107.0, -106.0]})
+    vals = np.array([84.6, 106.3, 134.0])[:, None, None] * np.ones((3, 2, 2))
+    da = xr.DataArray(vals, dims=("time", "lat", "lon"), coords={"time": t, "lat": [39.0, 40.0], "lon": [-107.0, -106.0]})
     out = planetary.standardize_daymet(da, "snow_water_equivalent", "mm", spec("snow_water_equivalent", "daymet"), BOX)
     C.check_contract(out, "snow_water_equivalent", BOX)
-    np.testing.assert_allclose(out.values, 1.0)  # leap-year February handled
+    np.testing.assert_allclose(out.values[:, 0, 0], [84.6, 106.3, 134.0], rtol=1e-6)
     assert (out["time"].dt.day == 1).all()
 
 

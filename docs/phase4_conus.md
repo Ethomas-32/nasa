@@ -2,48 +2,72 @@
 
 Run: `pipeline.run("conus", var, 1981, 2020)`, annual aggregate per variables.yaml, outputs in
 `export/conus/<var>.trend.nc` and `<var>.summary.json`. Per-pixel Theil-Sen + Mann-Kendall
-(tie-corrected, lag-1 autocorrelation adjusted), BH-FDR alpha 0.10. Grid 0.5 x 0.625 deg.
-Run date 2026-11-15. Hydrology variables are pending (cache still downloading).
+(tie-corrected, lag-1 autocorrelation adjusted), BH-FDR alpha 0.10, **CONUS land mask applied**
+(nClimGrid footprint; cells >= 50% US land). Run date 2026-11-15.
 
-| Variable | Provider | CONUS regional trend 1981-2020 | p | Area sig. up / down | Start 1986 regional | Breakpoint (detrended Pettitt) |
+## Results (masked)
+
+| Variable | Provider | CONUS regional trend 1981-2020 | p | Area sig. up / down | Start 1986 regional | Breakpoint |
 |---|---|---|---|---|---|---|
-| air_temp_2m | POWER (MERRA-2) | +0.258 degC/decade | 0.0002 | 0.65 / 0.00 | +0.227 | none (p=1) |
-| solar_irradiance | MERRA-2 SWGDN | -0.10 W m-2/decade (-0.05 %/dec) | 0.89 | 0.00 / 0.00 | -0.54 | none (p=0.49) |
-| wind_speed_50m | POWER (MERRA-2) | +0.010 m/s/decade (+0.17 %/dec) | 0.54 | 0.05 / 0.03 | +0.019 | none (p=0.80) |
-| wind_power_density | derived (daily v^3) | +0.64 W m-2/decade (+0.31 %/dec) | 0.63 | 0.02 / 0.01 | +2.36 | none (p=0.80) |
-| surface_pressure | POWER (MERRA-2) | -0.0007 hPa/decade | 1.0 | 0.00 / 0.00 | -0.05 | none |
-| aerosol_optical_depth | MERRA-2 TOTEXTTAU | -0.0105 /decade (-7.0 %/dec) | 0.012 | 0.00 / 0.61 | -0.0071 | none (p=0.30) |
+| air_temp_2m | POWER (MERRA-2) | +0.277 degC/decade | 0.003 | 0.68 / 0.00 | +0.236 | none (p=0.91) |
+| solar_irradiance | MERRA-2 SWGDN | -0.04 W m-2/decade (-0.02 %/dec) | 0.95 | 0.00 / 0.00 | -0.65 | none (p=0.28) |
+| aerosol_optical_depth | MERRA-2 TOTEXTTAU | -0.0105 /decade (-7.1 %/dec) | 0.036 | 0.00 / 0.57 | -0.0066 | none (p=0.23) |
+| wind_speed_50m | POWER (MERRA-2) | +0.005 m/s/decade (+0.09 %/dec) | 0.68 | 0.02 / 0.02 | +0.020 | none |
+| wind_power_density | derived (daily v^3) | +0.80 W m-2/decade (+0.49 %/dec) | 0.60 | 0.02 / 0.01 | +2.03 | none |
+| surface_pressure | POWER (MERRA-2) | +0.015 hPa/decade | 0.79 | 0.00 / 0.00 | -0.04 | none |
+| snow_water_equivalent | Daymet (peak monthly-mean) | -2.50 mm/decade (-6.9 %/dec) | 0.074 | 0.00 / 0.06 | -1.16 | none (p=0.83) |
+| runoff | TerraClimate | +6.2 mm/decade (+3.5 %/dec) | 0.38 | 0.00 / 0.00 | +9.4 | none |
+| soil_moisture | TerraClimate | +0.40 mm/decade (+0.75 %/dec) | 0.71 | 0.00 / 0.03 | +0.94 | none |
+| pdsi | TerraClimate | +0.007 /decade | 0.97 | 0.00 / 0.00 | +0.19 | none |
+| precipitation | nClimGrid | pending (cache downloading) | | | | |
+
+Sub-regional area-weighted mean trend (%/decade for relative variables, units/decade otherwise) and
+fraction of the sub-region significant (FDR) up/down:
+
+| Variable | Southwest | Northeast | Pacific NW | Southeast | N. Rockies | Plains |
+|---|---|---|---|---|---|---|
+| air_temp_2m (degC/dec) | +0.45 (0.99 up) | +0.37 (0.96 up) | +0.23 (0.52 up) | +0.33 (0.95 up) | +0.18 (0.28 up) | +0.19 (0.35 up) |
+| aerosol_optical_depth | -6.9 (0.43 dn) | -14.0 (1.00 dn) | +1.8 | -11.2 (1.00 dn) | +0.2 | -6.4 (0.48 dn) |
+| snow_water_equivalent | -7.4 (0.11 dn) | -0.6 | -12.7 (0.14 dn) | -5.9 (0.13 dn) | -1.0 (0.07 dn) | +0.1 |
+| runoff | -8.1 | +5.6 | -1.6 | +2.4 | +3.2 | +0.8 |
+| soil_moisture | -14.7 (0.22 dn) | +1.7 | -2.6 | +1.8 | -0.7 | -1.7 |
+| pdsi (/dec) | -0.70 | +0.59 | -0.45 | +0.34 | +0.12 | +0.16 |
+| wind_power_density | +0.4 (0.08 dn) | +0.2 | +0.1 | +0.6 | +2.1 (0.04 up) | +1.1 |
+
+Boxes: Southwest 31-37N 120-103W; Northeast 38-47.5N 85-67W; Pacific NW 42-49N 125-116W;
+Southeast 29-36N 92-76W; N. Rockies 42-49N 116-104W; Plains 35-48N 104-95W.
 
 ## Sanity checks
-- **Temperature** behaves as expected: broad, significant warming of ~0.26 degC/decade with no
-  significant cooling anywhere. This is close to the commonly cited US warming rate since ~1980
-  (stated from general knowledge, not re-verified here) and is the end-to-end check that the
-  pipeline, units and per-decade scaling are right.
-- **Surface pressure** shows no trend, as it should (a negative control).
-- **Solar: no robust CONUS trend.** Cross-check 2001-2020 against CERES SYN1deg (independent,
-  satellite-derived, 1 deg): MERRA-2 -0.59 %/decade (p=0.22, 12% of area significant DOWN) vs CERES
-  +0.37 %/decade (p=0.42, 0% of area significant). Detrended annual CONUS series correlate 0.94, so
-  interannual variability agrees; MERRA-2 is 6.3% brighter on average (12.1 W m-2). The trend sign
-  depends on the product and neither is significant, so MERRA-2's local "significant decline"
-  patches are NOT corroborated and must carry that caveat in the export/narrative.
-- **Wind:** CONUS-scale wind and power density trends are small and not significant; only 2-8% of
-  the area passes FDR. The `opposing_trend_score` is high (0.67-0.90) but meaningless at such small
-  significant area; it must always be read together with `area_frac_sig_up + down`.
+- **Temperature**: broad, significant warming (+0.28 degC/decade, 68% of area significant, none
+  cooling), fastest in the Southwest. Close to commonly cited US warming since ~1980 (general
+  knowledge, not re-verified here). End-to-end check that pipeline, units and per-decade scaling work.
+- **Surface pressure**: no trend (negative control).
+- **Southwest drying / Northeast wetting (checked, not assumed)**: the pattern is present IN SIGN in
+  every hydro variable (runoff -8.1 vs +5.6 %/dec; soil moisture -14.7 vs +1.7; PDSI -0.70 vs +0.59),
+  but it is statistically significant only for Southwest soil moisture (22% of the sub-region).
+  Annual runoff and PDSI have NO FDR-significant pixels anywhere: interannual variability is large
+  relative to 40 years, and FDR over ~8000 spatially correlated 0.25-deg cells is strict. This must
+  be reported as "consistent direction, not established at pixel level", not as a detected trend.
+- **Snow**: declines everywhere snow matters, strongest in the Pacific Northwest (-12.7 %/dec),
+  significant in 6-14% of snowy sub-regions; CONUS regional p=0.074 (not significant at 0.05).
+- **Solar: no robust CONUS trend.** Cross-check 2001-2020 (unmasked) against CERES SYN1deg:
+  MERRA-2 -0.59 %/decade (p=0.22, 12% of area sig. down) vs CERES +0.37 %/decade (p=0.42, none
+  significant). Detrended annual series correlate 0.94; MERRA-2 is 6.3% brighter (12.1 W m-2). The
+  sign is product-dependent; MERRA-2's local declines are not corroborated.
+- **Aerosol** declines strongly in the East (Northeast -14 %/dec, Southeast -11 %/dec, 100% of area
+  significant), consistent with the documented US aerosol reduction; the 1991 Pinatubo spike is
+  visible in the regional series and Theil-Sen is robust to it. Open question, NOT tested: AOD falls
+  while all-sky solar is flat. Check clear-sky (`SWGDNCLR`) / cloud before stating any cause.
+- **Wind**: no robust trend; 1-9% of any sub-region significant. `opposing_trend_score` is high but
+  meaningless at such small significant area; always read it with `area_frac_sig_up + down`.
 
-- **Aerosol** declines strongly and coherently (61% of the area significant, none increasing),
-  consistent with the documented US aerosol reduction. The 1991 regional value (0.245 vs ~0.15 in
-  neighbouring years) is the Pinatubo eruption, a physically correct feature; Theil-Sen is robust
-  to it and no breakpoint is flagged. Open question, NOT tested: AOD falls ~7%/decade while
-  MERRA-2 all-sky surface solar is flat, which would imply an offsetting (e.g. cloud) change.
-  Do not state a cause without checking clear-sky vs all-sky irradiance (`SWGDNCLR` exists in
-  M2TMNXRAD) or cloud fraction.
-
-## Method issue found and fixed
-Pettitt on the raw regional series flagged a "breakpoint" in temperature (1998, p=0.0002). That
-is an artifact: a smooth trend always produces a Pettitt change point. The pipeline now tests the
-Sen-detrended series; a synthetic product splice (+3 units from 2001) is still caught (test
-`test_breakpoint_flags_a_spliced_series`) and a pure trend is not (`test_breakpoint_is_not_fooled_by_a_smooth_trend`).
-
-## Still to do in Phase 4
-- Precipitation (nClimGrid) check: is the Southwest drying / Northeast wetting pattern present? Check, don't assume.
-- Runoff, soil moisture, PDSI, SWE once their caches finish.
+## Issues found and fixed during Phase 4
+1. **Pettitt false alarm.** On the raw regional series Pettitt flagged temperature (1998, p=0.0002);
+   a smooth trend always yields a Pettitt change point. Now tested on the Sen-detrended series
+   (`test_breakpoint_is_not_fooled_by_a_smooth_trend`, `test_breakpoint_flags_a_spliced_series`).
+2. **Daymet SWE 30x too small.** The loader trusted Daymet's "monthly total / sum over days"
+   metadata and divided by days-in-month. Checked against daymet-daily-na: the monthly value is the
+   daily MEAN. Fixed; cache corrected; see docs/sources.md finding 6.
+3. **Region = bounding box was wrong.** CONUS statistics included ocean, southern Canada and
+   northern Mexico (coverage was always 1.00). Added a CONUS land mask (nClimGrid footprint,
+   `data/masks/`), applied in the pipeline. Pre-mask temperature was +0.258 degC/decade, masked +0.277.

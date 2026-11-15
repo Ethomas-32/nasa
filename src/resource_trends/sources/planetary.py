@@ -77,16 +77,16 @@ LCC = dict(proj="lcc", lat_1=25, lat_2=60, lat_0=42.5, lon_0=-100, x_0=0, y_0=0,
 
 
 def standardize_daymet(raw: xr.DataArray, name, units, spec, bbox) -> xr.DataArray:
-    """raw is already on a lat/lon grid with monthly TOTALS-of-daily-values converted by the caller.
+    """raw is already on a lat/lon grid (see daymet_to_latlon).
 
-    Daymet monthly `swe` has cell_methods 'time: sum within days, sum over days', i.e. it is the sum
-    of daily SWE over the month. Dividing by days-in-month gives mean SWE (mm); the annual `max` of
-    these is the peak monthly-mean SWE (a lower bound of true peak SWE)."""
-    days = pd.DatetimeIndex(raw["time"].values).days_in_month.values
-    raw = raw / xr.DataArray(days, dims="time", coords={"time": raw["time"]})
+    Daymet monthly `swe` is the MONTHLY MEAN of daily SWE, used as-is. Its metadata says otherwise
+    (long_name 'monthly total', cell_methods '... sum over days'), but on 2026-11-15 the monthly value
+    equalled the mean of daily-na values exactly at three sites (Colorado Rockies, Sierra Nevada,
+    Minnesota, Jan-Apr 2010) and was ~30x smaller than their sum. See docs/sources.md finding 6.
+    The annual `max` of these is the peak monthly-mean SWE (a lower bound of true peak SWE)."""
     return C.finalize(raw, name, units, spec["native_units"], "daymet", bbox,
                       dataset=spec["dataset"], native_variable=spec["variable"], product_type=spec["product_type"],
-                      note="monthly mean of daily SWE (Daymet monthly value is a sum over days / days in month)")
+                      note="monthly mean of daily SWE (verified against daymet-daily-na)")
 
 
 def daymet_to_latlon(block: xr.DataArray, lat: np.ndarray, lon: np.ndarray, f: int) -> xr.DataArray:

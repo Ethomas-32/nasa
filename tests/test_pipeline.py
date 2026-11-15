@@ -51,7 +51,7 @@ def synthetic():
 def test_run_recovers_opposing_trends_and_writes_outputs(tmp_path, synthetic):
     loader, truth = synthetic
     ds, summary = pipeline.run("conus", "solar_irradiance", start_year=1989, end_year=2018, registry=REG,
-                               loader=loader, out_dir=tmp_path)
+                               loader=loader, out_dir=tmp_path, apply_mask=False)
     # files exist and the JSON round-trips
     assert (tmp_path / "solar_irradiance.trend.nc").exists()
     s = json.loads((tmp_path / "solar_irradiance.summary.json").read_text())
@@ -73,7 +73,7 @@ def test_run_recovers_opposing_trends_and_writes_outputs(tmp_path, synthetic):
 
 def test_start_year_sensitivity_reports_both_shifts_when_data_allow(synthetic, tmp_path):
     loader, _ = synthetic
-    _, s = pipeline.run("conus", "solar_irradiance", start_year=1990, end_year=2023, registry=REG, loader=loader)
+    _, s = pipeline.run("conus", "solar_irradiance", start_year=1990, end_year=2023, registry=REG, loader=loader, apply_mask=False)
     starts = [r["start_year"] for r in s["sensitivity"]]
     assert starts == [1985, 1995]
     for r in s["sensitivity"]:
@@ -83,7 +83,7 @@ def test_start_year_sensitivity_reports_both_shifts_when_data_allow(synthetic, t
 
 def test_sensitivity_skips_shift_before_data_start(synthetic):
     loader, _ = synthetic
-    _, s = pipeline.run("conus", "solar_irradiance", start_year=1984, end_year=2023, registry=REG, loader=loader)
+    _, s = pipeline.run("conus", "solar_irradiance", start_year=1984, end_year=2023, registry=REG, loader=loader, apply_mask=False)
     assert [r["start_year"] for r in s["sensitivity"]] == [1989]
     assert any("1979" in n for n in s["notes"])          # says WHY the -5 shift is missing
 
@@ -91,7 +91,7 @@ def test_sensitivity_skips_shift_before_data_start(synthetic):
 def test_season_run_labels_outputs(synthetic, tmp_path):
     loader, _ = synthetic
     ds, s = pipeline.run("conus", "solar_irradiance", start_year=1990, end_year=2020, season="JJA",
-                         registry=REG, loader=loader, out_dir=tmp_path)
+                         registry=REG, loader=loader, out_dir=tmp_path, apply_mask=False)
     assert s["season"] == "JJA" and (tmp_path / "solar_irradiance.JJA.summary.json").exists()
 
 
@@ -108,7 +108,7 @@ def test_breakpoint_is_not_fooled_by_a_smooth_trend():
         out.attrs = {"units": "W m-2", "provider": "synthetic"}
         return out
 
-    _, s = pipeline.run("conus", "solar_irradiance", start_year=1984, end_year=2023, registry=REG, loader=loader)
+    _, s = pipeline.run("conus", "solar_irradiance", start_year=1984, end_year=2023, registry=REG, loader=loader, apply_mask=False)
     assert s["regional"]["p_value"] < 0.001          # the trend is real and detected...
     assert s["breakpoint"]["p"] > 0.05                # ...but not mistaken for a step
     assert not any("breakpoint" in n.lower() for n in s["notes"])
@@ -125,6 +125,19 @@ def test_breakpoint_flags_a_spliced_series(tmp_path):
         out.attrs = {"units": "W m-2", "provider": "synthetic"}
         return out
 
-    _, s = pipeline.run("conus", "solar_irradiance", start_year=1984, end_year=2023, registry=REG, loader=loader)
+    _, s = pipeline.run("conus", "solar_irradiance", start_year=1984, end_year=2023, registry=REG, loader=loader, apply_mask=False)
     assert s["breakpoint"]["p"] < 0.01 and abs(s["breakpoint"]["year"] - 2001) <= 1
     assert any("breakpoint" in n.lower() for n in s["notes"])
+
+
+def test_region_mask_removes_cells_outside_the_region(synthetic):
+    loader, _ = synthetic
+    ds, s = pipeline.run("conus", "solar_irradiance", start_year=1990, end_year=2020, registry=REG, loader=loader)
+    assert s["mask"] and "nclimgrid" in s["mask"]
+    # synthetic grid spans 30-49N, 120-75W: the Atlantic off New England / Gulf of Maine is outside CONUS
+    atlantic = ds["p_value"].sel(lat=slice(40, 43), lon=slice(-70, -66))
+    assert atlantic.size == 0 or bool(atlantic.isnull().all())
+    kansas = ds["p_value"].sel(lat=slice(37, 40), lon=slice(-101, -95))
+    assert bool(kansas.notnull().all())
+    _, s2 = pipeline.run("conus", "solar_irradiance", start_year=1990, end_year=2020, registry=REG, loader=loader, apply_mask=False)
+    assert s2["mask"] is None and any("no land mask" in n for n in s2["notes"])

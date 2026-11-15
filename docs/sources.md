@@ -39,10 +39,17 @@ before relying on them; they move.
 5. **Candidate common period:** 1981-2020 (wind starts 1981-01; Daymet ends 2020-12). The earlier
    tentative 1984 start came from POWER solar, which we no longer use. Decision pending.
 6. **TerraClimate also has `swe`**, so snow water equivalent has a global provider (Africa/global
-   runs). **Daymet monthly `swe` semantics (verified Phase 3):** attrs `cell_methods: "area: mean
-   time: sum within days time: sum over days"`, long_name "monthly total snow water equivalent", i.e.
-   the SUM of daily SWE over the month. The loader divides by days-in-month -> monthly-mean SWE (mm).
-   The annual `max` aggregation is therefore peak monthly-mean SWE, a lower bound on true peak SWE.
+   runs). **Daymet monthly `swe` semantics (verified empirically 2026-11-15):** the metadata says
+   long_name "monthly total snow water equivalent" and `cell_methods: "area: mean time: sum within
+   days time: sum over days"`, which suggests a SUM of daily SWE. **It is not.** Comparing
+   `daymet-monthly-na` with the mean and sum of `daymet-daily-na` (Jan-Apr 2010):
+   Colorado Rockies (-106.0, 39.6) monthly 84.6/106.3/134.0/142.4 = daily MEAN exactly (sum 2622-4273);
+   Sierra Nevada (-119.6, 37.8) 150.6/203.3/237.3/288.9 = daily mean; Minnesota (-93, 47)
+   53.2/58.1/36.6/0.6 = daily mean. The monthly value is the monthly MEAN SWE (mm = kg m-2) and is
+   used as-is. A first loader version trusted the metadata and divided by days-in-month (SWE ~30x
+   too small); the error surfaced as an implausible CONUS mean in Phase 4 and the cache was
+   corrected by multiplying back by days-in-month. The annual `max` is peak monthly-mean SWE, a
+   lower bound on true daily peak SWE. Lesson: verify semantics against data, not only metadata.
 7. **MERRA-2 cost:** a global monthly file is 60-84 MB. Full download of one variable (~560 months)
    is ~35 GB, so do not download. Streaming a CONUS subset via `earthaccess.open` + `h5netcdf` works:
    ~10 s per file (3 files in 32 s), so ~1.5 h per variable single-threaded, cached after that.

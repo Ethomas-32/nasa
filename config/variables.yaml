@@ -185,7 +185,7 @@ variables:
     relative: true
     status: verified
     caveats:
-      - "Daymet monthly swe is described as 'monthly total snow water equivalent'; its monthly semantics (sum vs mean vs end-of-month) must be checked in the Phase 3 loader. Daily collection daymet-daily-na is the fallback."
+      - "Daymet monthly swe is the monthly MEAN of daily SWE (verified against daymet-daily-na despite 'monthly total' metadata). Annual value = peak monthly-mean SWE, a lower bound on true peak SWE."
       - Daymet is on a 1 km Lambert conformal grid and needs reprojection.
     providers:
       - {provider: daymet, coverage: [conus], dataset: daymet-monthly-na, variable: swe, native_units: mm,

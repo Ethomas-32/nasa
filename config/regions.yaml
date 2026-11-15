@@ -10,6 +10,7 @@ regions:
     bbox: {lat_min: 24.5, lat_max: 49.5, lon_min: -125.0, lon_max: -66.5}
     coverage_tags: [global, north_america, conus]
     analysis_deg: 0.25   # products finer than this are block-averaged to it (cheap stats, small cache)
+    mask: data/masks/conus_nclimgrid_footprint.nc   # US land only (bbox also covers ocean, Canada, Mexico); scripts/make_mask.py
     provider_preference: [daymet, nclimgrid, terraclimate, merra2, nasa_power]
   africa:
     name: Africa
@@ -17,7 +18,7 @@ regions:
     coverage_tags: [global, africa]
     analysis_deg: 0.5
     provider_preference: [terraclimate, merra2, nasa_power]
-    notes: Sparse station network; state uncertainty.
+    notes: Sparse station network; state uncertainty. No land mask yet (bbox includes ocean, Middle East, southern Europe edge).
   global:
     name: Global (coarse, for the globe overview)
     bbox: {lat_min: -90.0, lat_max: 90.0, lon_min: -180.0, lon_max: 180.0}

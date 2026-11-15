@@ -10,7 +10,7 @@ from pathlib import Path
 import numpy as np
 import xarray as xr
 
-from . import preprocess, sources, stats
+from . import masks, preprocess, sources, stats
 from .registry import Registry
 
 DEFAULT_START, DEFAULT_END = 1981, 2020
@@ -55,7 +55,7 @@ def _regional(series_da: xr.DataArray, relative: bool) -> dict:
 
 def run(region: str, variable: str, start_year: int = DEFAULT_START, end_year: int = DEFAULT_END,
         season: str | None = None, registry: Registry | None = None, loader=None, out_dir=None,
-        alpha_fdr: float = 0.10, shift: int = SHIFT):
+        alpha_fdr: float = 0.10, shift: int = SHIFT, apply_mask: bool = True):
     """Run the trend analysis for one (region, variable[, season]). Returns (Dataset, summary dict)
     and, if out_dir is given, writes `<var>[.<season>].trend.nc` and `<var>[.<season>].summary.json`."""
     reg = registry or Registry.load()
@@ -67,6 +67,14 @@ def run(region: str, variable: str, start_year: int = DEFAULT_START, end_year: i
     lo = start_year - shift
     first_month = f"{lo - 1}-12" if season == "DJF" else f"{lo}-01"     # DJF needs the previous December
     da = loader(variable, region, reg, first_month, f"{end_year}-12")
+    mask_path = None
+    if apply_mask:
+        m = masks.region_mask(reg.regions[region], da["lat"].values, da["lon"].values)
+        if m is not None:
+            da = da.where(m.values[None, :, :])
+            mask_path = reg.regions[region]["mask"]
+    if mask_path is None:
+        notes.append("no land mask applied: statistics cover the whole bounding box (may include ocean / other countries)")
     agg = _aggregate(da, how, season)
     has = agg["year"].values[np.isfinite(agg.values).reshape(agg.sizes["year"], -1).any(axis=1)]
     if has.size == 0:
@@ -141,6 +149,7 @@ def run(region: str, variable: str, start_year: int = DEFAULT_START, end_year: i
         "product_type": da.attrs.get("product_type"),
         "units": da.attrs.get("units"),
         "aggregation": how,
+        "mask": mask_path,
         "period": f"{start_year}-{end_year}",
         "n_years": int(main.sizes["year"]),
         "method": ds.attrs["method"] + "; per-pixel annual " + (f"{season} " if season else "") + f"{how}",
