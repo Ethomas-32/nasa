@@ -13,12 +13,16 @@ dependencies = [
     "xarray",
     "pandas",
     "pyyaml",
+    "netCDF4",      # reading/writing the cached series and trend files
+    "dask",         # lazy coarsening in loaders
+    "pillow",       # PNG overlays (export)
+    "jsonschema",   # export schema validation
 ]
 
 [project.optional-dependencies]
 dev = ["pytest"]
 data = ["earthaccess>=0.19", "pystac-client>=0.9", "planetary-computer>=1.0", "zarr>=3.4", "fsspec", "s3fs",
-        "adlfs", "aiohttp", "h5netcdf", "h5py", "netCDF4", "dask", "rasterio>=1.5", "pyproj>=3.8"]
+        "adlfs", "aiohttp", "requests", "h5netcdf", "h5py", "rasterio>=1.5", "pyproj>=3.8"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
